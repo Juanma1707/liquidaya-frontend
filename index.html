@@ -20,39 +20,39 @@
 <body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-            <a href="/" class="flex items-center space-x-2">
-                <span class="text-2xl">⚖️</span>
-                <span class="font-black text-xl tracking-tight text-slate-900">Liquida<span class="text-indigo-600">Ya</span><span class="text-slate-400 text-sm font-normal">.pe</span></span>
+        <div class="max-w-5xl mx-auto px-4 py-2.5 sm:py-3 flex items-center justify-between gap-2">
+            <a href="/" class="flex items-center space-x-1.5 shrink-0">
+                <span class="text-xl sm:text-2xl">⚖️</span>
+                <span class="font-black text-lg sm:text-xl tracking-tight text-slate-900">Liquida<span class="text-indigo-600">Ya</span><span class="text-slate-400 text-xs sm:text-sm font-normal">.pe</span></span>
             </a>
-            <div class="flex items-center space-x-3">
-                <button onclick="openAIModal()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-bold px-3 py-1.5 rounded-full transition">
-                    ¿No sabes cuál elegir? Consulta al Asesor
-                </button>
-            </div>
+            <button onclick="openAIModal()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 font-bold px-3 py-1.5 rounded-full transition text-[11px] sm:text-xs flex items-center gap-1 shrink-0">
+                <span>💬</span>
+                <span class="hidden sm:inline">¿No sabes cuál elegir? </span>
+                <span>Asesor Legal IA</span>
+            </button>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 py-8 flex-1 w-full space-y-8">
+    <main class="max-w-4xl mx-auto px-4 py-6 sm:py-8 flex-1 w-full space-y-6 sm:space-y-8">
 
         <section id="view-catalog" class="space-y-6">
             <div class="text-center max-w-2xl mx-auto space-y-2">
-                <span class="text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+                <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
                     Plataforma Laboral Oficial Perú
                 </span>
-                <h1 class="text-2xl sm:text-3xl font-black text-slate-900">Selecciona el trámite que deseas realizar</h1>
+                <h1 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">Selecciona el trámite que deseas realizar</h1>
                 <p class="text-xs sm:text-sm text-slate-500">
-                    Elige el tipo de trámite o situación laboral. Si tienes dudas sobre tu caso, consulta con el asesor virtual.
+                    Elige tu régimen laboral o motivo de cese. Si tienes dudas sobre tu caso, consulta con el asesor virtual.
                 </p>
             </div>
 
-            <div class="bg-slate-900 rounded-2xl p-5 text-white flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-800 shadow-md">
+            <div class="bg-slate-900 rounded-2xl p-4 sm:p-5 text-white flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-800 shadow-md">
                 <div class="space-y-1 text-center sm:text-left">
                     <strong class="text-indigo-400 text-xs font-bold block uppercase tracking-wider">Orientación Legal</strong>
                     <h3 class="font-bold text-sm">¿No sabes si tu empresa es Micro, Pequeña o Régimen General?</h3>
                     <p class="text-[11px] text-slate-400">Describe tu caso y el asesor legal analizará tus beneficios por ley.</p>
                 </div>
-                <button onclick="openAIModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition whitespace-nowrap">
+                <button onclick="openAIModal()" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition text-center whitespace-nowrap">
                     Consultar Asesor Legal
                 </button>
             </div>
@@ -130,7 +130,7 @@
             <div class="flex items-center justify-between border-b pb-4">
                 <div>
                     <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 block">Trámite Seleccionado:</span>
-                    <h2 id="form-selected-title" class="text-lg font-black text-slate-900">Liquidación Régimen General</h2>
+                    <h2 id="form-selected-title" class="text-base sm:text-lg font-black text-slate-900">Liquidación Régimen General</h2>
                 </div>
                 <button onclick="backToCatalog()" class="text-xs font-bold text-slate-500 hover:text-slate-800 bg-slate-100 px-3 py-1.5 rounded-xl">
                     ← Cambiar trámite
@@ -420,19 +420,19 @@
     </footer>
 
     <div id="ai-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-6 text-xs space-y-4 shadow-2xl flex flex-col justify-between max-h-[90vh]">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 text-xs space-y-4 shadow-2xl flex flex-col justify-between max-h-[90vh]">
             <div class="flex items-center justify-between border-b pb-3">
                 <div>
                     <h3 class="font-black text-sm text-slate-900">Asesor Legal Inteligente</h3>
-                    <p class="text-[10px] text-emerald-600 font-bold">Diagnóstico legal interactivo según normativa peruana</p>
+                    <p class="text-[10px] text-emerald-600 font-bold">Diagnóstico interactivo según normativa peruana</p>
                 </div>
                 <button onclick="closeModal('ai-modal')" class="text-slate-400 hover:text-slate-600 font-bold text-base">✕</button>
             </div>
 
-            <div id="ai-chat-box" class="space-y-3 overflow-y-auto flex-1 pr-1 max-h-[320px]">
+            <div id="ai-chat-box" class="space-y-3 overflow-y-auto flex-1 pr-1 max-h-[300px]">
                 <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-700 leading-relaxed">
                     <strong>¡Hola! Cuéntame tu situación laboral:</strong><br>
-                    Escribe cómo trabajabas (ej: nombre de la empresa, tamaño del negocio o cómo fue tu salida). Si hace falta algún detalle, te haré una pregunta breve para darte el cálculo exacto.
+                    Escribe cómo trabajabas (ej: tamaño del negocio, empresa o motivo de salida). Te haré preguntas breves para definir tu caso con exactitud.
                 </div>
             </div>
 
@@ -562,41 +562,71 @@
             openModal('ai-modal');
         }
 
-        // Diagnóstico de Respaldo Local (Por si Render está en reposo)
-        function localLegalDiagnosis(query) {
-            const q = query.toLowerCase();
+        // Diagnóstico Inteligente con Regla de Repregunta Obligatoria
+        function localLegalDiagnosis(query, history) {
+            const allText = history.map(h => h.text).join(' ').toLowerCase() + ' ' + query.toLowerCase();
+            
+            // 1. Verificar si conocemos el tamaño/régimen de la empresa
+            let hasCompanySize = false;
             let regime = "general";
-            let dismissal = "renuncia_fin";
-            let title = "Liquidación Régimen General (D.L. 728)";
-            let explanation = "";
-
-            if (q.includes("despid") || q.includes("botaron") || q.includes("echaron") || q.includes("sin carta") || q.includes("sin motivo") || q.includes("verbal")) {
-                dismissal = "despido_arbitrario";
+            if (allText.includes("micro") || allText.includes("bodega") || allText.includes("botica") || allText.includes("taller") || allText.includes("tienda") || allText.includes("farmacia") || allText.includes("menos de 10") || allText.includes("pocos") || allText.includes("1") || allText.includes("2") || allText.includes("3") || allText.includes("4") || allText.includes("5")) {
+                hasCompanySize = true;
+                regime = "micro";
+            } else if (allText.includes("pequeñ") || allText.includes("mype") || allText.includes("distribuidora") || allText.includes("servicios") || allText.includes("mediana") || allText.includes("50")) {
+                hasCompanySize = true;
+                regime = "pequena";
+            } else if (allText.includes("grande") || allText.includes("cadena") || allText.includes("banco") || allText.includes("retail") || allText.includes("supermercado") || allText.includes("almacen") || allText.includes("fabrica") || allText.includes("mas de 100") || allText.includes("corporacion") || allText.includes("alicorp") || allText.includes("interbank") || allText.includes("bcp")) {
+                hasCompanySize = true;
+                regime = "general";
             }
 
-            if (q.includes("micro") || q.includes("bodega") || q.includes("botica") || q.includes("taller") || q.includes("tienda") || q.includes("farmacia")) {
-                regime = "micro";
-                title = "Liquidación Microempresa (REMYPE)";
-                explanation = "Por las características de tu centro de trabajo, tu caso califica como <strong>Microempresa (REMYPE)</strong>. Te corresponden 15 días de vacaciones proporcionales por año de servicio.";
-            } else if (q.includes("pequeñ") || q.includes("mype") || q.includes("distribuidora") || q.includes("servicios")) {
-                regime = "pequena";
-                title = "Liquidación Pequeña Empresa (REMYPE)";
-                explanation = "Tu caso califica como <strong>Pequeña Empresa (REMYPE)</strong>. Tienes derecho al 50% de CTS, 50% de Gratificación legal y 15 días de vacaciones anuales.";
+            // 2. Verificar si conocemos el motivo/forma de salida
+            let hasDismissalType = false;
+            let dismissal = "renuncia_fin";
+            if (allText.includes("despid") || allText.includes("botaron") || allText.includes("echaron") || allText.includes("sin carta") || allText.includes("sin motivo") || allText.includes("verbal") || allText.includes("acoso") || allText.includes("arbitrario")) {
+                hasDismissalType = true;
+                dismissal = "despido_arbitrario";
+            } else if (allText.includes("renunci") || allText.includes("fin de contrato") || allText.includes("vencio") || allText.includes("acabo mi contrato")) {
+                hasDismissalType = true;
+                dismissal = "renuncia_fin";
+            }
+
+            // Si falta alguno de los dos datos o es el primer mensaje vago, repreguntar
+            if (!hasCompanySize || !hasDismissalType) {
+                let questions = [];
+                if (!hasCompanySize) {
+                    questions.push("¿Aproximadamente cuántos trabajadores eran en tu empresa o qué tipo de negocio era (tienda pequeña, empresa mediana o empresa grande)?");
+                }
+                if (!hasDismissalType) {
+                    questions.push("¿Cómo fue tu salida (renunciaste, terminó tu contrato o te despidieron de forma verbal/sin aviso)?");
+                }
+                return {
+                    status: "needs_info",
+                    message: "Comprendo tu caso. Para darte el cálculo exacto según la ley peruana, por favor aclárame: " + questions.join(" Además, ")
+                };
+            }
+
+            // Si ambos datos están claros, dictamen final
+            let title = regime === "micro" ? "Liquidación Microempresa (REMYPE)" : (regime === "pequena" ? "Liquidación Pequeña Empresa (REMYPE)" : "Liquidación Régimen General (D.L. 728)");
+            let explanation = "";
+
+            if (regime === "micro") {
+                explanation = "Al calificar como <strong>Microempresa bajo Ley MYPE</strong> (hasta 10 trabajadores), te corresponden 15 días de vacaciones truncas proporcionales por año de servicio.";
+            } else if (regime === "pequena") {
+                explanation = "Tu caso corresponde a <strong>Pequeña Empresa (REMYPE)</strong>. Tienes derecho legal al 50% de CTS, 50% de Gratificación legal y 15 días de vacaciones por año laborado.";
             } else {
-                regime = "general";
-                title = "Liquidación Régimen General (D.L. 728)";
-                explanation = "Tu caso corresponde al <strong>Régimen General Laboral (D.L. 728)</strong>. Tienes derecho al 100% de CTS, Gratificación con bonificación extraordinaria del 9% de EsSalud y 30 días de vacaciones por año.";
+                explanation = "Tu caso corresponde al <strong>Régimen General Laboral (D.L. 728)</strong>. Te corresponde el 100% de CTS, Gratificación completa con bonificación del 9% de EsSalud y 30 días de vacaciones anuales.";
             }
 
             if (dismissal === "despido_arbitrario") {
                 title += " + Indemnización";
-                explanation += "<br><br>Al haber sufrido un despido sin justificación legal, te corresponde adicionalmente una <strong>Indemnización por Despido Arbitrario</strong> de 1.5 sueldos por año laborado (D.L. 728 Art. 38).";
+                explanation += "<br><br>Al haber sido despedido sin causa justificada ni aviso previo, te corresponde adicionalmente una <strong>Indemnización por Despido Arbitrario</strong> de 1.5 sueldos por año laborado (D.L. 728 Art. 38).";
             }
 
             return { status: "complete", regime, dismissal_type: dismissal, title, explanation };
         }
 
-        // Envío y gestión conversacional de IA
+        // Envío y Conversación Multiturno con la IA
         async function sendAIMessage() {
             const input = document.getElementById('ai-user-input');
             const query = input.value.trim();
@@ -604,8 +634,7 @@
 
             const chatBox = document.getElementById('ai-chat-box');
             
-            // Renderizar mensaje del usuario
-            chatBox.innerHTML += `<div class="bg-indigo-600 text-white p-3 rounded-2xl ml-8 leading-relaxed font-medium">${query}</div>`;
+            chatBox.innerHTML += `<div class="bg-indigo-600 text-white p-3 rounded-2xl ml-6 sm:ml-8 leading-relaxed font-medium">${query}</div>`;
             aiChatHistory.push({ role: "user", text: query });
             
             chatBox.innerHTML += `<div id="ai-loading" class="text-slate-400 text-xs italic p-2 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span> Analizando tu caso con la normativa laboral peruana...</div>`;
@@ -616,7 +645,7 @@
 
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 6000);
+                const timeoutId = setTimeout(() => controller.abort(), 12000);
 
                 const res = await fetch(`${BACKEND_URL}/api/ai-consult`, {
                     method: 'POST',
@@ -631,19 +660,19 @@
                     responseData = jsonRes.data;
                 }
             } catch (e) {
-                // Fallback automático si hay timeout o fallo de red
+                // Fallback automático local si el backend tarda en despertar
             }
 
             if (!responseData) {
-                responseData = localLegalDiagnosis(query);
+                responseData = localLegalDiagnosis(query, aiChatHistory);
             }
 
             document.getElementById('ai-loading')?.remove();
 
             if (responseData.status === "needs_info") {
-                // La IA repregunta para obtener más detalles
+                // La IA repregunta para obtener los datos faltantes
                 chatBox.innerHTML += `
-                    <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-800 space-y-2 border border-slate-200">
+                    <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-800 space-y-1.5 border border-slate-200">
                         <div class="flex items-center gap-1 text-indigo-700 font-bold text-[11px]">
                             <span>Asesor Legal:</span>
                         </div>
@@ -652,7 +681,7 @@
                 `;
                 aiChatHistory.push({ role: "model", text: responseData.message });
             } else {
-                // Caso completo: Dictamen final + Botón de acción
+                // Caso claro: Dictamen final + Botón para iniciar trámite
                 chatBox.innerHTML += `
                     <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-800 space-y-2 border border-slate-200">
                         <div class="flex items-center gap-1 text-indigo-700 font-bold text-[11px]">
@@ -857,7 +886,7 @@
                     if (chargeRes.status === 'approved') {
                         unlockPDF();
                     } else {
-                        unlockPDF(); // Desbloqueo de cortesía en modo test
+                        unlockPDF(); // Desbloqueo en entorno de evaluación
                     }
                 } catch (e) {
                     unlockPDF();
