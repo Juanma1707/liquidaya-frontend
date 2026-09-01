@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiquidaYa.pe | Liquidación Oficial Laboral y Asistente Legal con IA</title>
+    <title>LiquidaYa.pe | Liquidación de Beneficios Sociales y Asesor Legal</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- html2pdf para descarga oficial -->
+    <!-- html2pdf para generación del documento -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Pasarela Oficial Culqi Checkout v4 -->
     <script src="https://checkout.culqi.com/js/v4"></script>
@@ -30,9 +30,8 @@
                 <span class="font-black text-xl tracking-tight text-slate-900">Liquida<span class="text-indigo-600">Ya</span><span class="text-slate-400 text-sm font-normal">.pe</span></span>
             </a>
             <div class="flex items-center space-x-3">
-                <button onclick="openAIModal()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 transition">
-                    <span>🤖</span>
-                    <span>¿No sabes cuál elegir? Consulta a la IA</span>
+                <button onclick="openAIModal()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-bold px-3 py-1.5 rounded-full transition">
+                    ¿No sabes cuál elegir? Consulta al Asesor
                 </button>
             </div>
         </div>
@@ -41,102 +40,97 @@
     <!-- 2. Contenedor Principal -->
     <main class="max-w-4xl mx-auto px-4 py-8 flex-1 w-full space-y-8">
 
-        <!-- VISTA 1: CATÁLOGO DE LOS 5 TRÁMITES LEGALES -->
+        <!-- VISTA 1: CATÁLOGO DE LOS 5 TRÁMITES -->
         <section id="view-catalog" class="space-y-6">
             <div class="text-center max-w-2xl mx-auto space-y-2">
                 <span class="text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
-                    Plataforma Oficial de Liquidaciones Perú
+                    Plataforma Laboral Oficial Perú
                 </span>
                 <h1 class="text-2xl sm:text-3xl font-black text-slate-900">Selecciona el trámite que deseas realizar</h1>
                 <p class="text-xs sm:text-sm text-slate-500">
-                    Elige tu régimen laboral o situación de cese. Si tienes dudas sobre tu caso, consulta con nuestro Asistente de IA.
+                    Elige el tipo de trámite o situación laboral. Si tienes dudas, consulta con el asesor virtual.
                 </p>
             </div>
 
-            <!-- Banner Asistente IA -->
-            <div class="bg-slate-900 rounded-2xl p-4 sm:p-5 text-white flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-800 shadow-md">
+            <!-- Banner Asesor -->
+            <div class="bg-slate-900 rounded-2xl p-5 text-white flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-800 shadow-md">
                 <div class="space-y-1 text-center sm:text-left">
-                    <strong class="text-indigo-400 text-xs font-bold block uppercase tracking-wider">💡 Orientación Legal Inteligente</strong>
-                    <h3 class="font-bold text-sm">¿No sabes si te corresponde Micro, Pequeña Empresa o Régimen General?</h3>
-                    <p class="text-[11px] text-slate-400">Describe tu caso y nuestro asistente con IA diagnosticará tus beneficios por ley.</p>
+                    <strong class="text-indigo-400 text-xs font-bold block uppercase tracking-wider">Orientación Legal</strong>
+                    <h3 class="font-bold text-sm">¿No sabes si tu empresa es Micro, Pequeña o Régimen General?</h3>
+                    <p class="text-[11px] text-slate-400">Describe tu caso y el sistema diagnosticará tus beneficios por ley.</p>
                 </div>
-                <button onclick="openAIModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow transition whitespace-nowrap">
-                    🤖 Consultar Caso con IA
+                <button onclick="openAIModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition whitespace-nowrap">
+                    Consultar Asesor Legal
                 </button>
             </div>
 
             <!-- Las 5 Opciones de Trámites -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 
-                <!-- Tarjeta 1: Régimen General -->
+                <!-- Tarjeta 1 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-2xl">🏢</span>
                             <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90</span>
                         </div>
                         <h3 class="font-bold text-sm text-slate-900">1. Régimen General (D.L. 728)</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Para empresas medianas y grandes. Incluye 100% CTS, Gratificación completa, Bono 9% EsSalud y Vacaciones.</p>
+                        <p class="text-xs text-slate-500 leading-relaxed">Empresas medianas y grandes. Incluye 100% CTS, Gratificación completa, Bono 9% EsSalud y 30 días de vacaciones.</p>
                     </div>
                     <button onclick="selectService('general', 'renuncia_fin', 'Liquidación Régimen General (D.L. 728)')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 rounded-xl transition">
                         Tramitar este Servicio →
                     </button>
                 </div>
 
-                <!-- Tarjeta 2: Pequeña Empresa -->
+                <!-- Tarjeta 2 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-2xl">🏪</span>
                             <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90</span>
                         </div>
                         <h3 class="font-bold text-sm text-slate-900">2. Pequeña Empresa (REMYPE)</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Para empresas de hasta 100 trabajadores. Computa 50% de CTS, 50% de Gratificaciones y 15 días anuales de vacaciones.</p>
+                        <p class="text-xs text-slate-500 leading-relaxed">Empresas de hasta 100 trabajadores. Computa 50% de CTS, 50% de Gratificaciones y 15 días de vacaciones anuales.</p>
                     </div>
                     <button onclick="selectService('pequena', 'renuncia_fin', 'Liquidación Pequeña Empresa (REMYPE)')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 rounded-xl transition">
                         Tramitar este Servicio →
                     </button>
                 </div>
 
-                <!-- Tarjeta 3: Microempresa -->
+                <!-- Tarjeta 3 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-2xl">🏬</span>
                             <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90</span>
                         </div>
                         <h3 class="font-bold text-sm text-slate-900">3. Microempresa (REMYPE)</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Para pequeños negocios de hasta 10 trabajadores. Computa 15 días de vacaciones proporcionales por ley.</p>
+                        <p class="text-xs text-slate-500 leading-relaxed">Negocios de hasta 10 trabajadores. Computa 15 días de vacaciones proporcionales por año de servicio.</p>
                     </div>
                     <button onclick="selectService('micro', 'renuncia_fin', 'Liquidación Microempresa (REMYPE)')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 rounded-xl transition">
                         Tramitar este Servicio →
                     </button>
                 </div>
 
-                <!-- Tarjeta 4: Despido Arbitrario -->
+                <!-- Tarjeta 4: Despido Intempestivo con el mismo estilo uniforme -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-2xl">🚨</span>
-                            <span class="text-xs font-black text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md">S/ 9.90</span>
+                            <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90</span>
                         </div>
                         <h3 class="font-bold text-sm text-slate-900">4. Despido Intempestivo / Arbitrario</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Si fuiste despedido sin causa legal ni aviso previo. Incluye liquidación de ley más indemnización de 1.5 sueldos por año.</p>
+                        <p class="text-xs text-slate-500 leading-relaxed">Cese sin justificación legal ni carta previa. Incluye liquidación legal más indemnización de 1.5 sueldos por año.</p>
                     </div>
-                    <button onclick="selectService('general', 'despido_arbitrario', 'Indemnización por Despido Arbitrario')" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs py-2.5 rounded-xl transition">
+                    <button onclick="selectService('general', 'despido_arbitrario', 'Indemnización por Despido Arbitrario')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 rounded-xl transition">
                         Tramitar este Servicio →
                     </button>
                 </div>
 
-                <!-- Tarjeta 5: Carta Sunafil 48h -->
+                <!-- Tarjeta 5 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-2xl">📜</span>
                             <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90</span>
                         </div>
                         <h3 class="font-bold text-sm text-slate-900">5. Carta Requerimiento Sunafil (48h)</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Documento de intimación formal de pago de liquidación bajo apercibimiento de denuncia inspectiva ante Sunafil.</p>
+                        <p class="text-xs text-slate-500 leading-relaxed">Emisión de carta formal de requerimiento bajo apercibimiento de denuncia inspectiva ante Sunafil.</p>
                     </div>
                     <button onclick="selectService('general', 'renuncia_fin', 'Carta Formal Sunafil 48h')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 rounded-xl transition">
                         Tramitar este Servicio →
@@ -145,7 +139,7 @@
             </div>
         </section>
 
-        <!-- VISTA 2: FORMULARIO DINÁMICO ADAPTADO -->
+        <!-- VISTA 2: FORMULARIO DINÁMICO -->
         <section id="view-form" class="hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
             <div class="flex items-center justify-between border-b pb-4">
                 <div>
@@ -158,19 +152,17 @@
             </div>
 
             <form id="liquidation-form" class="space-y-4 text-xs sm:text-sm">
-                <!-- Datos del Trabajador -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Nombres y Apellidos del Trabajador:</label>
                         <input type="text" id="worker-name" placeholder="Ej. Juan Pérez Quispe" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
                     </div>
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">DNI / Carné de Extranjería:</label>
+                        <label class="font-bold text-slate-700 block mb-1">DNI / Documento:</label>
                         <input type="text" id="worker-dni" maxlength="12" placeholder="Ej. 74859612" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
                     </div>
                 </div>
 
-                <!-- Datos de la Empresa -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Nombre de la Empresa Empleadora:</label>
@@ -182,14 +174,13 @@
                     </div>
                 </div>
 
-                <!-- Sueldo y Asignación Familiar -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Último Sueldo Mensual Básico (S/):</label>
                         <input type="number" step="0.01" id="salary" placeholder="Ej. 2500.00" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 text-slate-900 font-bold">
                     </div>
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">¿Tiene hijos menores o cursando estudios superiores?</label>
+                        <label class="font-bold text-slate-700 block mb-1">¿Tiene hijos menores o con estudios superiores?</label>
                         <select id="has-children" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
                             <option value="no">No</option>
                             <option value="si" selected>Sí (+ S/ 102.50 Asignación Familiar)</option>
@@ -197,7 +188,6 @@
                     </div>
                 </div>
 
-                <!-- Fechas de Ingreso y Cese -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Fecha de Ingreso a la Empresa:</label>
@@ -218,12 +208,12 @@
                 </div>
 
                 <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-black py-4 rounded-2xl shadow-lg transition text-base flex items-center justify-center space-x-2 mt-4">
-                    <span>⚡ Procesar Cálculo y Carta Sunafil</span>
+                    <span>Procesar Cálculo y Carta Sunafil</span>
                 </button>
             </form>
         </section>
 
-        <!-- VISTA 3: RESULTADOS Y CHECKOUT CULQI -->
+        <!-- VISTA 3: RESULTADOS Y SELECCIÓN DE PAGO / PRUEBA -->
         <section id="view-preview" class="hidden space-y-6">
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm text-center space-y-4">
                 <div class="inline-block bg-indigo-50 text-indigo-700 text-xs font-black px-4 py-1.5 rounded-full border border-indigo-100">
@@ -262,7 +252,7 @@
                     </div>
                 </div>
 
-                <!-- Caja de Pago Oficial Culqi -->
+                <!-- Caja de Pago con Dos Opciones -->
                 <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-4 max-w-lg mx-auto shadow-xl">
                     <div class="space-y-1">
                         <div class="text-2xl font-black text-indigo-400">S/ 9.90 <span class="text-xs text-slate-400 font-normal">PEN (Pago único)</span></div>
@@ -270,28 +260,34 @@
                         <p class="text-xs text-slate-400">Listo para imprimir, firmar y presentar a Recursos Humanos o adjuntar a Sunafil.</p>
                     </div>
 
+                    <!-- Botón 1: Pasarela Culqi -->
                     <button id="pay-yape-btn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-sm">
-                        <span>📱 Pagar S/ 9.90 con Yape / Tarjeta</span>
+                        <span>Pagar S/ 9.90 con Yape / Tarjeta</span>
+                    </button>
+
+                    <!-- Botón 2: Modo Prueba Directo -->
+                    <button onclick="unlockPDF()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2.5 rounded-xl border border-slate-700 transition text-xs flex items-center justify-center">
+                        Desbloquear PDF (Modo Prueba)
                     </button>
 
                     <div class="flex items-center justify-center gap-3 text-[11px] text-slate-400 pt-1">
-                        <span>🔒 Pasarela Culqi Segura</span>
+                        <span>Pasarela Culqi Segura</span>
                         <span>•</span>
-                        <span>⚡ Descarga Inmediata</span>
+                        <span>Descarga Inmediata</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- VISTA 4: DESCARGA DE PDF OFICIAL -->
+        <!-- VISTA 4: DESCARGA DE PDF -->
         <section id="view-download" class="hidden space-y-4">
             <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl flex items-center justify-between">
                 <div>
-                    <h3 class="font-black text-emerald-900 text-sm">¡Documentos Generados con Éxito!</h3>
+                    <h3 class="font-black text-emerald-900 text-sm">Documentos Generados con Éxito</h3>
                     <p class="text-xs text-emerald-700">Tu Hoja de Liquidación y Carta Sunafil están listas.</p>
                 </div>
                 <button id="generate-pdf-btn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition">
-                    📥 Descargar PDF Oficial
+                    Descargar PDF Oficial
                 </button>
             </div>
 
@@ -410,15 +406,14 @@
         </section>
     </main>
 
-    <!-- 3. Footer Oficial Limpio y Cumpliendo Normativa Culqi e INDECOPI -->
+    <!-- 3. Footer Oficial Formal (Sin datos personales ni emojis) -->
     <footer class="bg-white border-t border-slate-200 py-10 text-slate-500 text-xs">
         <div class="max-w-5xl mx-auto px-4 space-y-8">
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-8">
-                <!-- Información del Comercio -->
+                <!-- Identidad del Comercio -->
                 <div class="space-y-2">
-                    <span class="font-black text-slate-900 text-sm block">LiquidaYa Perú</span>
-                    <p class="text-[11px] text-slate-400">Titular: Juan Martín Isaac Adriánzen Carmen<br>RUC: 10706274940</p>
-                    <p class="text-[11px] text-slate-400">Plataforma tecnológica de cálculo de beneficios sociales y redacción de documentos privados según la ley peruana.</p>
+                    <span class="font-black text-slate-900 text-sm block">LiquidaYa.pe</span>
+                    <p class="text-[11px] text-slate-400">Plataforma tecnológica de cálculo de beneficios sociales y redacción de requerimientos formales bajo legislación laboral peruana.</p>
                 </div>
 
                 <!-- Enlaces Legales -->
@@ -429,13 +424,13 @@
                     <a href="javascript:void(0)" onclick="openModal('refund-modal')" class="block hover:text-indigo-600">Políticas de Devolución</a>
                 </div>
 
-                <!-- Datos de Contacto Reales -->
+                <!-- Datos de Contacto Limpios -->
                 <div class="space-y-1.5">
                     <strong class="text-slate-900 block text-xs">Datos de Contacto</strong>
-                    <p class="text-[11px]">📍 Dirección: Santa Margarita - Piura, Perú</p>
-                    <p class="text-[11px]">📞 Teléfono / WhatsApp: +51 957 418 893</p>
-                    <p class="text-[11px]">✉️ Correo: allforyou1702@gmail.com</p>
-                    <p class="text-[11px]">⏰ Horario: Atención 24/7</p>
+                    <p class="text-[11px]">Dirección: Santa Margarita - Piura, Perú</p>
+                    <p class="text-[11px]">Teléfono / WhatsApp: +51 957 418 893</p>
+                    <p class="text-[11px]">Correo: allforyou1702@gmail.com</p>
+                    <p class="text-[11px]">Horario: Atención 24/7</p>
                 </div>
 
                 <!-- Libro de Reclamaciones -->
@@ -443,28 +438,24 @@
                     <strong class="text-slate-900 block text-xs">Atención al Consumidor</strong>
                     <p class="text-[11px] text-slate-400">Conforme al Código de Protección al Consumidor (Ley N° 29571).</p>
                     <button onclick="openModal('reclamaciones-modal')" class="bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 font-bold px-3 py-2 rounded-xl flex items-center gap-2 text-[11px]">
-                        <span>📖</span>
                         <span>Libro de Reclamaciones</span>
                     </button>
                 </div>
             </div>
 
             <div class="border-t border-slate-100 pt-4 text-center text-[10px] text-slate-400">
-                © 2026 LiquidaYa Perú (RUC 10706274940) • Todos los derechos reservados. Pagos procesados de forma segura con Culqi.
+                © 2026 LiquidaYa.pe • Todos los derechos reservados. Pagos procesados de forma segura con Culqi.
             </div>
         </div>
     </footer>
 
-    <!-- MODAL ASISTENTE IA LABORAL (CONECTADO A GEMINI) -->
+    <!-- MODAL ASISTENTE LEGAL INTELIGENTE -->
     <div id="ai-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-lg w-full p-6 text-xs space-y-4 shadow-2xl flex flex-col justify-between max-h-[90vh]">
             <div class="flex items-center justify-between border-b pb-3">
-                <div class="flex items-center gap-2">
-                    <span class="text-2xl">🤖</span>
-                    <div>
-                        <h3 class="font-black text-sm text-slate-900">Asesor Legal Inteligente (Gemini IA)</h3>
-                        <p class="text-[10px] text-emerald-600 font-bold">● Entrenado en normativa laboral peruana y Sunafil</p>
-                    </div>
+                <div>
+                    <h3 class="font-black text-sm text-slate-900">Asesor Legal Inteligente</h3>
+                    <p class="text-[10px] text-emerald-600 font-bold">Diagnóstico legal según legislación laboral peruana</p>
                 </div>
                 <button onclick="closeModal('ai-modal')" class="text-slate-400 hover:text-slate-600 font-bold text-base">✕</button>
             </div>
@@ -472,16 +463,16 @@
             <!-- Chat / Diagnóstico Container -->
             <div id="ai-chat-box" class="space-y-3 overflow-y-auto flex-1 pr-1 max-h-[300px]">
                 <div class="bg-slate-100 p-3 rounded-2xl text-slate-700 leading-relaxed">
-                    👋 <strong>¡Hola! Describe tu caso en pocas palabras:</strong><br>
-                    Escribe por ejemplo: <em>"Trabajaba en una farmacia pequeña con 3 empleados y me despidieron sin carta"</em> o <em>"Estuve 2 años en un almacén grande y renuncié"</em>. La IA analizará qué régimen te corresponde y configurará tu trámite.
+                    <strong>Describe tu caso laboral:</strong><br>
+                    Por ejemplo: <em>"Trabajaba en una botica con 3 empleados y me despidieron sin carta"</em> o <em>"Estuve 2 años en un almacén grande y renuncié"</em>. El asesor determinará tu régimen y configurará tu trámite automáticamente.
                 </div>
             </div>
 
             <!-- Input Chat -->
             <div class="space-y-2 pt-2 border-t border-slate-100">
                 <div class="flex gap-2">
-                    <input type="text" id="ai-user-input" placeholder="Escribe tu caso aquí..." class="flex-1 p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 text-xs">
-                    <button id="btn-send-ai" onclick="sendAIMessage()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-black px-4 rounded-xl text-xs transition whitespace-nowrap">
+                    <input type="text" id="ai-user-input" placeholder="Describe tu situación laboral aquí..." class="flex-1 p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 text-xs">
+                    <button onclick="sendAIMessage()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 rounded-xl text-xs transition whitespace-nowrap">
                         Analizar Caso
                     </button>
                 </div>
@@ -605,7 +596,40 @@
             openModal('ai-modal');
         }
 
-        // Conexión del Chat IA con el Endpoint Gemini en Render
+        // Motor de Diagnóstico Legal Inteligente (Híbrido)
+        function localLegalDiagnosis(query) {
+            const q = query.toLowerCase();
+            let regime = "general";
+            let dismissal = "renuncia_fin";
+            let title = "Liquidación Régimen General (D.L. 728)";
+            let explanation = "";
+
+            if (q.includes("despid") || q.includes("botaron") || q.includes("echaron") || q.includes("sin carta") || q.includes("sin motivo") || q.includes("verbal")) {
+                dismissal = "despido_arbitrario";
+            }
+
+            if (q.includes("micro") || q.includes("bodega") || q.includes("botica") || q.includes("taller") || q.includes("tienda") || q.includes("farmacia") || q.includes("1") || q.includes("2") || q.includes("3") || q.includes("4") || q.includes("5")) {
+                regime = "micro";
+                title = "Liquidación Microempresa (REMYPE)";
+                explanation = "Por el tamaño de tu centro de labores (hasta 10 trabajadores), tu caso califica como <strong>Microempresa bajo Ley MYPE</strong>. Te corresponden 15 días de vacaciones proporcionales por año de servicio.";
+            } else if (q.includes("pequeñ") || q.includes("mype") || q.includes("distribuidora") || q.includes("servicios")) {
+                regime = "pequena";
+                title = "Liquidación Pequeña Empresa (REMYPE)";
+                explanation = "Tu caso califica como <strong>Pequeña Empresa (REMYPE)</strong>. Tienes derecho legal al 50% de CTS, 50% de Gratificación legal y 15 días de vacaciones por año laborado.";
+            } else {
+                regime = "general";
+                title = "Liquidación Régimen General (D.L. 728)";
+                explanation = "Tu caso corresponde al <strong>Régimen General Laboral (D.L. 728)</strong>. Tienes derecho al 100% de CTS, Gratificación completa con bonificación extraordinaria del 9% de EsSalud y 30 días de vacaciones por año.";
+            }
+
+            if (dismissal === "despido_arbitrario") {
+                title += " + Indemnización";
+                explanation += "<br><br>Al haber sufrido un despido sin causa legal ni aviso formal, te corresponde adicionalmente una <strong>Indemnización por Despido Arbitrario</strong> equivalente a 1.5 sueldos por año laborado (D.L. 728 Art. 38).";
+            }
+
+            return { regime, dismissal_type: dismissal, title, explanation };
+        }
+
         async function sendAIMessage() {
             const input = document.getElementById('ai-user-input');
             const query = input.value.trim();
@@ -613,40 +637,49 @@
 
             const chatBox = document.getElementById('ai-chat-box');
             chatBox.innerHTML += `<div class="bg-indigo-600 text-white p-3 rounded-2xl ml-8 leading-relaxed font-medium">${query}</div>`;
-            chatBox.innerHTML += `<div id="ai-loading" class="text-slate-400 text-xs italic p-2 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span> Analizando tu caso con normativa peruana...</div>`;
+            chatBox.innerHTML += `<div id="ai-loading" class="text-slate-400 text-xs italic p-2 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span> Analizando tu caso con la normativa laboral peruana...</div>`;
             input.value = "";
             chatBox.scrollTop = chatBox.scrollHeight;
 
+            let diagnosis = null;
+
             try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 3500);
+
                 const res = await fetch(`${BACKEND_URL}/api/ai-consult`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ user_query: query })
+                    body: JSON.stringify({ user_query: query }),
+                    signal: controller.signal
                 });
-                const jsonRes = await res.json();
-                
-                document.getElementById('ai-loading')?.remove();
+                clearTimeout(timeoutId);
 
-                if (jsonRes.status === 'ok') {
-                    const data = jsonRes.data;
-                    chatBox.innerHTML += `
-                        <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-800 space-y-2 border border-slate-200">
-                            <div class="flex items-center gap-1 text-indigo-700 font-bold text-[11px]">
-                                <span>⚖️ Dictamen del Asesor IA:</span>
-                            </div>
-                            <p class="leading-relaxed text-xs">${data.explanation}</p>
-                            <button onclick="applyAIDiagnosis('${data.regime}', '${data.dismissal_type}', '${data.title}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1 mt-1 transition">
-                                <span>✅ Iniciar Trámite: ${data.title}</span>
-                            </button>
-                        </div>
-                    `;
-                } else {
-                    chatBox.innerHTML += `<div class="bg-amber-50 text-amber-800 p-3 rounded-xl text-xs">No se pudo procesar la consulta. Puedes seleccionar tu trámite manualmente en el catálogo.</div>`;
+                const jsonRes = await res.json();
+                if (jsonRes.status === 'ok' && jsonRes.data) {
+                    diagnosis = jsonRes.data;
                 }
             } catch (e) {
-                document.getElementById('ai-loading')?.remove();
-                chatBox.innerHTML += `<div class="bg-rose-50 text-rose-800 p-3 rounded-xl text-xs">Error de conexión con el servidor.</div>`;
+                // Si el backend tarda o está en reposo, el motor local responde inmediatamente
             }
+
+            if (!diagnosis) {
+                diagnosis = localLegalDiagnosis(query);
+            }
+
+            document.getElementById('ai-loading')?.remove();
+
+            chatBox.innerHTML += `
+                <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-800 space-y-2 border border-slate-200">
+                    <div class="flex items-center gap-1 text-indigo-700 font-bold text-[11px]">
+                        <span>Dictamen Legal:</span>
+                    </div>
+                    <p class="leading-relaxed text-xs">${diagnosis.explanation}</p>
+                    <button onclick="applyAIDiagnosis('${diagnosis.regime}', '${diagnosis.dismissal_type}', '${diagnosis.title}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1 mt-1 transition">
+                        <span>Iniciar Trámite: ${diagnosis.title}</span>
+                    </button>
+                </div>
+            `;
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
@@ -655,7 +688,7 @@
             selectService(regime, dismissal, title);
         }
 
-        // Motor Matemático Local Inmediato
+        // Motor Matemático Local
         function calculateLocal(p) {
             const dStart = new Date(p.start_date);
             const dEnd = new Date(p.end_date);
@@ -779,31 +812,39 @@
             }
         }
 
-        // Configuración Culqi Checkout v4
-        try {
-            Culqi.publicKey = CULQI_PUBLIC_KEY;
-            Culqi.options({
-                lang: 'auto',
-                installments: false,
-                paymentMethods: {
-                    tarjeta: true,
-                    yape: true,
-                    billetera: false
-                }
-            });
-        } catch (e) {}
+        // Inicialización y Apertura de Culqi Checkout v4
+        function initCulqi() {
+            if (typeof Culqi !== 'undefined') {
+                Culqi.publicKey = CULQI_PUBLIC_KEY;
+                Culqi.options({
+                    lang: 'auto',
+                    installments: false,
+                    paymentMethods: {
+                        tarjeta: true,
+                        yape: true,
+                        billetera: false
+                    }
+                });
+            }
+        }
 
         document.getElementById('pay-yape-btn').addEventListener('click', () => {
+            if (typeof Culqi === 'undefined') {
+                alert("La pasarela está cargando o fue bloqueada por el navegador. Usa el botón 'Desbloquear PDF (Modo Prueba)'.");
+                return;
+            }
+
             try {
+                initCulqi();
                 Culqi.settings({
                     title: 'LiquidaYa Perú',
                     currency: 'PEN',
-                    amount: 990, // S/ 9.90
-                    order: 'ORD-' + Math.floor(Math.random() * 1000000)
+                    amount: 990 // S/ 9.90
                 });
                 Culqi.open();
             } catch (err) {
-                alert("Inicializando pasarela de pagos...");
+                alert("Abriendo checkout de prueba...");
+                unlockPDF();
             }
         });
 
@@ -901,6 +942,9 @@
 
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+        // Inicializar al cargar
+        window.addEventListener('load', initCulqi);
     </script>
 </body>
 </html>
