@@ -1,1 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiquidaYa.pe | Calculadora Oficial de Liquidación y Carta Sunafil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://checkout.culqi.com/js/v4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .formal-sheet {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/" class="flex items-center space-x-2">
+                <span class="text-2xl">⚖️</span>
+                <span class="font-black text-xl tracking-tight text-slate-900">Liquida<span class="text-indigo-600">Ya</span><span class="text-slate-400 text-sm font-normal">.pe</span></span>
+            </a>
+            <div class="flex items-center space-x-4">
+                <span class="text-xs font-semibold text-slate-500 hidden sm:inline">🇵🇪 Ley Laboral D.L. 728 & Sunafil</span>
+                <span class="text-xs bg-indigo-50 text-indigo-700 font-bold px-3 py-1.5 rounded-full border border-indigo-200 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span>
+                    <span>Cálculo en Vivo</span>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-1 w-full space-y-8">
+
+        <section id="calc-section" class="max-w-2xl mx-auto bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+            <div class="text-center space-y-2">
+                <span class="text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+                    Calculadora Laboral Oficial Perú 2026
+                </span>
+                <h1 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">
+                    Calcula tu liquidación exacta y exige tu pago
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-500">
+                    Tu empleador tiene <strong>48 horas</strong> por ley para depositarte. Obtén tu cálculo exacto de CTS, Gratificación, Vacaciones y la Carta Formal para Sunafil.
+                </p>
+            </div>
+
+            <form id="liquidation-form" class="space-y-4 text-xs sm:text-sm">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">Nombres y Apellidos:</label>
+                        <input type="text" id="worker-name" placeholder="Ej. Juan Pérez Quispe" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">DNI / Documento:</label>
+                        <input type="text" id="worker-dni" maxlength="12" placeholder="Ej. 74859612" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">Empresa empleadora:</label>
+                        <input type="text" id="company-name" placeholder="Ej. Corporación ABC S.A.C." required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">RUC de la empresa (Opcional):</label>
+                        <input type="text" id="company-ruc" maxlength="11" placeholder="Ej. 20601234567" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">Sueldo mensual básico (S/):</label>
+                        <input type="number" step="0.01" id="salary" placeholder="Ej. 1800.00" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 text-slate-900 font-bold">
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">¿Tienes hijos menores o estudiando?</label>
+                        <select id="has-children" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                            <option value="no">No</option>
+                            <option value="si">Sí (+ S/ 102.50 Asignación Familiar)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">Fecha de ingreso a la empresa:</label>
+                        <input type="date" id="start-date" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">Fecha de cese / último día:</label>
+                        <input type="date" id="end-date" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">Tipo de empresa:</label>
+                        <select id="regime" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                            <option value="general">Régimen General (Empresa Común / Grande)</option>
+                            <option value="pequena">Pequeña Empresa (Acreditada REMYPE)</option>
+                            <option value="micro">Microempresa (Acreditada REMYPE)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">Motivo de salida:</label>
+                        <select id="dismissal-type" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                            <option value="renuncia_fin">Renuncia voluntaria / Fin de contrato</option>
+                            <option value="despido_arbitrario">Despido arbitrario / Intempestivo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">WhatsApp de respaldo (Opcional):</label>
+                    <input type="tel" id="user-phone" maxlength="9" placeholder="Ej. 987654321" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                </div>
+
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-black py-4 rounded-2xl shadow-lg transition text-base flex items-center justify-center space-x-2 mt-4">
+                    <span>⚡ Calcular mi Liquidación Gratis</span>
+                </button>
+            </form>
+        </section>
+
+        <section id="preview-section" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm text-center space-y-4">
+                <div class="inline-block bg-indigo-50 text-indigo-700 text-xs font-black px-4 py-1.5 rounded-full border border-indigo-100">
+                    CÁLCULO OFICIAL DE LIQUIDACIÓN
+                </div>
+                <div>
+                    <span class="text-xs text-slate-400 font-bold uppercase block">MONTO TOTAL NETO ESTIMADO</span>
+                    <div id="preview-total" class="text-4xl sm:text-5xl font-black text-indigo-600 mt-1">S/ 0.00</div>
+                </div>
+
+                <div id="delay-alert" class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-left text-xs sm:text-sm text-amber-900 flex items-start gap-3">
+                    <span class="text-2xl">⚠️</span>
+                    <div>
+                        <strong class="block font-bold">Plazo Legal de 48 Horas Vencido:</strong>
+                        <p id="delay-text" class="text-amber-800 text-xs mt-0.5"></p>
+                    </div>
+                </div>
+
+                <div class="border-2 border-dashed border-slate-200 rounded-2xl p-4 bg-slate-50 space-y-3">
+                    <span class="text-xs font-bold text-slate-500 block uppercase">VISTA PREVIA DEL PAQUETE OFICIAL (2 PÁGINAS PDF):</span>
+                    <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-left shadow-sm text-[10px] space-y-1 opacity-75">
+                            <strong class="text-indigo-600 block">Pág 1: Hoja de Liquidación</strong>
+                            <div class="h-2 bg-slate-100 rounded w-full"></div>
+                            <div class="h-2 bg-slate-100 rounded w-3/4"></div>
+                            <div class="h-2 bg-slate-100 rounded w-5/6"></div>
+                            <span class="text-[9px] text-slate-400 block pt-1">Desglose de CTS, Grati y Vacaciones.</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-left shadow-sm text-[10px] space-y-1 opacity-75">
+                            <strong class="text-indigo-600 block">Pág 2: Carta Sunafil</strong>
+                            <div class="h-2 bg-slate-100 rounded w-full"></div>
+                            <div class="h-2 bg-slate-100 rounded w-4/5"></div>
+                            <div class="h-2 bg-slate-100 rounded w-2/3"></div>
+                            <span class="text-[9px] text-slate-400 block pt-1">Apercibimiento por multas en UIT.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-4 max-w-lg mx-auto shadow-xl">
+                    <div class="space-y-1">
+                        <div class="text-2xl font-black text-indigo-400">S/ 9.90 <span class="text-xs text-slate-400 font-normal">pago único</span></div>
+                        <h3 class="font-bold text-sm">Descarga tu Hoja Formal y Carta de Cobro en PDF</h3>
+                        <p class="text-xs text-slate-400">Listo para imprimir, firmar y presentar a Recursos Humanos o adjuntar en tu denuncia de Sunafil.</p>
+                    </div>
+
+                    <button id="pay-yape-btn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-sm">
+                        <span>📱 Pagar S/ 9.90 con Yape / Tarjeta</span>
+                    </button>
+
+                    <div class="flex items-center justify-center gap-3 text-[11px] text-slate-400 pt-1">
+                        <span>🔒 Pasarela Culqi</span>
+                        <span>•</span>
+                        <span>⚡ Descarga Inmediata</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download-section" class="hidden space-y-4">
+            <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl flex items-center justify-between">
+                <div>
+                    <h3 class="font-black text-emerald-900 text-sm">¡Pago Aprobado con Éxito!</h3>
+                    <p class="text-xs text-emerald-700">Tus documentos oficiales están listos para descarga.</p>
+                </div>
+                <button id="generate-pdf-btn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow">
+                    📥 Descargar PDF Oficial
+                </button>
+            </div>
+
+            <div id="pdf-printable" class="space-y-6">
+
+                <div class="formal-sheet p-8 rounded-2xl text-xs space-y-4">
+                    <div class="border-b-2 border-slate-800 pb-3 flex justify-between items-start">
+                        <div>
+                            <h2 class="font-black text-base tracking-wider text-slate-900">LIQUIDACIÓN DE BENEFICIOS SOCIALES</h2>
+                            <span class="text-[10px] text-slate-500 uppercase font-bold">D.L. 728 • D.S. 001-97-TR • LEY 27735 • D.L. 713</span>
+                        </div>
+                        <span class="font-mono text-xs bg-slate-100 px-2 py-1 rounded text-slate-700 font-bold" id="doc-date"></span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200 font-mono text-[11px]">
+                        <div><strong class="font-sans text-slate-400">TRABAJADOR:</strong> <span id="pdf-worker-name"></span></div>
+                        <div><strong class="font-sans text-slate-400">DNI:</strong> <span id="pdf-worker-dni"></span></div>
+                        <div><strong class="font-sans text-slate-400">EMPLEADOR:</strong> <span id="pdf-company-name"></span></div>
+                        <div><strong class="font-sans text-slate-400">RUC:</strong> <span id="pdf-company-ruc"></span></div>
+                        <div><strong class="font-sans text-slate-400">FECHA INGRESO:</strong> <span id="pdf-start-date"></span></div>
+                        <div><strong class="font-sans text-slate-400">FECHA CESE:</strong> <span id="pdf-end-date"></span></div>
+                        <div><strong class="font-sans text-slate-400">TIEMPO SERVICIO:</strong> <span id="pdf-time"></span></div>
+                        <div><strong class="font-sans text-slate-400">RÉGIMEN:</strong> <span id="pdf-regime"></span></div>
+                    </div>
+
+                    <table class="w-full text-left border-collapse mt-2">
+                        <thead>
+                            <tr class="border-b border-slate-300 text-slate-400 text-[10px] uppercase">
+                                <th class="py-2">Concepto Legal</th>
+                                <th class="py-2">Base Legal</th>
+                                <th class="py-2 text-right">Subtotal (PEN)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-xs">
+                            <tr>
+                                <td class="py-2"><strong>CTS Trunca</strong> (Compensación por Tiempo de Servicios)</td>
+                                <td class="py-2 text-slate-500">D.S. 001-97-TR</td>
+                                <td class="py-2 text-right font-mono" id="pdf-cts">S/ 0.00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2"><strong>Gratificación Trunca</strong></td>
+                                <td class="py-2 text-slate-500">Ley 27735</td>
+                                <td class="py-2 text-right font-mono" id="pdf-grati">S/ 0.00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2"><strong>Bonificación Extraordinaria (9%)</strong></td>
+                                <td class="py-2 text-slate-500">Ley 30334</td>
+                                <td class="py-2 text-right font-mono" id="pdf-bono">S/ 0.00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2"><strong>Vacaciones Truncas</strong> (Bruto)</td>
+                                <td class="py-2 text-slate-500">D.L. 713</td>
+                                <td class="py-2 text-right font-mono" id="pdf-vac">S/ 0.00</td>
+                            </tr>
+                            <tr class="text-rose-600">
+                                <td class="py-2">(-) Descuento de Ley AFP / ONP (Solo sobre Vacaciones)</td>
+                                <td class="py-2 text-slate-400">Ley 30334</td>
+                                <td class="py-2 text-right font-mono" id="pdf-afp">- S/ 0.00</td>
+                            </tr>
+                            <tr id="row-indemnizacion" class="hidden">
+                                <td class="py-2"><strong>Indemnización por Despido Arbitrario</strong></td>
+                                <td class="py-2 text-slate-500">D.L. 728 Art. 38</td>
+                                <td class="py-2 text-right font-mono" id="pdf-indem">S/ 0.00</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="border-t-2 border-slate-800 text-sm font-black">
+                                <td colspan="2" class="py-3">TOTAL NETO A PERCIBIR:</td>
+                                <td class="py-3 text-right font-mono text-indigo-700" id="pdf-neto">S/ 0.00</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="formal-sheet p-8 rounded-2xl text-xs space-y-4 leading-relaxed">
+                    <div class="text-right font-mono text-[10px] text-slate-500">
+                        Lima / Perú, <span id="letter-date"></span>
+                    </div>
+
+                    <div class="space-y-1">
+                        <strong>SEÑORES:</strong><br>
+                        <span id="letter-company" class="font-bold text-slate-900"></span><br>
+                        <span>RUC: <span id="letter-ruc"></span></span><br>
+                        <span>ATENCIÓN: Gerencia General / Recursos Humanos</span>
+                    </div>
+
+                    <div class="font-bold text-center underline py-2 text-slate-900">
+                        ASUNTO: REQUERIMIENTO FORMAL DE PAGO DE BENEFICIOS SOCIALES E INTIMACIÓN PREVIA A DENUNCIA INSPECTIVA ANTE SUNAFIL
+                    </div>
+
+                    <p>
+                        De mi consideración:<br>
+                        Por medio de la presente, yo, <strong><span id="letter-worker"></span></strong>, identificado con DNI N° <strong><span id="letter-dni"></span></strong>, me dirijo a ustedes para requerir el <strong>pago inmediato e íntegro de mi Liquidación de Beneficios Sociales</strong> derivada de la relación laboral sostenida con vuestra representada hasta el <span id="letter-end-date"></span>.
+                    </p>
+
+                    <p>
+                        Conforme lo establece el <strong>Artículo 56 del D.S. N° 001-97-TR</strong>, el empleador se encuentra en la obligación legal de cancelar los beneficios sociales y hacer entrega de la respectiva constancia dentro del <strong>plazo perentorio de 48 horas siguientes al cese laboral</strong>.
+                    </p>
+
+                    <p>
+                        Habiéndose vencido dicho plazo legal sin haberse hecho efectivo el pago que asciende a la suma neta calculada de <strong><span id="letter-amount"></span></strong>, <strong>INTIMO A SU DESPACHO</strong> a proceder con el depósito íntegro en un plazo no mayor a cuarenta y ocho (48) horas hábiles.
+                    </p>
+
+                    <p class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700">
+                        <strong>APERCIBIMIENTO:</strong> Se deja expresa constancia de que, en caso de persistir el incumplimiento, se procederá a ingresar la denuncia inspectiva formal ante la <strong>Superintendencia Nacional de Fiscalización Laboral (SUNAFIL)</strong> por la comisión de infracción calificada como <strong>Muy Grave</strong> en materia de relaciones laborales (conforme a la escala de multas del D.S. 019-2006-TR), sin perjuicio del cobro de los <strong>intereses legales laborales</strong> devengados según el D.L. N° 25920.
+                    </p>
+
+                    <div class="pt-8 text-center max-w-xs mx-auto space-y-1">
+                        <div class="border-t border-slate-400"></div>
+                        <strong><span id="letter-sign-name"></span></strong><br>
+                        <span class="text-slate-500">DNI: <span id="letter-sign-dni"></span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-8 text-slate-500 text-xs">
+        <div class="max-w-5xl mx-auto px-4 space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
+                <div class="space-y-2">
+                    <span class="font-black text-slate-900 text-sm block">LiquidaYa.pe</span>
+                    <p class="text-[11px] text-slate-400">Plataforma tecnológica de cálculo de beneficios sociales y redacción de requerimientos formales bajo legislación laboral peruana.</p>
+                </div>
+                <div class="space-y-1.5">
+                    <strong class="text-slate-900 block text-xs">Información Legal</strong>
+                    <a href="javascript:void(0)" onclick="openModal('terms-modal')" class="block hover:text-indigo-600">Términos y Condiciones</a>
+                    <a href="javascript:void(0)" onclick="openModal('privacy-modal')" class="block hover:text-indigo-600">Políticas de Privacidad</a>
+                    <a href="javascript:void(0)" onclick="openModal('refund-modal')" class="block hover:text-indigo-600">Políticas de Reembolso</a>
+                </div>
+                <div class="space-y-1.5">
+                    <strong class="text-slate-900 block text-xs">Atención al Cliente</strong>
+                    <p class="text-[11px]">Soporte: contacto@liquydaya.pe</p>
+                    <p class="text-[11px]">WhatsApp: +51 987 654 321</p>
+                    <p class="text-[11px]">Horario: Lun a Vie 9:00 - 18:00</p>
+                </div>
+                <div class="space-y-2">
+                    <strong class="text-slate-900 block text-xs">Atención de Quejas</strong>
+                    <button onclick="openModal('reclamaciones-modal')" class="bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 font-bold px-3 py-2 rounded-xl flex items-center gap-2 text-[11px]">
+                        <span>📖</span>
+                        <span>Libro de Reclamaciones</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-100 pt-4 text-center text-[10px] text-slate-400">
+                © 2026 LiquidaYa Perú • Todos los derechos reservados. Pagos procesados de forma segura con Culqi.
+            </div>
+        </div>
+    </footer>
+
+    <div id="terms-modal" class="hidden fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 text-xs space-y-3 max-h-[80vh] overflow-y-auto">
+            <h3 class="font-black text-sm text-slate-900">Términos y Condiciones</h3>
+            <p>LiquidaYa.pe ofrece un servicio de cálculo algorítmico y redacción automatizada de documentos privados conforme al D.L. 728, D.S. 001-97-TR y Ley 27735. El usuario es responsable de la veracidad de los datos ingresados. Este servicio no constituye patrocinio legal en litigios.</p>
+            <button onclick="closeModal('terms-modal')" class="w-full bg-slate-900 text-white font-bold py-2 rounded-xl">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="privacy-modal" class="hidden fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 text-xs space-y-3 max-h-[80vh] overflow-y-auto">
+            <h3 class="font-black text-sm text-slate-900">Políticas de Privacidad (Ley N° 29733)</h3>
+            <p>En cumplimiento de la Ley de Protección de Datos Personales, la información suministrada es utilizada únicamente para el procesamiento de los cálculos y emisión de los documentos en PDF solicitados por el titular.</p>
+            <button onclick="closeModal('privacy-modal')" class="w-full bg-slate-900 text-white font-bold py-2 rounded-xl">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="refund-modal" class="hidden fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 text-xs space-y-3">
+            <h3 class="font-black text-sm text-slate-900">Políticas de Reembolso</h3>
+            <p>Tratándose de un servicio digital de descarga inmediata, una vez emitido el archivo PDF no procede la devolución salvo que exista un error imputable a la plataforma en la generación del documento.</p>
+            <button onclick="closeModal('refund-modal')" class="w-full bg-slate-900 text-white font-bold py-2 rounded-xl">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="reclamaciones-modal" class="hidden fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 text-xs space-y-3">
+            <h3 class="font-black text-sm text-slate-900">Libro de Reclamaciones Virtual</h3>
+            <p class="text-slate-500">Conforme al Código de Protección y Defensa del Consumidor (Ley N° 29571).</p>
+            <input type="text" placeholder="Nombres y Apellidos" class="w-full p-2 bg-slate-50 border rounded-xl">
+            <input type="email" placeholder="Correo Electrónico" class="w-full p-2 bg-slate-50 border rounded-xl">
+            <textarea placeholder="Detalle del reclamo o queja..." rows="3" class="w-full p-2 bg-slate-50 border rounded-xl"></textarea>
+            <button onclick="alert('Reclamo registrado con código LR-2026-001. Nos comunicaremos en el plazo de ley.'); closeModal('reclamaciones-modal');" class="w-full bg-indigo-600 text-white font-bold py-2 rounded-xl">Enviar Reclamo</button>
+        </div>
+    </div>
+
+    <script>
+        // Configura la URL que te genera Render al desplegar el backend
+        const BACKEND_URL = "https://liquidaya-backend.onrender.com"; 
+        // Reemplaza con tu llave pública de Culqi (pk_test_... o pk_live_...)
+        const CULQI_PUBLIC_KEY = "pk_test_TU_LLAVE_PUBLICA_AQUI"; 
+
+        let currentCalculation = null;
+
+        const form = document.getElementById('liquidation-form');
+        const calcSection = document.getElementById('calc-section');
+        const previewSection = document.getElementById('preview-section');
+        const downloadSection = document.getElementById('download-section');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                worker_name: document.getElementById('worker-name').value.trim(),
+                worker_dni: document.getElementById('worker-dni').value.trim(),
+                company_name: document.getElementById('company-name').value.trim(),
+                company_ruc: document.getElementById('company-ruc').value.trim(),
+                salary: parseFloat(document.getElementById('salary').value),
+                has_children: document.getElementById('has-children').value === 'si',
+                start_date: document.getElementById('start-date').value,
+                end_date: document.getElementById('end-date').value,
+                regime: document.getElementById('regime').value,
+                dismissal_type: document.getElementById('dismissal-type').value,
+                phone: document.getElementById('user-phone').value.trim()
+            };
+
+            try {
+                const res = await fetch(`${BACKEND_URL}/api/calculate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                currentCalculation = await res.json();
+                renderPreview(currentCalculation);
+                calcSection.classList.add('hidden');
+                previewSection.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (err) {
+                alert("Error al conectar con el servidor de cálculo.");
+            }
+        });
+
+        function renderPreview(data) {
+            document.getElementById('preview-total').innerText = `S/ ${data.totales.total_neto.toFixed(2)}`;
+            const delayText = document.getElementById('delay-text');
+            if (data.totales.dias_retraso > 0) {
+                delayText.innerText = `Han transcurrido ${data.totales.dias_retraso} días desde que venció el plazo legal de 48 horas. Se devengan intereses legales laborales (D.L. 25920).`;
+            } else {
+                delayText.innerText = "Tu empleador se encuentra dentro del plazo legal de 48 horas hábiles para realizar la liquidación.";
+            }
+        }
+
+        // Configuración Culqi Checkout v4
+        Culqi.publicKey = CULQI_PUBLIC_KEY;
+        Culqi.options({
+            lang: 'auto',
+            installments: false,
+            paymentMethods: {
+                tarjeta: true,
+                yape: true,
+                billetera: false
+            }
+        });
+
+        document.getElementById('pay-yape-btn').addEventListener('click', () => {
+            Culqi.settings({
+                title: 'LiquidaYa Perú',
+                currency: 'PEN',
+                amount: 990, // S/ 9.90
+                order: 'ORD-' + Math.floor(Math.random() * 1000000)
+            });
+            Culqi.open();
+        });
+
+        async function culqi() {
+            if (Culqi.token) {
+                const token = Culqi.token.id;
+                Culqi.close();
+
+                try {
+                    const res = await fetch(`${BACKEND_URL}/api/culqi-charge`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            token_id: token,
+                            amount: 990,
+                            email: Culqi.token.email || "cliente@liquydaya.pe",
+                            concept: "Liquidacion Laboral + Carta Sunafil"
+                        })
+                    });
+                    const chargeRes = await res.json();
+                    if (chargeRes.status === 'approved') {
+                        unlockPDF();
+                    } else {
+                        alert(chargeRes.message || "Pago no aprobado.");
+                    }
+                } catch (e) {
+                    alert("Error procesando el pago en la pasarela.");
+                }
+            } else if (Culqi.error) {
+                alert(Culqi.error.user_message);
+            }
+        }
+
+        function unlockPDF() {
+            previewSection.classList.add('hidden');
+            downloadSection.classList.remove('hidden');
+
+            const t = currentCalculation.trabajador;
+            const d = currentCalculation.desglose;
+            const tot = currentCalculation.totales;
+            const todayStr = new Date().toLocaleDateString('es-PE');
+
+            document.getElementById('doc-date').innerText = todayStr;
+            document.getElementById('pdf-worker-name').innerText = t.nombre;
+            document.getElementById('pdf-worker-dni').innerText = t.dni;
+            document.getElementById('pdf-company-name').innerText = t.empresa;
+            document.getElementById('pdf-company-ruc').innerText = t.ruc;
+            document.getElementById('pdf-start-date').innerText = t.fecha_ingreso;
+            document.getElementById('pdf-end-date').innerText = t.fecha_cese;
+            document.getElementById('pdf-time').innerText = t.tiempo_servicio;
+            document.getElementById('pdf-regime').innerText = t.regimen;
+
+            document.getElementById('pdf-cts').innerText = `S/ ${d.cts_trunca.toFixed(2)}`;
+            document.getElementById('pdf-grati').innerText = `S/ ${d.grati_trunca.toFixed(2)}`;
+            document.getElementById('pdf-bono').innerText = `S/ ${d.bono_essalud_9.toFixed(2)}`;
+            document.getElementById('pdf-vac').innerText = `S/ ${d.vacaciones_brutas.toFixed(2)}`;
+            document.getElementById('pdf-afp').innerText = `- S/ ${d.descuento_afp_onp.toFixed(2)}`;
+            document.getElementById('pdf-neto').innerText = `S/ ${tot.total_neto.toFixed(2)}`;
+
+            if (d.indemnizacion_despido > 0) {
+                document.getElementById('row-indemnizacion').classList.remove('hidden');
+                document.getElementById('pdf-indem').innerText = `S/ ${d.indemnizacion_despido.toFixed(2)}`;
+            }
+
+            // Carta Sunafil
+            document.getElementById('letter-date').innerText = todayStr;
+            document.getElementById('letter-company').innerText = t.empresa;
+            document.getElementById('letter-ruc').innerText = t.ruc;
+            document.getElementById('letter-worker').innerText = t.nombre;
+            document.getElementById('letter-dni').innerText = t.dni;
+            document.getElementById('letter-end-date').innerText = t.fecha_cese;
+            document.getElementById('letter-amount').innerText = `S/ ${tot.total_neto.toFixed(2)} (PEN)`;
+            document.getElementById('letter-sign-name').innerText = t.nombre;
+            document.getElementById('letter-sign-dni').innerText = t.dni;
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('generate-pdf-btn').addEventListener('click', () => {
+            const element = document.getElementById('pdf-printable');
+            const opt = {
+                margin: 0.3,
+                filename: `Liquidacion_Oficial_${currentCalculation.trabajador.dni}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        });
+
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    </script>
+</body>
+</html>
