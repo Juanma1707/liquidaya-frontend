@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LiquidaYa.pe | Liquidación Oficial Laboral y Asesor Legal</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- html2pdf para descarga oficial -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- Pasarela Oficial Culqi Checkout v4 -->
     <script src="https://checkout.culqi.com/js/v4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -22,7 +19,6 @@
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-    <!-- 1. Header Oficial -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
             <a href="/" class="flex items-center space-x-2">
@@ -37,10 +33,8 @@
         </div>
     </header>
 
-    <!-- 2. Contenedor Principal -->
     <main class="max-w-4xl mx-auto px-4 py-8 flex-1 w-full space-y-8">
 
-        <!-- VISTA 1: CATÁLOGO DE LOS 5 TRÁMITES -->
         <section id="view-catalog" class="space-y-6">
             <div class="text-center max-w-2xl mx-auto space-y-2">
                 <span class="text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
@@ -52,22 +46,19 @@
                 </p>
             </div>
 
-            <!-- Banner Asesor -->
             <div class="bg-slate-900 rounded-2xl p-5 text-white flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-800 shadow-md">
                 <div class="space-y-1 text-center sm:text-left">
                     <strong class="text-indigo-400 text-xs font-bold block uppercase tracking-wider">Orientación Legal</strong>
                     <h3 class="font-bold text-sm">¿No sabes si tu empresa es Micro, Pequeña o Régimen General?</h3>
-                    <p class="text-[11px] text-slate-400">Describe tu caso y el sistema diagnosticará tus beneficios por ley.</p>
+                    <p class="text-[11px] text-slate-400">Describe tu caso y el asesor legal analizará tus beneficios por ley.</p>
                 </div>
                 <button onclick="openAIModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition whitespace-nowrap">
                     Consultar Asesor Legal
                 </button>
             </div>
 
-            <!-- Catálogo de 5 Trámites -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 
-                <!-- Tarjeta 1 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
@@ -81,7 +72,6 @@
                     </button>
                 </div>
 
-                <!-- Tarjeta 2 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
@@ -95,7 +85,6 @@
                     </button>
                 </div>
 
-                <!-- Tarjeta 3 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
@@ -109,7 +98,6 @@
                     </button>
                 </div>
 
-                <!-- Tarjeta 4 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
@@ -123,7 +111,6 @@
                     </button>
                 </div>
 
-                <!-- Tarjeta 5 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
@@ -139,7 +126,6 @@
             </div>
         </section>
 
-        <!-- VISTA 2: FORMULARIO DINÁMICO -->
         <section id="view-form" class="hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
             <div class="flex items-center justify-between border-b pb-4">
                 <div>
@@ -213,7 +199,6 @@
             </form>
         </section>
 
-        <!-- VISTA 3: RESULTADOS Y CHECKOUT EXCLUSIVO YAPE -->
         <section id="view-preview" class="hidden space-y-6">
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm text-center space-y-4">
                 <div class="inline-block bg-indigo-50 text-indigo-700 text-xs font-black px-4 py-1.5 rounded-full border border-indigo-100">
@@ -252,7 +237,6 @@
                     </div>
                 </div>
 
-                <!-- Caja de Pago Oficial Culqi (Solo Yape) -->
                 <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-4 max-w-lg mx-auto shadow-xl">
                     <div class="space-y-1">
                         <div class="text-2xl font-black text-indigo-400">S/ 9.90 <span class="text-xs text-slate-400 font-normal">PEN (Pago único)</span></div>
@@ -260,7 +244,6 @@
                         <p class="text-xs text-slate-400">Listo para imprimir, firmar y presentar a Recursos Humanos o adjuntar a Sunafil.</p>
                     </div>
 
-                    <!-- Botón Oficial Culqi Yape -->
                     <button id="pay-yape-btn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-sm">
                         <span>Pagar S/ 9.90 con Yape</span>
                     </button>
@@ -274,7 +257,6 @@
             </div>
         </section>
 
-        <!-- VISTA 4: DESCARGA DE PDF -->
         <section id="view-download" class="hidden space-y-4">
             <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl flex items-center justify-between">
                 <div>
@@ -287,7 +269,6 @@
             </div>
 
             <div id="pdf-printable" class="space-y-6">
-                <!-- PÁGINA 1: HOJA DE LIQUIDACIÓN -->
                 <div class="formal-sheet p-8 rounded-2xl text-xs space-y-4">
                     <div class="border-b-2 border-slate-800 pb-3 flex justify-between items-start">
                         <div>
@@ -357,7 +338,6 @@
                     </table>
                 </div>
 
-                <!-- PÁGINA 2: CARTA FORMAL SUNAFIL -->
                 <div class="formal-sheet p-8 rounded-2xl text-xs space-y-4 leading-relaxed">
                     <div class="text-right font-mono text-[10px] text-slate-500">
                         Lima / Perú, <span id="letter-date"></span>
@@ -401,17 +381,14 @@
         </section>
     </main>
 
-    <!-- 3. Footer Oficial Formal -->
     <footer class="bg-white border-t border-slate-200 py-10 text-slate-500 text-xs">
         <div class="max-w-5xl mx-auto px-4 space-y-8">
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-8">
-                <!-- Identidad del Comercio -->
                 <div class="space-y-2">
                     <span class="font-black text-slate-900 text-sm block">LiquidaYa.pe</span>
                     <p class="text-[11px] text-slate-400">Plataforma tecnológica de cálculo de beneficios sociales y redacción de requerimientos formales bajo legislación laboral peruana.</p>
                 </div>
 
-                <!-- Enlaces Legales -->
                 <div class="space-y-1.5">
                     <strong class="text-slate-900 block text-xs">Información Legal</strong>
                     <a href="javascript:void(0)" onclick="openModal('terms-modal')" class="block hover:text-indigo-600">Términos y Condiciones</a>
@@ -419,7 +396,6 @@
                     <a href="javascript:void(0)" onclick="openModal('refund-modal')" class="block hover:text-indigo-600">Políticas de Devolución</a>
                 </div>
 
-                <!-- Datos de Contacto Limpios -->
                 <div class="space-y-1.5">
                     <strong class="text-slate-900 block text-xs">Datos de Contacto</strong>
                     <p class="text-[11px]">Dirección: Santa Margarita - Piura, Perú</p>
@@ -428,7 +404,6 @@
                     <p class="text-[11px]">Horario: Atención 24/7</p>
                 </div>
 
-                <!-- Libro de Reclamaciones -->
                 <div class="space-y-2">
                     <strong class="text-slate-900 block text-xs">Atención al Consumidor</strong>
                     <p class="text-[11px] text-slate-400">Conforme al Código de Protección al Consumidor (Ley N° 29571).</p>
@@ -444,38 +419,34 @@
         </div>
     </footer>
 
-    <!-- MODAL ASISTENTE LEGAL INTELIGENTE -->
     <div id="ai-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-lg w-full p-6 text-xs space-y-4 shadow-2xl flex flex-col justify-between max-h-[90vh]">
             <div class="flex items-center justify-between border-b pb-3">
                 <div>
                     <h3 class="font-black text-sm text-slate-900">Asesor Legal Inteligente</h3>
-                    <p class="text-[10px] text-emerald-600 font-bold">Diagnóstico legal según legislación laboral peruana</p>
+                    <p class="text-[10px] text-emerald-600 font-bold">Diagnóstico legal interactivo según normativa peruana</p>
                 </div>
                 <button onclick="closeModal('ai-modal')" class="text-slate-400 hover:text-slate-600 font-bold text-base">✕</button>
             </div>
 
-            <!-- Chat / Diagnóstico Container -->
-            <div id="ai-chat-box" class="space-y-3 overflow-y-auto flex-1 pr-1 max-h-[300px]">
-                <div class="bg-slate-100 p-3 rounded-2xl text-slate-700 leading-relaxed">
-                    <strong>Describe tu caso laboral:</strong><br>
-                    Por ejemplo: <em>"Trabajaba en una botica con 3 empleados y me despidieron sin carta"</em> o <em>"Estuve 2 años en un almacén grande y renuncié"</em>. El asesor determinará tu régimen y configurará tu trámite automáticamente.
+            <div id="ai-chat-box" class="space-y-3 overflow-y-auto flex-1 pr-1 max-h-[320px]">
+                <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-700 leading-relaxed">
+                    <strong>¡Hola! Cuéntame tu situación laboral:</strong><br>
+                    Escribe cómo trabajabas (ej: nombre de la empresa, tamaño del negocio o cómo fue tu salida). Si hace falta algún detalle, te haré una pregunta breve para darte el cálculo exacto.
                 </div>
             </div>
 
-            <!-- Input Chat -->
             <div class="space-y-2 pt-2 border-t border-slate-100">
-                <div class="flex gap-2">
-                    <input type="text" id="ai-user-input" placeholder="Describe tu situación laboral aquí..." class="flex-1 p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 text-xs">
-                    <button onclick="sendAIMessage()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 rounded-xl text-xs transition whitespace-nowrap">
-                        Analizar Caso
+                <form id="ai-form-chat" onsubmit="event.preventDefault(); sendAIMessage();" class="flex gap-2">
+                    <input type="text" id="ai-user-input" placeholder="Escribe tu mensaje aquí..." class="flex-1 p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 text-xs">
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 rounded-xl text-xs transition whitespace-nowrap">
+                        Enviar
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- MODALES LEGALES Y RECLAMACIONES -->
     <div id="terms-modal" class="hidden fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 text-xs space-y-3 max-h-[80vh] overflow-y-auto">
             <h3 class="font-black text-sm text-slate-900">Términos y Condiciones</h3>
@@ -558,12 +529,12 @@
         </div>
     </div>
 
-    <!-- SCRIPTS -->
     <script>
         const BACKEND_URL = "https://liquidaya-backend.onrender.com"; 
         const CULQI_PUBLIC_KEY = "pk_test_1TMhBN3zeAAONfwX"; 
 
         let currentCalculation = null;
+        let aiChatHistory = []; // Memoria conversacional
 
         const viewCatalog = document.getElementById('view-catalog');
         const viewForm = document.getElementById('view-form');
@@ -591,7 +562,7 @@
             openModal('ai-modal');
         }
 
-        // Motor de Diagnóstico Legal Inteligente (Híbrido)
+        // Diagnóstico de Respaldo Local (Por si Render está en reposo)
         function localLegalDiagnosis(query) {
             const q = query.toLowerCase();
             let regime = "general";
@@ -603,78 +574,99 @@
                 dismissal = "despido_arbitrario";
             }
 
-            if (q.includes("micro") || q.includes("bodega") || q.includes("botica") || q.includes("taller") || q.includes("tienda") || q.includes("farmacia") || q.includes("1") || q.includes("2") || q.includes("3") || q.includes("4") || q.includes("5")) {
+            if (q.includes("micro") || q.includes("bodega") || q.includes("botica") || q.includes("taller") || q.includes("tienda") || q.includes("farmacia")) {
                 regime = "micro";
                 title = "Liquidación Microempresa (REMYPE)";
-                explanation = "Por el tamaño de tu centro de labores (hasta 10 trabajadores), tu caso califica como <strong>Microempresa bajo Ley MYPE</strong>. Te corresponden 15 días de vacaciones proporcionales por año de servicio.";
+                explanation = "Por las características de tu centro de trabajo, tu caso califica como <strong>Microempresa (REMYPE)</strong>. Te corresponden 15 días de vacaciones proporcionales por año de servicio.";
             } else if (q.includes("pequeñ") || q.includes("mype") || q.includes("distribuidora") || q.includes("servicios")) {
                 regime = "pequena";
                 title = "Liquidación Pequeña Empresa (REMYPE)";
-                explanation = "Tu caso califica como <strong>Pequeña Empresa (REMYPE)</strong>. Tienes derecho legal al 50% de CTS, 50% de Gratificación legal y 15 días de vacaciones por año laborado.";
+                explanation = "Tu caso califica como <strong>Pequeña Empresa (REMYPE)</strong>. Tienes derecho al 50% de CTS, 50% de Gratificación legal y 15 días de vacaciones anuales.";
             } else {
                 regime = "general";
                 title = "Liquidación Régimen General (D.L. 728)";
-                explanation = "Tu caso corresponde al <strong>Régimen General Laboral (D.L. 728)</strong>. Tienes derecho al 100% de CTS, Gratificación completa con bonificación extraordinaria del 9% de EsSalud y 30 días de vacaciones por año.";
+                explanation = "Tu caso corresponde al <strong>Régimen General Laboral (D.L. 728)</strong>. Tienes derecho al 100% de CTS, Gratificación con bonificación extraordinaria del 9% de EsSalud y 30 días de vacaciones por año.";
             }
 
             if (dismissal === "despido_arbitrario") {
                 title += " + Indemnización";
-                explanation += "<br><br>Al haber sufrido un despido sin causa legal ni aviso formal, te corresponde adicionalmente una <strong>Indemnización por Despido Arbitrario</strong> equivalente a 1.5 sueldos por año laborado (D.L. 728 Art. 38).";
+                explanation += "<br><br>Al haber sufrido un despido sin justificación legal, te corresponde adicionalmente una <strong>Indemnización por Despido Arbitrario</strong> de 1.5 sueldos por año laborado (D.L. 728 Art. 38).";
             }
 
-            return { regime, dismissal_type: dismissal, title, explanation };
+            return { status: "complete", regime, dismissal_type: dismissal, title, explanation };
         }
 
+        // Envío y gestión conversacional de IA
         async function sendAIMessage() {
             const input = document.getElementById('ai-user-input');
             const query = input.value.trim();
             if (!query) return;
 
             const chatBox = document.getElementById('ai-chat-box');
+            
+            // Renderizar mensaje del usuario
             chatBox.innerHTML += `<div class="bg-indigo-600 text-white p-3 rounded-2xl ml-8 leading-relaxed font-medium">${query}</div>`;
+            aiChatHistory.push({ role: "user", text: query });
+            
             chatBox.innerHTML += `<div id="ai-loading" class="text-slate-400 text-xs italic p-2 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span> Analizando tu caso con la normativa laboral peruana...</div>`;
             input.value = "";
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            let diagnosis = null;
+            let responseData = null;
 
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 3500);
+                const timeoutId = setTimeout(() => controller.abort(), 6000);
 
                 const res = await fetch(`${BACKEND_URL}/api/ai-consult`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ user_query: query }),
+                    body: JSON.stringify({ messages: aiChatHistory }),
                     signal: controller.signal
                 });
                 clearTimeout(timeoutId);
 
                 const jsonRes = await res.json();
                 if (jsonRes.status === 'ok' && jsonRes.data) {
-                    diagnosis = jsonRes.data;
+                    responseData = jsonRes.data;
                 }
             } catch (e) {
-                // Fallback automático al diagnóstico local si el backend está en reposo
+                // Fallback automático si hay timeout o fallo de red
             }
 
-            if (!diagnosis) {
-                diagnosis = localLegalDiagnosis(query);
+            if (!responseData) {
+                responseData = localLegalDiagnosis(query);
             }
 
             document.getElementById('ai-loading')?.remove();
 
-            chatBox.innerHTML += `
-                <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-800 space-y-2 border border-slate-200">
-                    <div class="flex items-center gap-1 text-indigo-700 font-bold text-[11px]">
-                        <span>Dictamen Legal:</span>
+            if (responseData.status === "needs_info") {
+                // La IA repregunta para obtener más detalles
+                chatBox.innerHTML += `
+                    <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-800 space-y-2 border border-slate-200">
+                        <div class="flex items-center gap-1 text-indigo-700 font-bold text-[11px]">
+                            <span>Asesor Legal:</span>
+                        </div>
+                        <p class="leading-relaxed text-xs">${responseData.message}</p>
                     </div>
-                    <p class="leading-relaxed text-xs">${diagnosis.explanation}</p>
-                    <button onclick="applyAIDiagnosis('${diagnosis.regime}', '${diagnosis.dismissal_type}', '${diagnosis.title}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1 mt-1 transition">
-                        <span>Iniciar Trámite: ${diagnosis.title}</span>
-                    </button>
-                </div>
-            `;
+                `;
+                aiChatHistory.push({ role: "model", text: responseData.message });
+            } else {
+                // Caso completo: Dictamen final + Botón de acción
+                chatBox.innerHTML += `
+                    <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-800 space-y-2 border border-slate-200">
+                        <div class="flex items-center gap-1 text-indigo-700 font-bold text-[11px]">
+                            <span>Dictamen Legal:</span>
+                        </div>
+                        <p class="leading-relaxed text-xs">${responseData.explanation}</p>
+                        <button onclick="applyAIDiagnosis('${responseData.regime}', '${responseData.dismissal_type}', '${responseData.title}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1 mt-1 transition">
+                            <span>Iniciar Trámite: ${responseData.title}</span>
+                        </button>
+                    </div>
+                `;
+                aiChatHistory.push({ role: "model", text: responseData.explanation });
+            }
+
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
@@ -807,7 +799,7 @@
             }
         }
 
-        // Inicialización exclusiva de Yape en Culqi v4
+        // Inicialización y Pasarela Culqi (Exclusivo Yape)
         function initCulqi() {
             if (typeof Culqi !== 'undefined') {
                 Culqi.publicKey = CULQI_PUBLIC_KEY;
@@ -828,7 +820,7 @@
 
         document.getElementById('pay-yape-btn').addEventListener('click', () => {
             if (typeof Culqi === 'undefined') {
-                alert("La pasarela está conectando. Intenta nuevamente en unos segundos.");
+                alert("La pasarela está cargando. Intenta nuevamente en unos segundos.");
                 return;
             }
 
@@ -841,7 +833,7 @@
                 });
                 Culqi.open();
             } catch (err) {
-                alert("Error al inicializar la pasarela de Yape.");
+                alert("Error al inicializar la pasarela de pagos.");
             }
         });
 
@@ -865,7 +857,7 @@
                     if (chargeRes.status === 'approved') {
                         unlockPDF();
                     } else {
-                        unlockPDF(); // Desbloqueo en entorno de evaluación
+                        unlockPDF(); // Desbloqueo de cortesía en modo test
                     }
                 } catch (e) {
                     unlockPDF();
