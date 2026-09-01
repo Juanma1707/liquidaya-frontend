@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LiquidaYa.pe | Calculadora Oficial de Liquidación y Carta Sunafil</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- html2pdf para generación de PDF en cliente -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- Pasarela Oficial Culqi Checkout v4 -->
     <script src="https://checkout.culqi.com/js/v4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -22,7 +19,6 @@
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-    <!-- 1. Header Oficial -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
             <a href="/" class="flex items-center space-x-2">
@@ -39,10 +35,8 @@
         </div>
     </header>
 
-    <!-- 2. Contenedor Principal -->
     <main class="max-w-4xl mx-auto px-4 py-8 flex-1 w-full space-y-8">
 
-        <!-- Formulario de Cálculo -->
         <section id="calc-section" class="max-w-2xl mx-auto bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
             <div class="text-center space-y-2">
                 <span class="text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
@@ -57,7 +51,6 @@
             </div>
 
             <form id="liquidation-form" class="space-y-4 text-xs sm:text-sm">
-                <!-- Datos del Trabajador -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Nombres y Apellidos:</label>
@@ -69,7 +62,6 @@
                     </div>
                 </div>
 
-                <!-- Datos de la Empresa -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Empresa empleadora:</label>
@@ -81,7 +73,6 @@
                     </div>
                 </div>
 
-                <!-- Sueldo y Asignación Familiar -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Sueldo mensual básico (S/):</label>
@@ -96,7 +87,6 @@
                     </div>
                 </div>
 
-                <!-- Fechas de Ingreso y Cese -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Fecha de ingreso a la empresa:</label>
@@ -108,7 +98,6 @@
                     </div>
                 </div>
 
-                <!-- Régimen y Motivo -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Tipo de empresa:</label>
@@ -138,7 +127,6 @@
             </form>
         </section>
 
-        <!-- Preview Gratuito y Paywall de Desbloqueo -->
         <section id="preview-section" class="hidden space-y-6">
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm text-center space-y-4">
                 <div class="inline-block bg-indigo-50 text-indigo-700 text-xs font-black px-4 py-1.5 rounded-full border border-indigo-100">
@@ -149,7 +137,6 @@
                     <div id="preview-total" class="text-4xl sm:text-5xl font-black text-indigo-600 mt-1">S/ 0.00</div>
                 </div>
 
-                <!-- Alerta de Retraso Legal -->
                 <div id="delay-alert" class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-left text-xs sm:text-sm text-amber-900 flex items-start gap-3">
                     <span class="text-2xl">⚠️</span>
                     <div>
@@ -158,7 +145,6 @@
                     </div>
                 </div>
 
-                <!-- Mockup Visual del Paquete (Exigencia Culqi) -->
                 <div class="border-2 border-dashed border-slate-200 rounded-2xl p-4 bg-slate-50 space-y-3">
                     <span class="text-xs font-bold text-slate-500 block uppercase">VISTA PREVIA DEL PAQUETE OFICIAL (2 PÁGINAS PDF):</span>
                     <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
@@ -179,7 +165,6 @@
                     </div>
                 </div>
 
-                <!-- Caja de Cobro Culqi -->
                 <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-4 max-w-lg mx-auto shadow-xl">
                     <div class="space-y-1">
                         <div class="text-2xl font-black text-indigo-400">S/ 9.90 <span class="text-xs text-slate-400 font-normal">pago único</span></div>
@@ -191,8 +176,12 @@
                         <span>📱 Pagar S/ 9.90 con Yape / Tarjeta</span>
                     </button>
 
+                    <button id="bypass-test-btn" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold py-2.5 rounded-xl border border-slate-700 transition text-xs flex items-center justify-center gap-1.5">
+                        <span>🧪 Ver y Descargar PDF (Modo Prueba)</span>
+                    </button>
+
                     <div class="flex items-center justify-center gap-3 text-[11px] text-slate-400 pt-1">
-                        <span>🔒 Pasarela Culqi</span>
+                        <span>🔒 Pasarela Segura</span>
                         <span>•</span>
                         <span>⚡ Descarga Inmediata</span>
                     </div>
@@ -200,11 +189,10 @@
             </div>
         </section>
 
-        <!-- Contenedor del PDF Final (Desbloqueado tras Pago) -->
         <section id="download-section" class="hidden space-y-4">
             <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl flex items-center justify-between">
                 <div>
-                    <h3 class="font-black text-emerald-900 text-sm">¡Pago Aprobado con Éxito!</h3>
+                    <h3 class="font-black text-emerald-900 text-sm">¡Documentos Generados con Éxito!</h3>
                     <p class="text-xs text-emerald-700">Tus documentos oficiales están listos para descarga.</p>
                 </div>
                 <button id="generate-pdf-btn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow">
@@ -212,10 +200,8 @@
                 </button>
             </div>
 
-            <!-- Estructura Imprimible de 2 Páginas -->
             <div id="pdf-printable" class="space-y-6">
 
-                <!-- PÁGINA 1: HOJA DE LIQUIDACIÓN DE BENEFICIOS SOCIALES -->
                 <div class="formal-sheet p-8 rounded-2xl text-xs space-y-4">
                     <div class="border-b-2 border-slate-800 pb-3 flex justify-between items-start">
                         <div>
@@ -225,7 +211,6 @@
                         <span class="font-mono text-xs bg-slate-100 px-2 py-1 rounded text-slate-700 font-bold" id="doc-date"></span>
                     </div>
 
-                    <!-- Datos Generales -->
                     <div class="grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200 font-mono text-[11px]">
                         <div><strong class="font-sans text-slate-400">TRABAJADOR:</strong> <span id="pdf-worker-name"></span></div>
                         <div><strong class="font-sans text-slate-400">DNI:</strong> <span id="pdf-worker-dni"></span></div>
@@ -237,7 +222,6 @@
                         <div><strong class="font-sans text-slate-400">RÉGIMEN:</strong> <span id="pdf-regime"></span></div>
                     </div>
 
-                    <!-- Tabla de Conceptos -->
                     <table class="w-full text-left border-collapse mt-2">
                         <thead>
                             <tr class="border-b border-slate-300 text-slate-400 text-[10px] uppercase">
@@ -287,7 +271,6 @@
                     </table>
                 </div>
 
-                <!-- PÁGINA 2: CARTA FORMAL DE REQUERIMIENTO (SUNAFIL) -->
                 <div class="formal-sheet p-8 rounded-2xl text-xs space-y-4 leading-relaxed">
                     <div class="text-right font-mono text-[10px] text-slate-500">
                         Lima / Perú, <span id="letter-date"></span>
@@ -331,7 +314,6 @@
         </section>
     </main>
 
-    <!-- 3. Footer Oficial con Cumplimiento Culqi e Indecopi -->
     <footer class="bg-white border-t border-slate-200 py-8 text-slate-500 text-xs">
         <div class="max-w-5xl mx-auto px-4 space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
@@ -366,7 +348,6 @@
         </div>
     </footer>
 
-    <!-- Modales Legales (Cumplimiento Culqi) -->
     <div id="terms-modal" class="hidden fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 text-xs space-y-3 max-h-[80vh] overflow-y-auto">
             <h3 class="font-black text-sm text-slate-900">Términos y Condiciones</h3>
@@ -402,9 +383,8 @@
         </div>
     </div>
 
-    <!-- Script Principal & Pasarela Culqi -->
     <script>
-        // CONFIGURACIÓN: Reemplaza con la URL generada por Render y tu Llave Pública de Culqi
+        // CONFIGURACIÓN: URL de Render y Llave Pública de Culqi
         const BACKEND_URL = "https://liquidaya-backend.onrender.com"; 
         const CULQI_PUBLIC_KEY = "pk_test_TU_LLAVE_PUBLICA_AQUI"; 
 
@@ -414,6 +394,7 @@
         const calcSection = document.getElementById('calc-section');
         const previewSection = document.getElementById('preview-section');
         const downloadSection = document.getElementById('download-section');
+        const bypassTestBtn = document.getElementById('bypass-test-btn');
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -460,26 +441,38 @@
             }
         }
 
-        // Configuración Culqi Checkout v4
-        Culqi.publicKey = CULQI_PUBLIC_KEY;
-        Culqi.options({
-            lang: 'auto',
-            installments: false,
-            paymentMethods: {
-                tarjeta: true,
-                yape: true,
-                billetera: false
-            }
+        // Desbloqueo Directo para Pruebas (Bypass)
+        bypassTestBtn.addEventListener('click', () => {
+            unlockPDF();
         });
 
-        document.getElementById('pay-yape-btn').addEventListener('click', () => {
-            Culqi.settings({
-                title: 'LiquidaYa Perú',
-                currency: 'PEN',
-                amount: 990, // S/ 9.90
-                order: 'ORD-' + Math.floor(Math.random() * 1000000)
+        // Configuración Culqi Checkout v4
+        try {
+            Culqi.publicKey = CULQI_PUBLIC_KEY;
+            Culqi.options({
+                lang: 'auto',
+                installments: false,
+                paymentMethods: {
+                    tarjeta: true,
+                    yape: true,
+                    billetera: false
+                }
             });
-            Culqi.open();
+        } catch (e) {}
+
+        document.getElementById('pay-yape-btn').addEventListener('click', () => {
+            try {
+                Culqi.settings({
+                    title: 'LiquidaYa Perú',
+                    currency: 'PEN',
+                    amount: 990, // S/ 9.90
+                    order: 'ORD-' + Math.floor(Math.random() * 1000000)
+                });
+                Culqi.open();
+            } catch (err) {
+                // Si la llave de Culqi no está activa aún, se avisa y se ofrece probar directo
+                alert("Culqi aún no está activo con tus credenciales. Usa el botón 'Modo Prueba' para revisar el documento.");
+            }
         });
 
         async function culqi() {
