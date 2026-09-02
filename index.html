@@ -12,7 +12,6 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* Maquetación estricta de 2 páginas A4 sin solapamiento */
         .pdf-page {
             background-color: #ffffff;
             border: 1px solid #cbd5e1;
@@ -261,11 +260,13 @@
                     </div>
 
                     <button id="pay-yape-btn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-sm">
-                        <span>Pagar S/ 9.90 con Yape</span>
+                        <span id="pay-btn-text">Pagar S/ 9.90 con Yape o Tarjeta</span>
                     </button>
 
                     <div class="flex items-center justify-center gap-3 text-[11px] text-slate-400 pt-1">
-                        <span>Pasarela Culqi Segura</span>
+                        <span>Yape / Tarjetas</span>
+                        <span>•</span>
+                        <span>Culqi Seguro</span>
                         <span>•</span>
                         <span>Descarga Inmediata</span>
                     </div>
@@ -578,11 +579,11 @@
 
     <script>
         const BACKEND_URL = "https://liquidaya-backend.onrender.com"; 
-        // Llave pública oficial LIVE aprobada por Culqi
         const CULQI_PUBLIC_KEY = "pk_live_aaXJvE0kgdtn8JN9"; 
 
         let currentCalculation = null;
         let aiChatHistory = [];
+        let currentOrderId = null;
 
         const viewCatalog = document.getElementById('view-catalog');
         const viewForm = document.getElementById('view-form');
@@ -595,7 +596,7 @@
             document.getElementById('toast-text').innerText = text;
             document.getElementById('toast-icon').innerText = icon;
             toast.classList.remove('hidden');
-            setTimeout(() => toast.classList.add('hidden'), 4000);
+            setTimeout(() => toast.classList.add('hidden'), 4500);
         }
 
         function selectService(regimeVal, dismissalVal, titleText) {
@@ -618,7 +619,7 @@
             openModal('ai-modal');
         }
 
-        // Diagnóstico Local con repregunta obligatoria
+        // Diagnóstico Local con repregunta
         function localLegalDiagnosis(query, history) {
             const allText = history.map(h => h.text).join(' ').toLowerCase() + ' ' + query.toLowerCase();
             
@@ -684,7 +685,6 @@
             if (!query) return;
 
             const chatBox = document.getElementById('ai-chat-box');
-            
             chatBox.innerHTML += `<div class="bg-indigo-600 text-white p-3 rounded-2xl ml-6 sm:ml-8 leading-relaxed font-medium">${query}</div>`;
             aiChatHistory.push({ role: "user", text: query });
             
@@ -710,9 +710,7 @@
                 if (jsonRes.status === 'ok' && jsonRes.data) {
                     responseData = jsonRes.data;
                 }
-            } catch (e) {
-                // Fallback automático local
-            }
+            } catch (e) {}
 
             if (!responseData) {
                 responseData = localLegalDiagnosis(query, aiChatHistory);
@@ -799,7 +797,7 @@
                 ctsTotal = ctsMeses + ctsDias;
             }
 
-            // 3. Vacaciones Truncas (D.L. 713)
+            // 3. Vacaciones Truncas
             const fraccionAnioVac = Math.min(totalDays, 360);
             const vacBruto = (remPrincipal / 360.0) * fraccionAnioVac * (diasVacAnio / 30.0);
             const descuentoAfp = vacBruto * 0.13;
@@ -894,7 +892,7 @@
             }
         }
 
-        // Pasarela Culqi v4 Exclusivo Yape en Producción
+        // Configuración de Culqi: Habilitamos Yape y Tarjetas
         function initCulqi() {
             if (typeof Culqi !== 'undefined') {
                 Culqi.publicKey = CULQI_PUBLIC_KEY;
@@ -902,8 +900,8 @@
                     lang: 'auto',
                     installments: false,
                     paymentMethods: {
-                        tarjeta: false,
-                        yape: true,
+                        tarjeta: true, // Tarjetas de débito/crédito habilitadas
+                        yape: true,    // Yape con soporte para Orden Oficial
                         billetera: false,
                         bancaMovil: false,
                         agente: false,
@@ -913,29 +911,76 @@
             }
         }
 
-        document.getElementById('pay-yape-btn').addEventListener('click', () => {
+        // FLUJO DE PAGO BLINDADO CON ORDEN OFICIAL
+        document.getElementById('pay-yape-btn').addEventListener('click', async () => {
             if (typeof Culqi === 'undefined') {
                 showToast("Conectando con la pasarela segura. Espera un momento...", "⏳");
                 return;
             }
 
+            const btnText = document.getElementById('pay-btn-text');
+            btnText.innerText = "Generando orden de pago...";
+
             try {
+                // 1. Solicitamos la orden oficial al backend
+                const orderRes = await fetch(`${BACKEND_URL}/api/create-order`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        amount: 990,
+                        currency: "PEN",
+                        description: "Expediente Liquidacion + Carta Sunafil",
+                        email: "allforyou1702@gmail.com"
+                    })
+                });
+
+                const orderData = await orderRes.json();
+                
+                initCulqi();
+
+                const culqiSettings = {
+                    title: 'LiquidaYa Perú',
+                    currency: 'PEN',
+                    amount: 990
+                };
+
+                // Si la orden se generó exitosamente, se la pasamos a Culqi para que Yape funcione sin error
+                if (orderData.status === 'ok' && orderData.order_id) {
+                    currentOrderId = orderData.order_id;
+                    culqiSettings.order = orderData.order_id;
+                }
+
+                Culqi.settings(culqiSettings);
+                btnText.innerText = "Pagar S/ 9.90 con Yape o Tarjeta";
+                Culqi.open();
+
+            } catch (err) {
+                btnText.innerText = "Pagar S/ 9.90 con Yape o Tarjeta";
+                // En caso de problema de conexión, abrimos modo directo
                 initCulqi();
                 Culqi.settings({
                     title: 'LiquidaYa Perú',
                     currency: 'PEN',
-                    amount: 990 // S/ 9.90
+                    amount: 990
                 });
                 Culqi.open();
-            } catch (err) {
-                showToast("Inicializando pasarela...", "💳");
             }
         });
 
+        // Callback oficial de Culqi al confirmar pago
         window.culqi = async function() {
+            // Caso 1: Yape completado contra la Orden
+            if (Culqi.order) {
+                Culqi.close();
+                unlockPDF();
+                return;
+            }
+
+            // Caso 2: Pago completado con Tarjeta de Débito/Crédito
             if (Culqi.token) {
                 const token = Culqi.token.id;
                 Culqi.close();
+                showToast("Procesando cobro seguro...", "💳");
 
                 try {
                     const res = await fetch(`${BACKEND_URL}/api/culqi-charge`, {
@@ -952,13 +997,13 @@
                     if (chargeRes.status === 'approved') {
                         unlockPDF();
                     } else {
-                        showToast(chargeRes.message || "El pago con Yape no pudo ser procesado.", "⚠️");
+                        showToast(chargeRes.message || "El pago no pudo ser aprobado.", "⚠️");
                     }
                 } catch (e) {
-                    showToast("Error de conexión al procesar el pago.", "⚠️");
+                    showToast("Error de comunicación con el banco.", "⚠️");
                 }
             } else if (Culqi.error) {
-                showToast(Culqi.error.user_message || "No se completó el pago.", "⚠️");
+                showToast(Culqi.error.user_message || "No se completó la operación.", "⚠️");
             }
         };
 
