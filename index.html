@@ -73,12 +73,9 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                        </div>
+                        <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
                         <h3 class="font-bold text-sm text-slate-900">1. Régimen General (D.L. 728)</h3>
                         <p class="text-xs text-slate-500 leading-relaxed">Empresas medianas y grandes. Incluye 100% CTS, Gratificación completa, Bono 9% EsSalud y 30 días de vacaciones.</p>
                     </div>
@@ -89,9 +86,7 @@
 
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                        </div>
+                        <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
                         <h3 class="font-bold text-sm text-slate-900">2. Pequeña Empresa (REMYPE)</h3>
                         <p class="text-xs text-slate-500 leading-relaxed">Empresas de hasta 100 trabajadores. Computa 50% de CTS, 50% de Gratificaciones y 15 días de vacaciones anuales.</p>
                     </div>
@@ -102,9 +97,7 @@
 
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                        </div>
+                        <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
                         <h3 class="font-bold text-sm text-slate-900">3. Microempresa (REMYPE)</h3>
                         <p class="text-xs text-slate-500 leading-relaxed">Negocios de hasta 10 trabajadores. Computa 15 días de vacaciones proporcionales por año de servicio de ley.</p>
                     </div>
@@ -115,9 +108,7 @@
 
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                        </div>
+                        <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
                         <h3 class="font-bold text-sm text-slate-900">4. Despido Intempestivo / Arbitrario</h3>
                         <p class="text-xs text-slate-500 leading-relaxed">Cese sin causa justa ni carta previa. Incluye liquidación de ley más indemnización de 1.5 sueldos por año laborado.</p>
                     </div>
@@ -128,9 +119,7 @@
 
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                        </div>
+                        <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
                         <h3 class="font-bold text-sm text-slate-900">5. Carta Requerimiento Sunafil (48h)</h3>
                         <p class="text-xs text-slate-500 leading-relaxed">Emisión de carta formal de requerimiento bajo apercibimiento de denuncia inspectiva y multas ante Sunafil.</p>
                     </div>
@@ -260,13 +249,11 @@
                     </div>
 
                     <button id="pay-yape-btn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-sm">
-                        <span id="pay-btn-text">Pagar S/ 9.90 con Yape o Tarjeta</span>
+                        <span>Pagar S/ 9.90 con Yape</span>
                     </button>
 
                     <div class="flex items-center justify-center gap-3 text-[11px] text-slate-400 pt-1">
-                        <span>Yape / Tarjetas</span>
-                        <span>•</span>
-                        <span>Culqi Seguro</span>
+                        <span>Pasarela Culqi Segura</span>
                         <span>•</span>
                         <span>Descarga Inmediata</span>
                     </div>
@@ -583,7 +570,6 @@
 
         let currentCalculation = null;
         let aiChatHistory = [];
-        let currentOrderId = null;
 
         const viewCatalog = document.getElementById('view-catalog');
         const viewForm = document.getElementById('view-form');
@@ -619,7 +605,6 @@
             openModal('ai-modal');
         }
 
-        // Diagnóstico Local con repregunta
         function localLegalDiagnosis(query, history) {
             const allText = history.map(h => h.text).join(' ').toLowerCase() + ' ' + query.toLowerCase();
             
@@ -770,7 +755,6 @@
             const mesCese = dEnd.getMonth() + 1;
             const diaCese = dEnd.getDate();
 
-            // 1. Gratificación Trunca
             let mesesSemGrati = mesCese <= 6 ? mesCese - 1 : (mesCese - 6) - 1;
             const ultimoDiaMes = new Date(dEnd.getFullYear(), mesCese, 0).getDate();
             if (diaCese >= ultimoDiaMes - 1) mesesSemGrati += 1;
@@ -783,7 +767,6 @@
                 gratiTotal = gratiBase + bonoEssalud;
             }
 
-            // 2. CTS Trunca
             const baseCts = remPrincipal + ((remPrincipal * factorGrati) / 6.0);
             let mesesSemCts = 0;
             if ([5, 6, 7, 8, 9, 10].includes(mesCese)) mesesSemCts = mesCese - 4;
@@ -797,13 +780,11 @@
                 ctsTotal = ctsMeses + ctsDias;
             }
 
-            // 3. Vacaciones Truncas
             const fraccionAnioVac = Math.min(totalDays, 360);
             const vacBruto = (remPrincipal / 360.0) * fraccionAnioVac * (diasVacAnio / 30.0);
             const descuentoAfp = vacBruto * 0.13;
             const vacNeto = vacBruto - descuentoAfp;
 
-            // 4. Indemnización por Despido Arbitrario
             let indemnizacion = 0;
             if (p.dismissal_type === "despido_arbitrario") {
                 if (p.regime === "micro") indemnizacion = Math.min((remPrincipal / 30.0) * 10 * (totalDays / 360.0), remPrincipal * 3);
@@ -892,7 +873,7 @@
             }
         }
 
-        // Configuración de Culqi: Habilitamos Yape y Tarjetas
+        // Configuración EXCLUSIVA de YAPE (Sin Tarjeta ni menús)
         function initCulqi() {
             if (typeof Culqi !== 'undefined') {
                 Culqi.publicKey = CULQI_PUBLIC_KEY;
@@ -900,8 +881,8 @@
                     lang: 'auto',
                     installments: false,
                     paymentMethods: {
-                        tarjeta: true, // Tarjetas de débito/crédito habilitadas
-                        yape: true,    // Yape con soporte para Orden Oficial
+                        tarjeta: false, // Tarjeta apagada
+                        yape: true,    // Solo Yape activo
                         billetera: false,
                         bancaMovil: false,
                         agente: false,
@@ -911,76 +892,31 @@
             }
         }
 
-        // FLUJO DE PAGO BLINDADO CON ORDEN OFICIAL
-        document.getElementById('pay-yape-btn').addEventListener('click', async () => {
+        document.getElementById('pay-yape-btn').addEventListener('click', () => {
             if (typeof Culqi === 'undefined') {
                 showToast("Conectando con la pasarela segura. Espera un momento...", "⏳");
                 return;
             }
 
-            const btnText = document.getElementById('pay-btn-text');
-            btnText.innerText = "Generando orden de pago...";
-
             try {
-                // 1. Solicitamos la orden oficial al backend
-                const orderRes = await fetch(`${BACKEND_URL}/api/create-order`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        amount: 990,
-                        currency: "PEN",
-                        description: "Expediente Liquidacion + Carta Sunafil",
-                        email: "allforyou1702@gmail.com"
-                    })
-                });
-
-                const orderData = await orderRes.json();
-                
-                initCulqi();
-
-                const culqiSettings = {
-                    title: 'LiquidaYa Perú',
-                    currency: 'PEN',
-                    amount: 990
-                };
-
-                // Si la orden se generó exitosamente, se la pasamos a Culqi para que Yape funcione sin error
-                if (orderData.status === 'ok' && orderData.order_id) {
-                    currentOrderId = orderData.order_id;
-                    culqiSettings.order = orderData.order_id;
-                }
-
-                Culqi.settings(culqiSettings);
-                btnText.innerText = "Pagar S/ 9.90 con Yape o Tarjeta";
-                Culqi.open();
-
-            } catch (err) {
-                btnText.innerText = "Pagar S/ 9.90 con Yape o Tarjeta";
-                // En caso de problema de conexión, abrimos modo directo
                 initCulqi();
                 Culqi.settings({
                     title: 'LiquidaYa Perú',
                     currency: 'PEN',
-                    amount: 990
+                    amount: 990 // S/ 9.90
                 });
                 Culqi.open();
+            } catch (err) {
+                showToast("Inicializando pasarela...", "📱");
             }
         });
 
-        // Callback oficial de Culqi al confirmar pago
+        // Callback oficial de Culqi al tokenizar Yape
         window.culqi = async function() {
-            // Caso 1: Yape completado contra la Orden
-            if (Culqi.order) {
-                Culqi.close();
-                unlockPDF();
-                return;
-            }
-
-            // Caso 2: Pago completado con Tarjeta de Débito/Crédito
             if (Culqi.token) {
                 const token = Culqi.token.id;
                 Culqi.close();
-                showToast("Procesando cobro seguro...", "💳");
+                showToast("Confirmando pago con Yape...", "📱");
 
                 try {
                     const res = await fetch(`${BACKEND_URL}/api/culqi-charge`, {
@@ -1000,7 +936,7 @@
                         showToast(chargeRes.message || "El pago no pudo ser aprobado.", "⚠️");
                     }
                 } catch (e) {
-                    showToast("Error de comunicación con el banco.", "⚠️");
+                    showToast("Error de comunicación al procesar el pago.", "⚠️");
                 }
             } else if (Culqi.error) {
                 showToast(Culqi.error.user_message || "No se completó la operación.", "⚠️");
