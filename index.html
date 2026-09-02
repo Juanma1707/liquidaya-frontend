@@ -4,18 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LiquidaYa.pe | Liquidación Oficial Laboral y Asesor Legal</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- html2pdf para descarga oficial de documentos -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- Pasarela Oficial Culqi Checkout v4 -->
     <script src="https://checkout.culqi.com/js/v4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* Maquetación estricta de 2 páginas A4 */
+        /* Maquetación estricta de 2 páginas A4 sin solapamiento */
         .pdf-page {
             background-color: #ffffff;
             border: 1px solid #cbd5e1;
@@ -33,7 +30,6 @@
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-    <!-- 1. Header Oficial (Responsivo en móviles) -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm no-print">
         <div class="max-w-5xl mx-auto px-4 py-2.5 sm:py-3 flex items-center justify-between gap-2">
             <a href="/" class="flex items-center space-x-1.5 shrink-0">
@@ -48,16 +44,13 @@
         </div>
     </header>
 
-    <!-- Notificación Toast -->
     <div id="toast-msg" class="hidden fixed top-16 left-1/2 transform -translate-x-1/2 z-50 bg-slate-900 text-white text-xs font-bold px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-2 border border-slate-700 max-w-sm text-center">
         <span id="toast-icon">ℹ️</span>
         <span id="toast-text">Notificación</span>
     </div>
 
-    <!-- 2. Contenedor Principal -->
     <main class="max-w-4xl mx-auto px-4 py-6 sm:py-8 flex-1 w-full space-y-6 sm:space-y-8">
 
-        <!-- VISTA 1: CATÁLOGO DE LOS 5 TRÁMITES LEGALES -->
         <section id="view-catalog" class="space-y-6">
             <div class="text-center max-w-2xl mx-auto space-y-2">
                 <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
@@ -69,7 +62,6 @@
                 </p>
             </div>
 
-            <!-- Banner Asesor -->
             <div class="bg-slate-900 rounded-2xl p-4 sm:p-5 text-white flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-800 shadow-md">
                 <div class="space-y-1 text-center sm:text-left">
                     <strong class="text-indigo-400 text-xs font-bold block uppercase tracking-wider">Orientación Legal Inmediata</strong>
@@ -81,10 +73,8 @@
                 </button>
             </div>
 
-            <!-- Catálogo de los 5 Trámites Oficiales -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 
-                <!-- Tarjeta 1 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
@@ -98,7 +88,6 @@
                     </button>
                 </div>
 
-                <!-- Tarjeta 2 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
@@ -112,7 +101,6 @@
                     </button>
                 </div>
 
-                <!-- Tarjeta 3 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
@@ -126,7 +114,6 @@
                     </button>
                 </div>
 
-                <!-- Tarjeta 4 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
@@ -140,7 +127,6 @@
                     </button>
                 </div>
 
-                <!-- Tarjeta 5 -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
@@ -156,7 +142,6 @@
             </div>
         </section>
 
-        <!-- VISTA 2: FORMULARIO DINÁMICO -->
         <section id="view-form" class="hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
             <div class="flex items-center justify-between border-b pb-4">
                 <div>
@@ -230,7 +215,6 @@
             </form>
         </section>
 
-        <!-- VISTA 3: RESULTADOS Y CHECKOUT EXCLUSIVO YAPE -->
         <section id="view-preview" class="hidden space-y-6">
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm text-center space-y-4">
                 <div class="inline-block bg-indigo-50 text-indigo-700 text-xs font-black px-4 py-1.5 rounded-full border border-indigo-100">
@@ -269,7 +253,6 @@
                     </div>
                 </div>
 
-                <!-- Caja de Pago Culqi Yape -->
                 <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-4 max-w-lg mx-auto shadow-xl">
                     <div class="space-y-1">
                         <div class="text-2xl font-black text-indigo-400">S/ 9.90 <span class="text-xs text-slate-400 font-normal">PEN (Pago único)</span></div>
@@ -290,7 +273,6 @@
             </div>
         </section>
 
-        <!-- VISTA 4: DESCARGA DE PDF OFICIAL DE 2 PÁGINAS -->
         <section id="view-download" class="hidden space-y-4">
             <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 no-print">
                 <div>
@@ -308,7 +290,6 @@
             </div>
 
             <div id="pdf-printable" class="space-y-6">
-                <!-- PÁGINA 1: HOJA DE LIQUIDACIÓN FORMAL -->
                 <div class="pdf-page p-6 sm:p-8 rounded-2xl text-xs space-y-4">
                     <div class="border-b-2 border-slate-800 pb-3 flex justify-between items-start">
                         <div>
@@ -377,7 +358,6 @@
                         </tfoot>
                     </table>
 
-                    <!-- Cláusula de Salvaguarda Legal -->
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-[10px] text-slate-500 leading-relaxed">
                         <strong>CLÁUSULA DE SALVAGUARDA TÉCNICA (Art. 19 D.S. 001-97-TR):</strong> El presente informe consigna los conceptos remunerativos fijos obligatorios de ley. En caso existan comisiones variables, horas extras ordinarias o retenciones de ley debidamente acreditadas, la empresa empleadora se encuentra legalmente obligada a detallarlas e integrarlas en la liquidación final dentro del plazo legal de 48 horas.
                     </div>
@@ -396,7 +376,6 @@
                     </div>
                 </div>
 
-                <!-- PÁGINA 2: CARTA FORMAL SUNAFIL CON CARGO DE RECEPCIÓN -->
                 <div class="pdf-page p-6 sm:p-8 rounded-2xl text-xs space-y-4 leading-relaxed">
                     <div class="text-right font-mono text-[10px] text-slate-500">
                         Perú, <span id="letter-date"></span>
@@ -437,7 +416,6 @@
                             <span class="text-slate-500 text-[10px]">DNI: <span id="letter-sign-dni" class="font-mono"></span></span>
                         </div>
 
-                        <!-- Recuadro Oficial de Cargo de Recepción -->
                         <div class="border-2 border-dashed border-slate-300 rounded-xl p-3 text-[10px] space-y-1 bg-slate-50 text-slate-600">
                             <strong class="block text-center text-slate-800 border-b border-slate-200 pb-1">CARGO DE RECEPCIÓN (EMPRESA)</strong>
                             <div>Fecha: \_\_\_\_ / \_\_\_\_ / 2026 &nbsp;&nbsp; Hora: \_\_\_\_ : \_\_\_\_</div>
@@ -450,7 +428,6 @@
         </section>
     </main>
 
-    <!-- 3. Footer Oficial -->
     <footer class="bg-white border-t border-slate-200 py-10 text-slate-500 text-xs no-print">
         <div class="max-w-5xl mx-auto px-4 space-y-8">
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-8">
@@ -489,7 +466,6 @@
         </div>
     </footer>
 
-    <!-- MODAL ASISTENTE LEGAL INTERACTIVO MULTITURNO -->
     <div id="ai-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 no-print">
         <div class="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 text-xs space-y-4 shadow-2xl flex flex-col justify-between max-h-[90vh]">
             <div class="flex items-center justify-between border-b pb-3">
@@ -518,7 +494,6 @@
         </div>
     </div>
 
-    <!-- MODALES LEGALES Y RECLAMACIONES -->
     <div id="terms-modal" class="hidden fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 no-print">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 text-xs space-y-3 max-h-[80vh] overflow-y-auto">
             <h3 class="font-black text-sm text-slate-900">Términos y Condiciones de Uso</h3>
@@ -601,10 +576,10 @@
         </div>
     </div>
 
-    <!-- SCRIPTS -->
     <script>
         const BACKEND_URL = "https://liquidaya-backend.onrender.com"; 
-        const CULQI_PUBLIC_KEY = "pk_test_1TMhBN3zeAAONfwX"; 
+        // Llave pública oficial LIVE aprobada por Culqi
+        const CULQI_PUBLIC_KEY = "pk_live_aaXJvE0kgdtn8JN9"; 
 
         let currentCalculation = null;
         let aiChatHistory = [];
@@ -919,7 +894,7 @@
             }
         }
 
-        // Pasarela Culqi v4 Exclusivo Yape
+        // Pasarela Culqi v4 Exclusivo Yape en Producción
         function initCulqi() {
             if (typeof Culqi !== 'undefined') {
                 Culqi.publicKey = CULQI_PUBLIC_KEY;
@@ -977,10 +952,10 @@
                     if (chargeRes.status === 'approved') {
                         unlockPDF();
                     } else {
-                        unlockPDF(); // Desbloqueo en test
+                        showToast(chargeRes.message || "El pago con Yape no pudo ser procesado.", "⚠️");
                     }
                 } catch (e) {
-                    unlockPDF();
+                    showToast("Error de conexión al procesar el pago.", "⚠️");
                 }
             } else if (Culqi.error) {
                 showToast(Culqi.error.user_message || "No se completó el pago.", "⚠️");
