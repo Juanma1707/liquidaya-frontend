@@ -15,7 +15,6 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* Maquetación estricta de 2 páginas A4 para valor legal */
         .pdf-page {
             background-color: #ffffff;
             border: 1px solid #cbd5e1;
@@ -41,8 +40,9 @@
                 <span class="font-black text-xl tracking-tight text-slate-900">Liquida<span class="text-indigo-600">Ya</span><span class="text-slate-400 text-sm font-normal">.pe</span></span>
             </a>
             <div class="flex items-center gap-2">
-                <span class="hidden sm:inline-block text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
-                    ✓ Sistema Actualizado a Leyes SUNAFIL 2026
+                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span>Leyes Laborales SUNAFIL 2026</span>
                 </span>
             </div>
         </div>
@@ -57,15 +57,15 @@
     <!-- Contenedor Principal -->
     <main class="max-w-4xl mx-auto px-4 py-6 sm:py-8 flex-1 w-full space-y-6 sm:space-y-8">
 
-        <!-- VISTA 1: IDENTIFICADOR RÁPIDO DE CASOS (5 CASOS CLAROS) -->
+        <!-- VISTA 1: IDENTIFICADOR RÁPIDO DE CASOS -->
         <section id="view-catalog" class="space-y-6">
-            <div class="text-center max-w-2xl mx-auto space-y-2">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
                 <span class="text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-200">
                     Defensa de los Derechos del Trabajador en el Perú
                 </span>
                 <h1 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">¿Cuál es tu problema laboral hoy?</h1>
-                <p class="text-xs sm:text-sm text-slate-500">
-                    Elige tu caso real en español simple. No necesitas ser abogado para calcular tu dinero y exigir lo que te corresponde por ley.
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal px-2">
+                    En <strong class="text-slate-900 font-bold">LiquidaYa.pe</strong> entendemos la impotencia de esperar por un dinero que te ganaste trabajando honradamente día a día. Estamos aquí para que ninguna empresa se aproveche del desconocimiento: te damos el respaldo y las herramientas legales para que hagas respetar tus derechos y cobres hasta el último centavo que por ley te pertenece.
                 </p>
             </div>
 
@@ -81,7 +81,7 @@
                 </button>
             </div>
 
-            <!-- Las 5 Tarjetas de Casos Concretos -->
+            <!-- Las 5 Tarjetas de Casos -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 
                 <!-- Tarjeta 1 -->
@@ -174,7 +174,6 @@
             </div>
 
             <form id="liquidation-form" class="space-y-4 text-xs sm:text-sm">
-                <!-- Datos del Trabajador -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Nombre Completo del Trabajador:</label>
@@ -197,7 +196,6 @@
                     </div>
                 </div>
 
-                <!-- Datos de la Empresa -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Nombre de la Empresa o Empleador:</label>
@@ -209,7 +207,6 @@
                     </div>
                 </div>
 
-                <!-- Fechas Laborales -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Fecha en que empezaste a trabajar:</label>
@@ -221,7 +218,6 @@
                     </div>
                 </div>
 
-                <!-- Sueldo y Régimen -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Último Sueldo Bruto Mensual (S/):</label>
@@ -244,7 +240,6 @@
                     </div>
                 </div>
 
-                <!-- Motivo de Salida (Oculto / Automático según la tarjeta elegida) -->
                 <input type="hidden" id="cessation-reason" value="despido_arbitrario">
                 <input type="hidden" id="selected-service-code" value="48horas">
 
@@ -454,7 +449,7 @@
                     </div>
                 </div>
 
-                <!-- PÁGINA 2: ACCIÓN LEGAL ADAPTABLE (CARTA NOTARIAL O DENUNCIA SUNAFIL) -->
+                <!-- PÁGINA 2: ACCIÓN LEGAL ADAPTABLE -->
                 <div class="pdf-page p-6 sm:p-8 rounded-2xl text-xs space-y-4 leading-relaxed">
                     <div class="border-b-2 border-slate-800 pb-2 flex justify-between items-start">
                         <span class="font-mono text-[10px] text-slate-500 uppercase font-bold" id="pdf-doc-badge">REQUERIMIENTO NOTARIAL • LEY N° 28806</span>
@@ -560,7 +555,6 @@
             setTimeout(() => toast.classList.add('hidden'), 4500);
         }
 
-        // Selección de uno de los 5 casos
         function selectService(serviceCode, titleText) {
             document.getElementById('selected-service-code').value = serviceCode;
             document.getElementById('form-selected-title').innerText = titleText;
@@ -587,7 +581,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Motor Matemático Oficial de Liquidación Laboral Perú (D.Leg 728 / 650 / 713)
         function calculateLiquidation(data) {
             const startDate = new Date(data.start_date);
             const endDate = new Date(data.end_date);
@@ -703,7 +696,6 @@
                 indemRow.classList.add('hidden');
             }
 
-            // Cambiar título de la vista previa según el documento generado
             const previewDocTitle = document.getElementById('preview-doc-title');
             if (payload.service_code === 'sunafil') {
                 previewDocTitle.innerText = "Pág 2: Denuncia SUNAFIL";
@@ -764,7 +756,7 @@
             document.getElementById('pdf-sign-worker').innerText = w.name;
             document.getElementById('pdf-sign-company').innerText = c.name;
 
-            // Página 2: Documento Legal Adaptable
+            // Página 2: Acción Legal
             document.getElementById('pdf-letter-company').innerText = c.name;
             document.getElementById('pdf-letter-ruc').innerText = c.ruc;
             document.getElementById('pdf-letter-end-date').innerText = d.end_date;
@@ -806,7 +798,6 @@
             html2pdf().set(opt).from(element).save();
         });
 
-        // Culqi Checkout
         function initCulqi() {
             if (typeof Culqi !== 'undefined') {
                 Culqi.publicKey = CULQI_PUBLIC_KEY;
