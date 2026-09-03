@@ -41,7 +41,7 @@
             </a>
             <div class="flex items-center gap-2">
                 <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                     <span>Leyes Laborales SUNAFIL 2026</span>
                 </span>
             </div>
@@ -174,6 +174,8 @@
             </div>
 
             <form id="liquidation-form" class="space-y-4 text-xs sm:text-sm">
+                
+                <!-- Datos del Trabajador -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Nombre Completo del Trabajador:</label>
@@ -187,7 +189,7 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Domicilio del Trabajador (Donde vives):</label>
+                        <label class="font-bold text-slate-700 block mb-1">Domicilio del Trabajador (Donde vives actualmente):</label>
                         <input type="text" id="worker-address" placeholder="Ej. Av. Los Laureles 320, Piura" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
                     </div>
                     <div>
@@ -196,47 +198,121 @@
                     </div>
                 </div>
 
+                <!-- Datos de la Empresa -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Nombre de la Empresa o Empleador:</label>
+                        <label class="font-bold text-slate-700 block mb-0.5">Nombre de la Empresa o Empleador:</label>
+                        <span class="text-[10px] text-slate-400 block mb-1">Razón social o nombre de tu jefe</span>
                         <input type="text" id="company-name" placeholder="Ej. Inversiones Comerciales SAC" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
                     </div>
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">RUC del Empleador (11 dígitos):</label>
+                        <label class="font-bold text-slate-700 block mb-0.5">RUC del Empleador (11 dígitos):</label>
+                        <span class="text-[10px] text-slate-400 block mb-1">Búscalo arriba en tus boletas o contrato (si no lo sabes, pon 20000000001)</span>
                         <input type="text" id="company-ruc" maxlength="11" inputmode="numeric" placeholder="Ej. 20601234567" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-mono">
                     </div>
                 </div>
 
+                <!-- Fechas Laborales -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Fecha en que empezaste a trabajar:</label>
                         <input type="date" id="start-date" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-mono">
                     </div>
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Fecha de tu último día de trabajo:</label>
+                        <label class="font-bold text-slate-700 block mb-1">Fecha de tu último día de trabajo (Cese):</label>
                         <input type="date" id="end-date" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-mono">
                     </div>
                 </div>
 
+                <!-- Sueldo, Asignación Familiar y Modalidad -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Último Sueldo Bruto Mensual (S/):</label>
+                        <label class="font-bold text-slate-700 block mb-0.5">Sueldo Bruto Mensual (S/):</label>
+                        <span class="text-[10px] text-indigo-600 block mb-1 font-semibold">El de tu contrato antes de descuentos AFP/ONP</span>
                         <input type="number" step="0.01" id="monthly-salary" placeholder="Ej. 2500.00" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-bold">
                     </div>
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">¿Tienes hijos menores? (Asig. Familiar):</label>
+                        <label class="font-bold text-slate-700 block mb-0.5">Asignación Familiar (Ley 25129):</label>
+                        <span class="text-[10px] text-slate-400 block mb-1">Hijos menores de 18 o hasta 24 estudiando</span>
                         <select id="family-bonus" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-medium">
-                            <option value="no">No tengo hijos</option>
-                            <option value="yes" selected>Sí (Me corresponde Asig. Familiar)</option>
+                            <option value="no">No me corresponde (Sin hijos calificados)</option>
+                            <option value="yes" selected>Sí me corresponde (+ S/ 102.50)</option>
                         </select>
                     </div>
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Tipo de Empresa:</label>
-                        <select id="labor-regime" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-bold">
-                            <option value="general" selected>Empresa Normal / Grande (100% Beneficios)</option>
-                            <option value="pequena">Pequeña Empresa REMYPE (50% Beneficios)</option>
-                            <option value="micro">Microempresa REMYPE (Sin CTS ni Grati)</option>
+                        <label class="font-bold text-slate-700 block mb-0.5">¿Cómo te pagaban en el trabajo?:</label>
+                        <span class="text-[10px] text-slate-400 block mb-1">Modalidad de pago mensual</span>
+                        <select id="contract-modality" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-medium">
+                            <option value="planilla" selected>En planilla formal (Recibía boletas)</option>
+                            <option value="rxh">Por Recibos por Honorarios (Con horario y jefe)</option>
                         </select>
+                    </div>
+                </div>
+
+                <!-- Régimen Laboral y Tipo de Seguro -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-0.5">Tipo de Empresa (Según tus beneficios):</label>
+                        <span class="text-[10px] text-slate-400 block mb-1">Guíate por lo que te pagaban al año</span>
+                        <select id="labor-regime" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-bold text-xs">
+                            <option value="general" selected>Empresa Grande / General (100% CTS, Gratificación completa y 30 días vacaciones)</option>
+                            <option value="pequena">Pequeña Empresa REMYPE (50% CTS, media gratificación y 15 días vacaciones)</option>
+                            <option value="micro">Microempresa REMYPE (Sin CTS ni gratificación, solo 15 días vacaciones)</option>
+                            <option value="hogar">Trabajadora del Hogar (Ley 31047 - 100% Beneficios completos)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-0.5">¿Qué seguro médico tenías en la empresa?:</label>
+                        <span class="text-[10px] text-slate-400 block mb-1">Determina el bono extra legal de tu gratificación</span>
+                        <select id="health-insurance" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-medium text-xs">
+                            <option value="essalud" selected>EsSalud regular (Bono legal obligatorio del 9%)</option>
+                            <option value="eps">EPS privada: Rímac, Pacífico o Mapfre (Bono del 6.75%)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN DE VARIABLES ADICIONALES (Fácil y Opcional) -->
+                <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <strong class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                            <span>⚖️</span>
+                            <span>Ajustes Adicionales de tu Liquidación (Opcional):</span>
+                        </strong>
+                        <span class="text-[10px] text-slate-400 font-medium">Completa solo si aplica a tu caso</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                        <div>
+                            <label class="font-bold text-slate-600 block mb-0.5 text-xs">Comisiones u Horas Extras promedio (S/):</label>
+                            <span class="text-[10px] text-slate-400 block mb-1">Promedio mensual de los últimos 6 meses</span>
+                            <input type="number" step="0.01" id="commissions-avg" value="0.00" class="w-full p-2 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-mono text-xs">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-600 block mb-0.5 text-xs">Vacaciones de años anteriores pendientes:</label>
+                            <span class="text-[10px] text-slate-400 block mb-1">Años completos que nunca descansaste</span>
+                            <select id="pending-vacation-years" class="w-full p-2 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-medium text-xs">
+                                <option value="0" selected>Ninguno (Tomé todas mis vacaciones pasadas)</option>
+                                <option value="1">1 año pendiente (Me deben 1 mes de sueldo)</option>
+                                <option value="2">2 años pendientes (Me deben 2 meses)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-600 block mb-0.5 text-xs">Adelantos o préstamos por descontar (S/):</label>
+                            <span class="text-[10px] text-slate-400 block mb-1">Monto que pediste prestado a la empresa</span>
+                            <input type="number" step="0.01" id="loans-discount" value="0.00" class="w-full p-2 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-mono text-xs">
+                        </div>
+                    </div>
+
+                    <!-- Casillas especiales rápidas -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-slate-200 text-xs">
+                        <label class="flex items-center gap-2 cursor-pointer text-slate-700">
+                            <input type="checkbox" id="check-night-shift" class="rounded text-indigo-600 focus:ring-0">
+                            <span>Trabajaba en jornada nocturna (10:00 PM a 6:00 AM)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-slate-700">
+                            <input type="checkbox" id="check-modal-five-years" class="rounded text-indigo-600 focus:ring-0">
+                            <span>Tenía contratos temporales renovados por más de 5 años</span>
+                        </label>
                     </div>
                 </div>
 
@@ -244,7 +320,7 @@
                 <input type="hidden" id="selected-service-code" value="48horas">
 
                 <div>
-                    <label class="font-bold text-slate-700 block mb-1">Tu Número de WhatsApp (Para contacto):</label>
+                    <label class="font-bold text-slate-700 block mb-1">Tu Número de WhatsApp (Para contacto directo):</label>
                     <input type="tel" id="worker-phone" maxlength="9" inputmode="numeric" placeholder="Ej. 957418893" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
                 </div>
 
@@ -270,21 +346,39 @@
                 <!-- Desglose de Beneficios -->
                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs space-y-2.5 max-w-lg mx-auto text-left">
                     <strong class="text-slate-800 block border-b pb-2 font-bold uppercase tracking-wider text-[11px]">Desglose de Conceptos Computables:</strong>
+                    
                     <div class="flex justify-between py-1 border-b border-slate-200">
-                        <span class="text-slate-600">1. Compensación por Tiempo de Servicios (CTS):</span>
+                        <span class="text-slate-600">1. Compensación por Tiempo de Servicios (CTS trunca):</span>
                         <strong id="preview-cts" class="font-mono text-slate-900">S/ 0.00</strong>
                     </div>
                     <div class="flex justify-between py-1 border-b border-slate-200">
-                        <span class="text-slate-600">2. Gratificaciones Truncas + Bonif. 9% (Ley 27735):</span>
+                        <span class="text-slate-600">2. Gratificaciones Truncas + Bono Legal (Ley 27735/30334):</span>
                         <strong id="preview-grati" class="font-mono text-slate-900">S/ 0.00</strong>
                     </div>
                     <div class="flex justify-between py-1 border-b border-slate-200">
-                        <span class="text-slate-600">3. Vacaciones Truncas y no Gozadas (D.Leg 713):</span>
+                        <span class="text-slate-600">3. Vacaciones Truncas del Periodo (D.Leg 713):</span>
                         <strong id="preview-vaca" class="font-mono text-slate-900">S/ 0.00</strong>
                     </div>
+                    <div id="preview-pending-vaca-row" class="hidden flex justify-between py-1 border-b border-slate-200 text-indigo-900">
+                        <span>4. Vacaciones Vencidas No Gozadas (Años anteriores):</span>
+                        <strong id="preview-pending-vaca" class="font-mono">S/ 0.00</strong>
+                    </div>
                     <div id="preview-indemnizacion-row" class="flex justify-between py-1 border-b border-slate-200 text-rose-700 font-bold">
-                        <span>4. Indemnización por Despido Arbitrario (Art. 38 D.Leg 728):</span>
+                        <span>5. Indemnización por Despido Arbitrario (Art. 38 D.Leg 728):</span>
                         <strong id="preview-indemnizacion" class="font-mono">S/ 0.00</strong>
+                    </div>
+                    <div id="preview-loans-row" class="hidden flex justify-between py-1 border-b border-slate-200 text-slate-500 italic">
+                        <span>Deducción de adelantos/préstamos pendientes:</span>
+                        <strong id="preview-loans" class="font-mono">- S/ 0.00</strong>
+                    </div>
+                </div>
+
+                <!-- Nota informativa Carta de Cese -->
+                <div class="p-3.5 bg-amber-50 rounded-2xl border border-amber-200 text-left text-xs text-amber-900 flex items-start gap-2.5 max-w-lg mx-auto">
+                    <span class="text-lg">📌</span>
+                    <div>
+                        <strong class="font-bold block">Derecho a la Carta de Cese para retirar tu CTS:</strong>
+                        <span>Tu empleador está obligado por ley a entregarte la carta para liberar tu fondo en el banco dentro de las 48 horas. Viene incluida como requerimiento formal en este expediente.</span>
                     </div>
                 </div>
 
@@ -348,11 +442,12 @@
             </div>
 
             <div id="pdf-printable" class="space-y-6">
+                
                 <!-- PÁGINA 1: LIQUIDACIÓN FORMAL -->
                 <div class="pdf-page p-6 sm:p-8 rounded-2xl text-xs space-y-4 leading-relaxed">
                     <div class="border-b-2 border-slate-800 pb-3 flex justify-between items-start">
                         <div>
-                            <span class="font-mono text-[10px] text-slate-500 uppercase font-bold">RÉGIMEN LABORAL PRIVADO • D.LEG. N° 728</span>
+                            <span class="font-mono text-[10px] text-slate-500 uppercase font-bold" id="pdf-header-regime">RÉGIMEN LABORAL PRIVADO • D.LEG. N° 728</span>
                             <h2 class="font-black text-base tracking-wider text-slate-900">LIQUIDACIÓN DE BENEFICIOS SOCIALES</h2>
                         </div>
                         <span class="font-mono text-xs bg-slate-100 px-2.5 py-1 rounded-lg text-slate-800 font-bold" id="doc-date"></span>
@@ -362,12 +457,14 @@
                         <div>
                             <strong>TRABAJADOR:</strong> <span id="pdf-worker-name" class="uppercase font-bold"></span><br>
                             <strong>DNI:</strong> <span id="pdf-worker-dni" class="font-mono"></span><br>
-                            <strong>DOMICILIO:</strong> <span id="pdf-worker-address"></span>
+                            <strong>DOMICILIO:</strong> <span id="pdf-worker-address"></span><br>
+                            <strong>MODALIDAD:</strong> <span id="pdf-worker-modality" class="font-bold text-indigo-700"></span>
                         </div>
                         <div>
                             <strong>EMPLEADOR:</strong> <span id="pdf-company-name" class="uppercase font-bold"></span><br>
                             <strong>RUC:</strong> <span id="pdf-company-ruc" class="font-mono"></span><br>
-                            <strong>RÉGIMEN:</strong> <span id="pdf-labor-regime" class="uppercase font-bold"></span>
+                            <strong>RÉGIMEN:</strong> <span id="pdf-labor-regime" class="uppercase font-bold"></span><br>
+                            <strong>SEGURO MÉDICO:</strong> <span id="pdf-health-insurance" class="font-bold"></span>
                         </div>
                     </div>
 
@@ -389,10 +486,13 @@
                     <div class="space-y-2">
                         <strong class="text-slate-900 block border-b pb-1 text-xs">I. BASE DE CÁLCULO COMPUTABLE:</strong>
                         <div class="grid grid-cols-2 gap-2 text-[11px]">
-                            <div>• Remuneración Básica Mensual: <strong id="pdf-salary" class="font-mono"></strong></div>
+                            <div>• Remuneración Básica: <strong id="pdf-salary" class="font-mono"></strong></div>
                             <div>• Asignación Familiar (Ley 25129): <strong id="pdf-asig-fam" class="font-mono"></strong></div>
+                            <div>• Comisiones / Horas Extras Promedio: <strong id="pdf-commissions" class="font-mono"></strong></div>
                             <div>• 1/6 Gratificación Computable (D.Leg 650): <strong id="pdf-sixth-grati" class="font-mono"></strong></div>
-                            <div>• Remuneración Computable CTS: <strong id="pdf-base-cts" class="font-mono text-indigo-700"></strong></div>
+                            <div class="col-span-2 pt-1 border-t border-slate-200">
+                                • Remuneración Computable Total CTS: <strong id="pdf-base-cts" class="font-mono text-indigo-700"></strong>
+                            </div>
                         </div>
                     </div>
 
@@ -413,19 +513,28 @@
                                     <td class="py-1.5 text-right font-bold" id="pdf-cts-amount">S/ 0.00</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-1.5 font-sans">Gratificaciones Truncas + Bonificación Ext. 9%</td>
+                                    <td class="py-1.5 font-sans" id="pdf-grati-label">Gratificaciones Truncas + Bonificación Legal</td>
                                     <td class="py-1.5 font-sans text-slate-500">Ley N° 27735 / Ley N° 30334</td>
                                     <td class="py-1.5 text-right font-bold" id="pdf-grati-amount">S/ 0.00</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-1.5 font-sans">Vacaciones Truncas y Descansos No Gozados</td>
+                                    <td class="py-1.5 font-sans">Vacaciones Truncas del Periodo</td>
                                     <td class="py-1.5 font-sans text-slate-500">D.Leg. N° 713</td>
                                     <td class="py-1.5 text-right font-bold" id="pdf-vaca-amount">S/ 0.00</td>
+                                </tr>
+                                <tr id="pdf-pending-vaca-row" class="hidden">
+                                    <td class="py-1.5 font-sans">Vacaciones Vencidas No Gozadas (Años Anteriores)</td>
+                                    <td class="py-1.5 font-sans text-slate-500">Art. 23 D.Leg. N° 713</td>
+                                    <td class="py-1.5 text-right font-bold text-indigo-800" id="pdf-pending-vaca-amount">S/ 0.00</td>
                                 </tr>
                                 <tr id="pdf-indem-row">
                                     <td class="py-1.5 font-sans text-rose-700 font-bold">Indemnización por Despido Arbitrario</td>
                                     <td class="py-1.5 font-sans text-slate-500">Art. 38 D.Leg. N° 728</td>
                                     <td class="py-1.5 text-right font-bold text-rose-700" id="pdf-indem-amount">S/ 0.00</td>
+                                </tr>
+                                <tr id="pdf-loans-row" class="hidden text-slate-500 italic">
+                                    <td class="py-1.5 font-sans" colspan="2">Deducción de adelantos de quincena o préstamos autorizados:</td>
+                                    <td class="py-1.5 text-right font-mono" id="pdf-loans-amount">- S/ 0.00</td>
                                 </tr>
                                 <tr class="bg-indigo-50/80 font-bold text-xs text-indigo-950">
                                     <td class="py-2 font-sans" colspan="2">TOTAL LIQUIDACIÓN NETO A PAGAR:</td>
@@ -464,20 +573,30 @@
                     </div>
 
                     <div class="font-bold text-center underline py-1 text-slate-900 text-xs" id="pdf-letter-subject">
-                        ASUNTO: REQUIERO PAGO INMEDIATO DE BENEFICIOS SOCIALES E INDEMNIZACIÓN LABORAL BAJO APERCIBIMIENTO DE DENUNCIA ANTE LA SUNAFIL
+                        ASUNTO: REQUIERO PAGO INMEDIATO DE BENEFICIOS SOCIALES Y ENTREGA DE CARTA DE CESE BAJO APERCIBIMIENTO DE DENUNCIA SUNAFIL
                     </div>
 
                     <p>
                         De mi mayor consideración:<br>
-                        Por medio del presente documento formal, me dirijo a ustedes para intimarles al <strong>PAGO ÍNTEGRO E INMEDIATO</strong> de los conceptos laborales derivados de la relación de trabajo culminada el día <strong><span id="pdf-letter-end-date" class="font-mono font-bold"></span></strong>, habiendo desempeñado labores continuas bajo subordinación y dependencia.
+                        Por medio del presente conducto formal, me dirijo a ustedes para intimarles al <strong>PAGO ÍNTEGRO E INMEDIATO</strong> de los conceptos laborales derivados de la relación de trabajo culminada el día <strong><span id="pdf-letter-end-date" class="font-mono font-bold"></span></strong>, habiendo desempeñado labores continuas bajo subordinación y dependencia.
                     </p>
 
                     <p id="pdf-letter-body-2">
                         Que, al amparo del <strong>Decreto Supremo N° 001-97-TR</strong> y normas complementarias, el empleador tiene la obligación legal ineludible de poner a disposición del trabajador el pago íntegro de su liquidación dentro de las <strong>cuarenta y ocho (48) horas siguientes al cese</strong>, plazo que a la fecha se encuentra manifiestamente vencido.
                     </p>
 
+                    <!-- Párrafo condicional de Primacía de la Realidad si es RxH -->
+                    <p id="pdf-letter-rxh-notice" class="hidden p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 text-[11px]">
+                        <strong>APLICACIÓN DEL PRINCIPIO DE PRIMACÍA DE LA REALIDAD (Ley N° 28806):</strong> Dejo formal constancia de que, habiendo prestado servicios personales bajo subordinación, cumplimiento de horario estricto y sujeción a órdenes directas mediante Recibos por Honorarios, ha operado la desnaturalización de la relación civil a laboral a plazo indeterminado conforme al Art. 4 del TUO del D.Leg. N° 728.
+                    </p>
+
                     <p>
                         Conforme al cálculo formal liquidado que integra la Página 1 de este expediente, la suma total líquida y exigible asciende al importe de <strong><span id="pdf-letter-amount" class="font-mono font-bold text-indigo-700"></span></strong>.
+                    </p>
+
+                    <!-- Cláusula Obligatoria de Carta de Cese / Liberación CTS -->
+                    <p class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 text-[11px]">
+                        <strong>EXIGENCIA DE CARTA DE CESE (Art. 45 D.S. N° 001-97-TR):</strong> Asimismo, intimo la entrega inmediata de la Carta de Cese dirigida a la entidad financiera depositaria de mi Compensación por Tiempo de Servicios (CTS), a efectos de proceder al retiro de los fondos acumulados que por ley me corresponden.
                     </p>
 
                     <p class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 text-[11px]" id="pdf-letter-warning">
@@ -525,11 +644,11 @@
                 </div>
                 <div>
                     <strong class="text-slate-900 block text-xs mb-1">Marco Regulatorio</strong>
-                    <p class="text-[11px] text-slate-400">Ley N° 28806 • TUO D.Leg 728 • Libro de Reclamaciones habilitado.</p>
+                    <p class="text-[11px] text-slate-400">Ley N° 28806 • TUO D.Leg 728 • Ley N° 31047 • Libro de Reclamaciones habilitado.</p>
                 </div>
             </div>
             <div class="border-t border-slate-100 pt-3 text-center text-[10px] text-slate-400">
-                © 2026 LiquidaYa.pe • Todos los derechos reservados. Pagos procesados por Culqi.
+                © 2026 LiquidaYa.pe • Todos los derechos reservados. Pagos seguros procesados por Culqi.
             </div>
         </div>
     </footer>
@@ -555,6 +674,7 @@
             setTimeout(() => toast.classList.add('hidden'), 4500);
         }
 
+        // Selección de uno de los 5 casos
         function selectService(serviceCode, titleText) {
             document.getElementById('selected-service-code').value = serviceCode;
             document.getElementById('form-selected-title').innerText = titleText;
@@ -581,6 +701,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Motor Matemático Oficial de Liquidación Laboral Perú
         function calculateLiquidation(data) {
             const startDate = new Date(data.start_date);
             const endDate = new Date(data.end_date);
@@ -590,40 +711,72 @@
             const totalMonths = Math.max(Math.floor(totalDays / 30.417), 1);
             const totalYears = (totalDays / 365).toFixed(1);
 
-            const basicSalary = parseFloat(data.salary);
-            const asigFam = data.has_family_bonus === 'yes' ? 102.50 : 0.00;
-            const baseSalary = basicSalary + asigFam;
+            let basicSalary = parseFloat(data.salary) || 0.00;
 
-            const sixthGrati = baseSalary / 6;
-            const baseCTS = baseSalary + sixthGrati;
+            // Sobretasa nocturna legal (35% mínimo sobre la RMV de S/ 1,025 = S/ 1,383.75)
+            if (data.is_night_shift && basicSalary < 1383.75) {
+                basicSalary = 1383.75;
+            }
+
+            const asigFam = data.has_family_bonus === 'yes' ? 102.50 : 0.00;
+            const commissionsAvg = parseFloat(data.commissions_avg) || 0.00;
+            const baseSalary = basicSalary + asigFam + commissionsAvg;
 
             let regimeFactor = 1.0;
-            if (data.regime === 'pequena') regimeFactor = 0.5;
-            else if (data.regime === 'micro') regimeFactor = 0.0;
+            let vacationDaysPerYear = 30;
 
+            if (data.regime === 'pequena') {
+                regimeFactor = 0.5;
+                vacationDaysPerYear = 15;
+            } else if (data.regime === 'micro') {
+                regimeFactor = 0.0;
+                vacationDaysPerYear = 15;
+            } else if (data.regime === 'hogar') {
+                regimeFactor = 1.0;
+                vacationDaysPerYear = 30;
+            }
+
+            // 1/6 Gratificación Computable para CTS (si el régimen otorga gratificaciones)
+            const sixthGrati = regimeFactor > 0 ? (baseSalary / 6) * regimeFactor : 0.00;
+            const baseCTS = baseSalary + sixthGrati;
+
+            // 1. CTS trunca
             const ctsMonths = Math.min(totalMonths, 6);
             let totalCTS = (baseCTS / 12) * ctsMonths * regimeFactor;
 
+            // 2. Gratificación trunca + Bonificación Extraordinaria (EsSalud 9% o EPS 6.75%)
             const gratiMonths = Math.min(totalMonths, 6);
             let rawGrati = (baseSalary / 6) * gratiMonths * regimeFactor;
-            let bonifExtra = rawGrati * 0.09;
+            const bonusRate = data.health_insurance === 'eps' ? 0.0675 : 0.09;
+            let bonifExtra = rawGrati * bonusRate;
             let totalGrati = rawGrati + bonifExtra;
 
+            // 3. Vacaciones truncas del periodo
+            let vacaFactor = (data.regime === 'micro' || data.regime === 'pequena') ? 0.5 : 1.0;
             let vacaMonths = Math.min(totalMonths, 12);
-            let vacaFactor = data.regime === 'micro' ? 0.5 : (data.regime === 'pequena' ? 0.5 : 1.0);
             let totalVaca = (baseSalary / 12) * vacaMonths * vacaFactor;
 
+            // 4. Vacaciones vencidas de años anteriores
+            const pendingVacationYears = parseInt(data.pending_vacation_years) || 0;
+            let totalPendingVaca = pendingVacationYears * baseSalary * vacaFactor;
+
+            // 5. Indemnización por Despido Arbitrario o Hostilidad
             let totalIndem = 0.0;
-            if (data.reason === 'despido_arbitrario') {
-                let indemFactor = (data.regime === 'micro') ? 10 * (totalDays / 365) : ((data.regime === 'pequena') ? 20 * (totalDays / 365) : 1.5 * (totalDays / 365));
-                if (data.regime === 'general') {
+            const qualifiesForIndem = (data.reason === 'despido_arbitrario' || data.reason === 'hostilidad' || data.is_modal_five_years);
+            
+            if (qualifiesForIndem) {
+                if (data.regime === 'general' || data.regime === 'hogar') {
                     totalIndem = Math.min(baseSalary * 1.5 * (totalDays / 365), baseSalary * 12);
-                } else {
-                    totalIndem = baseSalary * (indemFactor / 30);
+                } else if (data.regime === 'pequena') {
+                    totalIndem = Math.min(baseSalary * (20 * (totalDays / 365) / 30), baseSalary * 4);
+                } else if (data.regime === 'micro') {
+                    totalIndem = Math.min(baseSalary * (10 * (totalDays / 365) / 30), baseSalary * 3);
                 }
             }
 
-            const grandTotal = totalCTS + totalGrati + totalVaca + totalIndem;
+            // Deducción de préstamos o adelantos
+            const loansDiscount = parseFloat(data.loans_discount) || 0.00;
+            const grandTotal = Math.max((totalCTS + totalGrati + totalVaca + totalPendingVaca + totalIndem) - loansDiscount, 0.00);
 
             return {
                 service_code: data.service_code,
@@ -632,7 +785,8 @@
                     dni: data.worker_dni,
                     address: data.worker_address,
                     email: data.worker_email,
-                    phone: data.worker_phone
+                    phone: data.worker_phone,
+                    modality: data.modality
                 },
                 company: {
                     name: data.company_name.toUpperCase(),
@@ -646,16 +800,27 @@
                     total_years: totalYears,
                     basic_salary: basicSalary,
                     asig_fam: asigFam,
+                    commissions_avg: commissionsAvg,
                     sixth_grati: sixthGrati,
                     base_cts: baseCTS,
                     regime: data.regime,
-                    reason: data.reason
+                    reason: data.reason,
+                    health_insurance: data.health_insurance,
+                    is_night_shift: data.is_night_shift,
+                    is_modal_five_years: data.is_modal_five_years,
+                    pending_vacation_years: pendingVacationYears,
+                    loans_discount: loansDiscount
                 },
                 amounts: {
                     cts: totalCTS,
                     grati: totalGrati,
+                    raw_grati: rawGrati,
+                    bonif_extra: bonifExtra,
+                    bonus_rate: bonusRate,
                     vaca: totalVaca,
+                    pending_vaca: totalPendingVaca,
                     indem: totalIndem,
+                    loans: loansDiscount,
                     total: grandTotal
                 }
             };
@@ -676,7 +841,14 @@
                 end_date: document.getElementById('end-date').value,
                 salary: document.getElementById('monthly-salary').value,
                 has_family_bonus: document.getElementById('family-bonus').value,
+                modality: document.getElementById('contract-modality').value,
                 regime: document.getElementById('labor-regime').value,
+                health_insurance: document.getElementById('health-insurance').value,
+                commissions_avg: document.getElementById('commissions-avg').value,
+                pending_vacation_years: document.getElementById('pending-vacation-years').value,
+                loans_discount: document.getElementById('loans-discount').value,
+                is_night_shift: document.getElementById('check-night-shift').checked,
+                is_modal_five_years: document.getElementById('check-modal-five-years').checked,
                 reason: document.getElementById('cessation-reason').value,
                 worker_phone: document.getElementById('worker-phone').value.trim()
             };
@@ -688,12 +860,31 @@
             document.getElementById('preview-grati').innerText = `S/ ${currentCalculation.amounts.grati.toFixed(2)}`;
             document.getElementById('preview-vaca').innerText = `S/ ${currentCalculation.amounts.vaca.toFixed(2)}`;
             
+            // Vacaciones pendientes
+            const pendingVacaRow = document.getElementById('preview-pending-vaca-row');
+            if (currentCalculation.amounts.pending_vaca > 0) {
+                pendingVacaRow.classList.remove('hidden');
+                document.getElementById('preview-pending-vaca').innerText = `S/ ${currentCalculation.amounts.pending_vaca.toFixed(2)}`;
+            } else {
+                pendingVacaRow.classList.add('hidden');
+            }
+
+            // Indemnización por despido
             const indemRow = document.getElementById('preview-indemnizacion-row');
             if (currentCalculation.amounts.indem > 0) {
                 indemRow.classList.remove('hidden');
                 document.getElementById('preview-indemnizacion').innerText = `S/ ${currentCalculation.amounts.indem.toFixed(2)}`;
             } else {
                 indemRow.classList.add('hidden');
+            }
+
+            // Préstamos / Deducciones
+            const loansRow = document.getElementById('preview-loans-row');
+            if (currentCalculation.amounts.loans > 0) {
+                loansRow.classList.remove('hidden');
+                document.getElementById('preview-loans').innerText = `- S/ ${currentCalculation.amounts.loans.toFixed(2)}`;
+            } else {
+                loansRow.classList.add('hidden');
             }
 
             const previewDocTitle = document.getElementById('preview-doc-title');
@@ -727,9 +918,12 @@
             document.getElementById('pdf-worker-name').innerText = w.name;
             document.getElementById('pdf-worker-dni').innerText = w.dni;
             document.getElementById('pdf-worker-address').innerText = w.address;
+            document.getElementById('pdf-worker-modality').innerText = w.modality === 'rxh' ? 'LOCACIÓN DE SERVICIOS (RxH - DESNATURALIZADO)' : 'PLANILLA FORMAL (D.LEG 728)';
+            
             document.getElementById('pdf-company-name').innerText = c.name;
             document.getElementById('pdf-company-ruc').innerText = c.ruc;
             document.getElementById('pdf-labor-regime').innerText = d.regime.toUpperCase();
+            document.getElementById('pdf-health-insurance').innerText = d.health_insurance === 'eps' ? 'EPS PRIVADA (BONO 6.75%)' : 'ESSALUD REGULAR (BONO 9%)';
 
             document.getElementById('pdf-start-date').innerText = d.start_date;
             document.getElementById('pdf-end-date').innerText = d.end_date;
@@ -737,19 +931,40 @@
 
             document.getElementById('pdf-salary').innerText = `S/ ${d.basic_salary.toFixed(2)}`;
             document.getElementById('pdf-asig-fam').innerText = `S/ ${d.asig_fam.toFixed(2)}`;
+            document.getElementById('pdf-commissions').innerText = `S/ ${d.commissions_avg.toFixed(2)}`;
             document.getElementById('pdf-sixth-grati').innerText = `S/ ${d.sixth_grati.toFixed(2)}`;
             document.getElementById('pdf-base-cts').innerText = `S/ ${d.base_cts.toFixed(2)}`;
 
             document.getElementById('pdf-cts-amount').innerText = `S/ ${a.cts.toFixed(2)}`;
+            document.getElementById('pdf-grati-label').innerText = `Gratificaciones Truncas + Bono Legal (${a.bonus_rate === 0.0675 ? '6.75% EPS' : '9% EsSalud'})`;
             document.getElementById('pdf-grati-amount').innerText = `S/ ${a.grati.toFixed(2)}`;
             document.getElementById('pdf-vaca-amount').innerText = `S/ ${a.vaca.toFixed(2)}`;
             
+            // Vacaciones pendientes en PDF
+            const pdfPendingVacaRow = document.getElementById('pdf-pending-vaca-row');
+            if (a.pending_vaca > 0) {
+                pdfPendingVacaRow.classList.remove('hidden');
+                document.getElementById('pdf-pending-vaca-amount').innerText = `S/ ${a.pending_vaca.toFixed(2)}`;
+            } else {
+                pdfPendingVacaRow.classList.add('hidden');
+            }
+
+            // Indemnización en PDF
             const pdfIndemRow = document.getElementById('pdf-indem-row');
             if (a.indem > 0) {
                 pdfIndemRow.classList.remove('hidden');
                 document.getElementById('pdf-indem-amount').innerText = `S/ ${a.indem.toFixed(2)}`;
             } else {
                 pdfIndemRow.classList.add('hidden');
+            }
+
+            // Préstamos en PDF
+            const pdfLoansRow = document.getElementById('pdf-loans-row');
+            if (a.loans > 0) {
+                pdfLoansRow.classList.remove('hidden');
+                document.getElementById('pdf-loans-amount').innerText = `- S/ ${a.loans.toFixed(2)}`;
+            } else {
+                pdfLoansRow.classList.add('hidden');
             }
 
             document.getElementById('pdf-total-final').innerText = `S/ ${a.total.toFixed(2)}`;
@@ -764,13 +979,21 @@
             document.getElementById('pdf-letter-sign-name').innerText = w.name;
             document.getElementById('pdf-letter-sign-dni').innerText = w.dni;
 
+            // Bloque RxH condicional
+            const rxhNoticeElem = document.getElementById('pdf-letter-rxh-notice');
+            if (w.modality === 'rxh') {
+                rxhNoticeElem.classList.remove('hidden');
+            } else {
+                rxhNoticeElem.classList.add('hidden');
+            }
+
             const badgeElem = document.getElementById('pdf-doc-badge');
             const subjectElem = document.getElementById('pdf-letter-subject');
             const warningElem = document.getElementById('pdf-letter-warning');
 
             if (sCode === 'sunafil') {
                 badgeElem.innerText = "DENUNCIA LABORAL FORMAL • SUNAFIL";
-                subjectElem.innerText = "DENUNCIA FORMAL POR INFRACCIÓN MUY GRAVE EN MATERIA LABORAL (FALTA DE PAGO DE BENEFICIOS SOCIALES)";
+                subjectElem.innerText = "DENUNCIA FORMAL POR INFRACCIÓN MUY GRAVE EN MATERIA LABORAL (FALTA DE PAGO DE BENEFICIOS SOCIALES Y CARTA DE CESE)";
                 warningElem.innerHTML = "<strong>PETITORIO INSPECTIVO:</strong> Solicito a la Intendencia de Fiscalización de la SUNAFIL ordenar una orden de inspección inmediata, sancionando al empleador infractor con la multa de hasta 26.12 UIT tipificada en el numeral 25.19 del D.S. N° 019-2006-TR y requiriendo el depósito coactivo de la liquidación debida.";
             } else if (sCode === 'hostilidad') {
                 badgeElem.innerText = "EMPLAZAMIENTO NOTARIAL • ART. 30 D.LEG. N° 728";
@@ -778,7 +1001,7 @@
                 warningElem.innerHTML = "<strong>PLAZO LEGAL IMPRORROGABLE (6 DÍAS):</strong> Conforme al Art. 30 del D.Leg. N° 728, otorgo a la empresa el término de 6 días naturales para que cese la hostilidad imputada o enmiende su conducta. Caso contrario, me daré por despedido indirectamente con derecho al cobro forzoso de la indemnización de ley.";
             } else {
                 badgeElem.innerText = "CARTA NOTARIAL DE REQUERIMIENTO • LEY N° 28806";
-                subjectElem.innerText = "REQUIERO PAGO INMEDIATO DE BENEFICIOS SOCIALES BAJO APERCIBIMIENTO DE DENUNCIA ANTE LA SUNAFIL";
+                subjectElem.innerText = "REQUIERO PAGO INMEDIATO DE BENEFICIOS SOCIALES Y ENTREGA DE CARTA DE CESE BAJO APERCIBIMIENTO DE DENUNCIA ANTE LA SUNAFIL";
                 warningElem.innerHTML = "<strong>APERCIBIMIENTO LEGAL Y MULTAS SUNAFIL:</strong> Les otorgo el plazo perentorio de <strong>cuarenta y ocho (48) horas</strong> para hacer efectivo el abono en mi cuenta bancaria. Vencido dicho término, interpondré formal denuncia ante la SUNAFIL por Infracción Muy Grave (D.S. N° 019-2006-TR), sujeta a multas de hasta 26.12 UIT.";
             }
 
