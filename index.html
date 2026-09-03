@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiquidaYa.pe | Cálculo de Liquidación, Indemnización y Cartas Notariales SUNAFIL</title>
+    <title>LiquidaYa.pe | Cálculo Oficial de Liquidación y Reclamo Legal SUNAFIL</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- html2pdf.js -->
@@ -15,6 +15,7 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         
+        /* Maquetación estricta de 2 páginas A4 para valor legal */
         .pdf-page {
             background-color: #ffffff;
             border: 1px solid #cbd5e1;
@@ -34,16 +35,16 @@
 
     <!-- Header Oficial -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm no-print">
-        <div class="max-w-5xl mx-auto px-4 py-2.5 sm:py-3 flex items-center justify-between gap-2">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
             <a href="/" class="flex items-center space-x-1.5 shrink-0">
-                <span class="text-xl sm:text-2xl">💼</span>
-                <span class="font-black text-lg sm:text-xl tracking-tight text-slate-900">Liquida<span class="text-indigo-600">Ya</span><span class="text-slate-400 text-xs sm:text-sm font-normal">.pe</span></span>
+                <span class="text-2xl">💼</span>
+                <span class="font-black text-xl tracking-tight text-slate-900">Liquida<span class="text-indigo-600">Ya</span><span class="text-slate-400 text-sm font-normal">.pe</span></span>
             </a>
-            <button onclick="openAIModal()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 font-bold px-3 py-1.5 rounded-full transition text-[11px] sm:text-xs flex items-center gap-1.5 shrink-0">
-                <span>⚖️</span>
-                <span class="hidden sm:inline">Consultar al </span>
-                <span>Asesor Laboral IA</span>
-            </button>
+            <div class="flex items-center gap-2">
+                <span class="hidden sm:inline-block text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
+                    ✓ Sistema Actualizado a Leyes SUNAFIL 2026
+                </span>
+            </div>
         </div>
     </header>
 
@@ -56,119 +57,119 @@
     <!-- Contenedor Principal -->
     <main class="max-w-4xl mx-auto px-4 py-6 sm:py-8 flex-1 w-full space-y-6 sm:space-y-8">
 
-        <!-- VISTA 1: CATÁLOGO DE LOS 5 SERVICIOS LABORALES -->
+        <!-- VISTA 1: IDENTIFICADOR RÁPIDO DE CASOS (5 CASOS CLAROS) -->
         <section id="view-catalog" class="space-y-6">
             <div class="text-center max-w-2xl mx-auto space-y-2">
-                <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-200">
-                    Defensa de los Derechos del Trabajador • SUNAFIL / D.Leg 728
+                <span class="text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-200">
+                    Defensa de los Derechos del Trabajador en el Perú
                 </span>
-                <h1 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">Cobra tu Liquidación y Haz Valer tus Derechos Laborales</h1>
+                <h1 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">¿Cuál es tu problema laboral hoy?</h1>
                 <p class="text-xs sm:text-sm text-slate-500">
-                    Tu empleador solo tiene 48 horas tras el cese para pagarte. Genera tu expediente legal formal con liquidación detallada y carta notarial con apercibimiento SUNAFIL.
+                    Elige tu caso real en español simple. No necesitas ser abogado para calcular tu dinero y exigir lo que te corresponde por ley.
                 </p>
             </div>
 
-            <!-- Banner Alerta Legal 48 Horas -->
-            <div class="bg-slate-900 rounded-2xl p-4 sm:p-5 text-white flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-800 shadow-md">
+            <!-- Banner Alerta 48 Horas -->
+            <div class="bg-indigo-950 rounded-2xl p-5 text-white flex flex-col sm:flex-row items-center justify-between gap-4 border border-indigo-900 shadow-md">
                 <div class="space-y-1 text-center sm:text-left">
-                    <strong class="text-amber-400 text-xs font-bold block uppercase tracking-wider">Obligación Patronal Ineludible</strong>
-                    <h3 class="font-bold text-sm">¿Terminó tu vínculo laboral y pasaron más de 48 horas?</h3>
-                    <p class="text-[11px] text-slate-400">Según el D.S. N° 001-97-TR, tu empleador incurre en falta muy grave sujeta a multas de SUNAFIL e intereses legales.</p>
+                    <strong class="text-amber-400 text-xs font-bold block uppercase tracking-wider">REGLA LEGAL DE ORO EN EL PERÚ:</strong>
+                    <h3 class="font-bold text-sm">Tu empleador tiene solo 48 HORAS tras tu salida para pagarte</h3>
+                    <p class="text-[11px] text-indigo-200">"El contador no viene", "pagamos a fin de mes" o "falta firma" son pretextos ilegales (D.S. 001-97-TR).</p>
                 </div>
-                <button onclick="selectService('liquidacion', 'Liquidación de Beneficios Sociales (CTS, Gratificación y Vacaciones)')" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow transition text-center whitespace-nowrap">
-                    Calcular Mi Liquidación →
+                <button onclick="selectService('48horas', 'Caso 1: Requerimiento de Liquidación por Plazo Vencido (+48 Horas)')" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl shadow transition text-center whitespace-nowrap">
+                    Reclamar Mi Pago Ahora
                 </button>
             </div>
 
-            <!-- Grilla de 5 Servicios Laborales -->
+            <!-- Las 5 Tarjetas de Casos Concretos -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 
-                <!-- Servicio 1 -->
-                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
+                <!-- Tarjeta 1 -->
+                <div onclick="selectService('48horas', 'Caso 1: Ya salí del trabajo, pasaron más de 48 horas y no me pagan')" class="bg-white rounded-2xl p-5 border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-500 hover:shadow-md transition cursor-pointer group">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                            <span class="text-[10px] font-bold text-slate-400">Cálculo Oficial</span>
+                            <span class="text-xs font-black text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-md">¡Plazo Vencido!</span>
+                            <span class="text-xs font-bold text-slate-400">S/ 9.90 PEN</span>
                         </div>
-                        <h3 class="font-bold text-sm text-slate-900">1. Liquidación de Beneficios Sociales</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Cálculo normativo exacto de CTS trunca, Gratificaciones truncas con bonificación del 9% (Ley 30334) y Vacaciones truncas (D.Leg 713).</p>
+                        <h3 class="font-black text-sm text-slate-900 group-hover:text-indigo-600 transition">1. "Ya salí del trabajo, pasaron más de 2 días y no me pagan nada"</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">Te pasean diciendo que vuelvas la otra semana o no contestan. La ley les da 48 horas exactas; cada día que pasa ganan intereses legales a tu favor.</p>
                     </div>
-                    <button onclick="selectService('liquidacion', 'Liquidación de Beneficios Sociales (D.Leg 728 / 650 / 713)')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">
-                        Calcular Beneficios Sociales →
-                    </button>
+                    <div class="w-full bg-slate-900 group-hover:bg-indigo-600 text-white font-bold text-xs py-2.5 rounded-xl transition text-center">
+                        Generar Liquidación + Carta Notarial →
+                    </div>
                 </div>
 
-                <!-- Servicio 2 -->
-                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
+                <!-- Tarjeta 2 -->
+                <div onclick="selectService('despido_arbitrario', 'Caso 2: Me botaron de la nada sin falta grave comprobada')" class="bg-white rounded-2xl p-5 border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-500 hover:shadow-md transition cursor-pointer group">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                            <span class="text-[10px] font-bold text-rose-600">Plazo Vencido</span>
+                            <span class="text-xs font-black text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md">1.5 Sueldos por Año</span>
+                            <span class="text-xs font-bold text-slate-400">S/ 9.90 PEN</span>
                         </div>
-                        <h3 class="font-bold text-sm text-slate-900">2. Carta Notarial de Intimación de Pago (48 Horas)</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Requerimiento formal por conducto notarial intimando el depósito inmediato de liquidación bajo apercibimiento de denuncia SUNAFIL.</p>
+                        <h3 class="font-black text-sm text-slate-900 group-hover:text-indigo-600 transition">2. "Me botaron de la nada ('hasta hoy trabajas' o no me dejaron entrar)"</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">Te despidieron de palabra, por WhatsApp o sin carta formal de falta grave. Te corresponde tu liquidación completa MÁS una indemnización de hasta 12 sueldos.</p>
                     </div>
-                    <button onclick="selectService('carta_notarial', 'Carta Notarial de Intimación de Pago en 48 Horas')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">
-                        Generar Carta Notarial →
-                    </button>
+                    <div class="w-full bg-slate-900 group-hover:bg-indigo-600 text-white font-bold text-xs py-2.5 rounded-xl transition text-center">
+                        Calcular Indemnización + Despido →
+                    </div>
                 </div>
 
-                <!-- Servicio 3 -->
-                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
+                <!-- Tarjeta 3 -->
+                <div onclick="selectService('renuncia', 'Caso 3: Renuncié o venció mi contrato y quiero mi liquidación justa')" class="bg-white rounded-2xl p-5 border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-500 hover:shadow-md transition cursor-pointer group">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                            <span class="text-[10px] font-bold text-amber-600">1.5 Sueldos / Año</span>
+                            <span class="text-xs font-black text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-md">Cálculo al Centavo</span>
+                            <span class="text-xs font-bold text-slate-400">S/ 9.90 PEN</span>
                         </div>
-                        <h3 class="font-bold text-sm text-slate-900">3. Indemnización por Despido Arbitrario</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Liquidación formal de indemnización legal por despido incausado o verbal conforme al Art. 38 del D.Leg. 728 (tope de 12 sueldos).</p>
+                        <h3 class="font-black text-sm text-slate-900 group-hover:text-indigo-600 transition">3. "Renuncié voluntariamente o se terminó mi contrato"</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">Presentaste tu renuncia o tu contrato de meses llegó a su fin. Calcula con precisión tu CTS trunca, tus gratificaciones con el 9% de EsSalud y tus vacaciones no gozadas.</p>
                     </div>
-                    <button onclick="selectService('despido_arbitrario', 'Indemnización Legal por Despido Arbitrario (Art. 38 D.Leg 728)')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">
-                        Calcular Indemnización →
-                    </button>
+                    <div class="w-full bg-slate-900 group-hover:bg-indigo-600 text-white font-bold text-xs py-2.5 rounded-xl transition text-center">
+                        Calcular Liquidación Exacta →
+                    </div>
                 </div>
 
-                <!-- Servicio 4 -->
-                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
+                <!-- Tarjeta 4 -->
+                <div onclick="selectService('sunafil', 'Caso 4: Mi empleador se niega a pagarme o me bloqueó')" class="bg-white rounded-2xl p-5 border-2 border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-500 hover:shadow-md transition cursor-pointer group">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                            <span class="text-[10px] font-bold text-rose-500">Multa SUNAFIL</span>
+                            <span class="text-xs font-black text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-md">Multas de S/ 130,000</span>
+                            <span class="text-xs font-bold text-slate-400">S/ 9.90 PEN</span>
                         </div>
-                        <h3 class="font-bold text-sm text-slate-900">4. Denuncia Administrativa ante SUNAFIL</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Escrito formal de denuncia laboral por falta de pago de liquidación e incumplimiento de normas inspectivas (D.S. 019-2006-TR).</p>
+                        <h3 class="font-black text-sm text-slate-900 group-hover:text-indigo-600 transition">4. "La empresa se niega a pagar, me pasea o me bloqueó"</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">Ya les cobraste por las buenas y no responden. Genera la denuncia administrativa formal para ingresar a la mesa de partes de SUNAFIL y enviarles una inspección laboral.</p>
                     </div>
-                    <button onclick="selectService('denuncia_sunafil', 'Denuncia Formal ante SUNAFIL por Falta de Pago')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">
-                        Redactar Denuncia SUNAFIL →
-                    </button>
+                    <div class="w-full bg-slate-900 group-hover:bg-indigo-600 text-white font-bold text-xs py-2.5 rounded-xl transition text-center">
+                        Generar Denuncia SUNAFIL →
+                    </div>
                 </div>
 
-                <!-- Servicio 5 (Ocupa las dos columnas en desktop) -->
-                <div class="sm:col-span-2 bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 hover:border-indigo-400 transition">
+                <!-- Tarjeta 5 -->
+                <div onclick="selectService('hostilidad', 'Caso 5: Me bajaron el sueldo, me maltratan o cambiaron de puesto para que renuncie')" class="sm:col-span-2 bg-white rounded-2xl p-5 border-2 border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 hover:border-indigo-500 hover:shadow-md transition cursor-pointer group">
                     <div class="space-y-1 text-left w-full">
                         <div class="flex items-center gap-2">
-                            <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                            <span class="text-[10px] font-bold text-slate-400">Art. 30 D.Leg. 728</span>
+                            <span class="text-xs font-black text-purple-700 bg-purple-50 border border-purple-200 px-2 py-0.5 rounded-md">Art. 30 D.Leg. 728</span>
+                            <span class="text-xs font-bold text-slate-400">Plazo de 6 Días</span>
                         </div>
-                        <h3 class="font-bold text-sm text-slate-900">5. Cese de Hostilidad Laboral / Despido Indirecto</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Emplazamiento al empleador para que cese la reducción injustificada de sueldo, traslado perjudicial o actos hostiles bajo plazo legal de 6 días.</p>
+                        <h3 class="font-black text-sm text-slate-900 group-hover:text-indigo-600 transition">5. "Me bajaron el sueldo, me cambiaron de puesto o me hostigan para obligarme a renunciar"</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">No te botan directamente para no pagarte indemnización. Este documento emplaza notarialmente a la empresa para que detenga el hostigamiento o te indemnice por despido indirecto.</p>
                     </div>
-                    <button onclick="selectService('hostilidad', 'Emplazamiento por Cese de Hostilidad Laboral (Art. 30 D.Leg 728)')" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-5 rounded-xl transition whitespace-nowrap">
+                    <div class="w-full sm:w-auto bg-slate-900 group-hover:bg-indigo-600 text-white font-bold text-xs py-2.5 px-6 rounded-xl transition text-center whitespace-nowrap">
                         Reclamar Hostilidad →
-                    </button>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- VISTA 2: FORMULARIO LABORAL -->
+        <!-- VISTA 2: FORMULARIO DE CÁLCULO -->
         <section id="view-calculator" class="hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
             <div class="flex items-center justify-between border-b pb-4">
                 <div>
-                    <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 block">Trámite Seleccionado:</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 block">Caso Seleccionado:</span>
                     <h2 id="form-selected-title" class="text-base sm:text-lg font-black text-slate-900">Liquidación de Beneficios Sociales</h2>
                 </div>
                 <button onclick="backToCatalog()" class="text-xs font-bold text-slate-500 hover:text-slate-800 bg-slate-100 px-3 py-1.5 rounded-xl transition">
-                    ← Cambiar trámite
+                    ← Cambiar caso
                 </button>
             </div>
 
@@ -181,13 +182,13 @@
                     </div>
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">DNI / Carné de Extranjería:</label>
-                        <input type="text" id="worker-dni" maxlength="12" inputmode="numeric" placeholder="Ej. 70627494" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                        <input type="text" id="worker-dni" maxlength="12" inputmode="numeric" placeholder="Ej. 70627494" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-mono">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Domicilio del Trabajador (Notificación):</label>
+                        <label class="font-bold text-slate-700 block mb-1">Domicilio del Trabajador (Donde vives):</label>
                         <input type="text" id="worker-address" placeholder="Ej. Av. Los Laureles 320, Piura" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
                     </div>
                     <div>
@@ -199,7 +200,7 @@
                 <!-- Datos de la Empresa -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Razón Social o Nombre del Empleador:</label>
+                        <label class="font-bold text-slate-700 block mb-1">Nombre de la Empresa o Empleador:</label>
                         <input type="text" id="company-name" placeholder="Ej. Inversiones Comerciales SAC" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
                     </div>
                     <div>
@@ -211,11 +212,11 @@
                 <!-- Fechas Laborales -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Fecha de Ingreso a Trabajar:</label>
+                        <label class="font-bold text-slate-700 block mb-1">Fecha en que empezaste a trabajar:</label>
                         <input type="date" id="start-date" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-mono">
                     </div>
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Fecha de Cese o Término de Labores:</label>
+                        <label class="font-bold text-slate-700 block mb-1">Fecha de tu último día de trabajo:</label>
                         <input type="date" id="end-date" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-mono">
                     </div>
                 </div>
@@ -227,43 +228,33 @@
                         <input type="number" step="0.01" id="monthly-salary" placeholder="Ej. 2500.00" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-bold">
                     </div>
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">¿Percibías Asignación Familiar?:</label>
+                        <label class="font-bold text-slate-700 block mb-1">¿Tienes hijos menores? (Asig. Familiar):</label>
                         <select id="family-bonus" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-medium">
-                            <option value="no">No</option>
-                            <option value="yes" selected>Sí (Hijos menores o universitarios)</option>
+                            <option value="no">No tengo hijos</option>
+                            <option value="yes" selected>Sí (Me corresponde Asig. Familiar)</option>
                         </select>
                     </div>
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Régimen Laboral de la Empresa:</label>
+                        <label class="font-bold text-slate-700 block mb-1">Tipo de Empresa:</label>
                         <select id="labor-regime" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-bold">
-                            <option value="general" selected>Régimen General (100% Beneficios)</option>
+                            <option value="general" selected>Empresa Normal / Grande (100% Beneficios)</option>
                             <option value="pequena">Pequeña Empresa REMYPE (50% Beneficios)</option>
                             <option value="micro">Microempresa REMYPE (Sin CTS ni Grati)</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- Motivo de Cese -->
-                <div>
-                    <label class="font-bold text-slate-700 block mb-1">Motivo del Término de la Relación Laboral:</label>
-                    <select id="cessation-reason" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-bold">
-                        <option value="despido_arbitrario" selected>Despido Arbitrario / Incausado (Aplica Indemnización 1.5 sueldos/año)</option>
-                        <option value="renuncia">Renuncia Voluntaria</option>
-                        <option value="fin_contrato">Vencimiento de Contrato / No Renovación</option>
-                        <option value="mutuo_acuerdo">Mutuo Disenso / Acuerdo</option>
-                        <option value="hostilidad">Cese de Hostilidad / Despido Indirecto</option>
-                    </select>
-                </div>
-
-                <input type="hidden" id="procedure-type" value="liquidacion">
+                <!-- Motivo de Salida (Oculto / Automático según la tarjeta elegida) -->
+                <input type="hidden" id="cessation-reason" value="despido_arbitrario">
+                <input type="hidden" id="selected-service-code" value="48horas">
 
                 <div>
-                    <label class="font-bold text-slate-700 block mb-1">WhatsApp de Contacto:</label>
+                    <label class="font-bold text-slate-700 block mb-1">Tu Número de WhatsApp (Para contacto):</label>
                     <input type="tel" id="worker-phone" maxlength="9" inputmode="numeric" placeholder="Ej. 957418893" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
                 </div>
 
                 <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-black py-4 rounded-2xl shadow-lg transition text-base flex items-center justify-center space-x-2 mt-4">
-                    <span>Liquidar Beneficios Sociales y Generar Carta Notarial</span>
+                    <span>Calcular Mi Dinero y Generar Expediente Legal</span>
                 </button>
             </form>
         </section>
@@ -272,13 +263,13 @@
         <section id="view-preview" class="hidden space-y-6">
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm text-center space-y-5">
                 <div class="inline-block bg-indigo-50 text-indigo-700 text-xs font-black px-4 py-1.5 rounded-full border border-indigo-200">
-                    LIQUIDACIÓN OFICIAL CALCULADA CONFORME A LEY
+                    DICTAMEN LEGAL OFICIAL: CÁLCULO CONFORME A LEY
                 </div>
 
                 <div>
-                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">MONTO TOTAL NETO A COBRAR</span>
+                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">MONTO TOTAL NETO QUE TE DEBEN PAGAR</span>
                     <div id="preview-total-amount" class="text-4xl sm:text-5xl font-black text-indigo-600 mt-1">S/ 0.00</div>
-                    <span class="text-xs text-slate-500 mt-1 block">Monto que tu empleador está obligado a pagar bajo apercibimiento de multa SUNAFIL</span>
+                    <span class="text-xs text-slate-500 mt-1 block">Tu empleador no puede descontarte ni un sol de esta liquidación formal</span>
                 </div>
 
                 <!-- Desglose de Beneficios -->
@@ -302,7 +293,7 @@
                     </div>
                 </div>
 
-                <!-- Preview Visual -->
+                <!-- Preview Visual de 2 Páginas -->
                 <div class="border-2 border-dashed border-slate-200 rounded-2xl p-4 bg-slate-50 space-y-3">
                     <span class="text-xs font-bold text-slate-500 block uppercase tracking-wider">EXPEDIENTE LABORAL COMPLETO (2 PÁGINAS A4):</span>
                     <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
@@ -314,16 +305,16 @@
                             <span class="text-[9px] text-slate-400 block pt-1">Cálculo al centavo rubricado.</span>
                         </div>
                         <div class="bg-white p-3 rounded-xl border border-slate-200 text-left shadow-sm text-[10px] space-y-1">
-                            <strong class="text-indigo-600 block">Pág 2: Carta Notarial SUNAFIL</strong>
+                            <strong class="text-indigo-600 block" id="preview-doc-title">Pág 2: Requerimiento Legal</strong>
                             <div class="h-2 bg-slate-200 rounded w-full"></div>
                             <div class="h-2 bg-slate-200 rounded w-4/5"></div>
                             <div class="h-2 bg-slate-200 rounded w-2/3"></div>
-                            <span class="text-[9px] text-slate-400 block pt-1">Intimación 48 horas + Cargo.</span>
+                            <span class="text-[9px] text-slate-400 block pt-1">Carta Notarial / SUNAFIL con cargo.</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Acciones -->
+                <!-- Botones de Acción -->
                 <div class="space-y-4 max-w-lg mx-auto pt-2">
                     <button onclick="unlockExpediente()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-4 rounded-2xl shadow-lg hover:shadow-xl transition transform active:scale-95 text-sm flex items-center justify-center gap-2 border-2 border-emerald-500">
                         <span>👁️ Ver y Descargar Expediente Gratis (Modo Prueba)</span>
@@ -349,7 +340,7 @@
             <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 no-print">
                 <div>
                     <h3 class="font-black text-emerald-900 text-sm">¡Expediente Laboral Generado con Éxito!</h3>
-                    <p class="text-xs text-emerald-700">Tu hoja de liquidación y Carta Notarial de requerimiento formal están listas.</p>
+                    <p class="text-xs text-emerald-700">Tu liquidación formal y documento de intimación legal están listos para mesa de partes.</p>
                 </div>
                 <div class="flex gap-2 w-full sm:w-auto">
                     <button onclick="window.print()" class="w-1/2 sm:w-auto bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs px-3 py-2.5 rounded-xl shadow transition">
@@ -374,12 +365,12 @@
 
                     <div class="grid grid-cols-2 gap-4 bg-slate-50 p-3 rounded-xl border border-slate-200 text-[11px]">
                         <div>
-                            <strong>TRABAJADOR:</strong> <span id="pdf-worker-name" class="uppercase"></span><br>
+                            <strong>TRABAJADOR:</strong> <span id="pdf-worker-name" class="uppercase font-bold"></span><br>
                             <strong>DNI:</strong> <span id="pdf-worker-dni" class="font-mono"></span><br>
                             <strong>DOMICILIO:</strong> <span id="pdf-worker-address"></span>
                         </div>
                         <div>
-                            <strong>EMPLEADOR:</strong> <span id="pdf-company-name" class="uppercase"></span><br>
+                            <strong>EMPLEADOR:</strong> <span id="pdf-company-name" class="uppercase font-bold"></span><br>
                             <strong>RUC:</strong> <span id="pdf-company-ruc" class="font-mono"></span><br>
                             <strong>RÉGIMEN:</strong> <span id="pdf-labor-regime" class="uppercase font-bold"></span>
                         </div>
@@ -463,11 +454,11 @@
                     </div>
                 </div>
 
-                <!-- PÁGINA 2: CARTA NOTARIAL -->
+                <!-- PÁGINA 2: ACCIÓN LEGAL ADAPTABLE (CARTA NOTARIAL O DENUNCIA SUNAFIL) -->
                 <div class="pdf-page p-6 sm:p-8 rounded-2xl text-xs space-y-4 leading-relaxed">
                     <div class="border-b-2 border-slate-800 pb-2 flex justify-between items-start">
-                        <span class="font-mono text-[10px] text-slate-500 uppercase font-bold">CARTA NOTARIAL DE REQUERIMIENTO • LEY N° 28806</span>
-                        <span class="font-mono text-[10px] text-slate-500 font-bold">CONDUCTO NOTARIAL</span>
+                        <span class="font-mono text-[10px] text-slate-500 uppercase font-bold" id="pdf-doc-badge">REQUERIMIENTO NOTARIAL • LEY N° 28806</span>
+                        <span class="font-mono text-[10px] text-slate-500 font-bold">EXPEDIENTE LABORAL</span>
                     </div>
 
                     <div class="space-y-1">
@@ -477,29 +468,29 @@
                         <span>CIUDAD: República del Perú</span>
                     </div>
 
-                    <div class="font-bold text-center underline py-1 text-slate-900 text-xs">
+                    <div class="font-bold text-center underline py-1 text-slate-900 text-xs" id="pdf-letter-subject">
                         ASUNTO: REQUIERO PAGO INMEDIATO DE BENEFICIOS SOCIALES E INDEMNIZACIÓN LABORAL BAJO APERCIBIMIENTO DE DENUNCIA ANTE LA SUNAFIL
                     </div>
 
                     <p>
                         De mi mayor consideración:<br>
-                        Por medio del presente conducto notarial, me dirijo a ustedes para intimarles formalmente al <strong>PAGO ÍNTEGRO E INMEDIATO</strong> de mis Beneficios Sociales correspondientes a la relación laboral culminada el día <strong><span id="pdf-letter-end-date" class="font-mono font-bold"></span></strong>, habiendo desempeñado labores continuas bajo subordinación y dependencia.
+                        Por medio del presente documento formal, me dirijo a ustedes para intimarles al <strong>PAGO ÍNTEGRO E INMEDIATO</strong> de los conceptos laborales derivados de la relación de trabajo culminada el día <strong><span id="pdf-letter-end-date" class="font-mono font-bold"></span></strong>, habiendo desempeñado labores continuas bajo subordinación y dependencia.
+                    </p>
+
+                    <p id="pdf-letter-body-2">
+                        Que, al amparo del <strong>Decreto Supremo N° 001-97-TR</strong> y normas complementarias, el empleador tiene la obligación legal ineludible de poner a disposición del trabajador el pago íntegro de su liquidación dentro de las <strong>cuarenta y ocho (48) horas siguientes al cese</strong>, plazo que a la fecha se encuentra manifiestamente vencido.
                     </p>
 
                     <p>
-                        Que, al amparo del <strong>Decreto Supremo N° 001-97-TR</strong> y normas complementarias, el empleador tiene la obligación legal ineludible de poner a disposición del trabajador el pago íntegro de la liquidación de beneficios sociales dentro de las <strong>cuarenta y ocho (48) horas siguientes al cese</strong>, plazo legal que se encuentra manifiestamente vencido.
+                        Conforme al cálculo formal liquidado que integra la Página 1 de este expediente, la suma total líquida y exigible asciende al importe de <strong><span id="pdf-letter-amount" class="font-mono font-bold text-indigo-700"></span></strong>.
+                    </p>
+
+                    <p class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 text-[11px]" id="pdf-letter-warning">
+                        <strong>APERCIBIMIENTO LEGAL Y MULTAS SUNAFIL:</strong> Les otorgo el plazo perentorio de <strong>cuarenta y ocho (48) horas</strong> para verificar el depósito en mi cuenta bancaria. Vencido dicho término, interpondré de forma inmediata la correspondiente <strong>DENUNCIA ANTE LA SUPERINTENDENCIA NACIONAL DE FISCALIZACIÓN LABORAL (SUNAFIL)</strong> por la comisión de Infracción Muy Grave (D.S. N° 019-2006-TR), la cual conlleva multas de hasta 26.12 UIT, más los intereses legales laborales que devenguen conforme al Decreto Ley N° 25920.
                     </p>
 
                     <p>
-                        Conforme a la liquidación legal detallada que forma parte de este expediente, el importe neto adeudado asciende a la suma líquida de <strong><span id="pdf-letter-amount" class="font-mono font-bold text-indigo-700"></span></strong>.
-                    </p>
-
-                    <p class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 text-[11px]">
-                        <strong>APERCIBIMIENTO LEGAL Y MULTAS SUNAFIL:</strong> Les otorgo el plazo perentorio de <strong>cuarenta y ocho (48) horas</strong> calendarios computadas desde la recepción de la presente para hacer efectivo el depósito bancario. Vencido dicho término sin verificar el abono, procederé a interponer la correspondiente <strong>DENUNCIA ANTE LA SUPERINTENDENCIA NACIONAL DE FISCALIZACIÓN LABORAL (SUNAFIL)</strong> por la comisión de Infracción Muy Grave tipificada en el numeral 25.19 del Reglamento de la Ley General de Inspección del Trabajo (D.S. N° 019-2006-TR), sujeta a multas de hasta 26.12 UIT, más los intereses legales laborales que devenguen conforme al Decreto Ley N° 25920.
-                    </p>
-
-                    <p>
-                        Sin otro particular, quedo a la espera del cumplimiento de sus obligaciones patronales.
+                        Sin otro particular, quedo a la espera del cumplimiento de sus obligaciones legales.
                     </p>
 
                     <div class="grid grid-cols-2 gap-4 pt-4">
@@ -509,6 +500,7 @@
                             <span class="text-slate-500 text-[10px]">DNI: <span id="pdf-letter-sign-dni" class="font-mono"></span></span>
                         </div>
 
+                        <!-- Recuadro Notarial / Cargo -->
                         <div class="border-2 border-dashed border-slate-300 rounded-xl p-3 text-[10px] space-y-1 bg-slate-50 text-slate-600">
                             <strong class="block text-center text-slate-800 border-b border-slate-200 pb-1">CARGO DE RECEPCIÓN / DILIGENCIA NOTARIAL</strong>
                             <div>Fecha: ____ / ____ / 2026 &nbsp;&nbsp; Hora: ____ : ____</div>
@@ -534,6 +526,7 @@
                     <strong class="text-slate-900 block text-xs mb-1">Contacto</strong>
                     <p class="text-[11px]">Santa Margarita - Piura, Perú</p>
                     <p class="text-[11px]">WhatsApp: +51 957 418 893</p>
+                    <p class="text-[11px]">Correo: allforyou1702@gmail.com</p>
                 </div>
                 <div>
                     <strong class="text-slate-900 block text-xs mb-1">Marco Regulatorio</strong>
@@ -541,39 +534,10 @@
                 </div>
             </div>
             <div class="border-t border-slate-100 pt-3 text-center text-[10px] text-slate-400">
-                © 2026 LiquidaYa.pe • Todos los derechos reservados.
+                © 2026 LiquidaYa.pe • Todos los derechos reservados. Pagos procesados por Culqi.
             </div>
         </div>
     </footer>
-
-    <!-- MODAL ASESOR LABORAL IA -->
-    <div id="ai-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 no-print">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 text-xs space-y-4 shadow-2xl flex flex-col justify-between max-h-[90vh]">
-            <div class="flex items-center justify-between border-b pb-3">
-                <div>
-                    <h3 class="font-black text-sm text-slate-900">Asesor Laboral Inteligente</h3>
-                    <p class="text-[10px] text-indigo-600 font-bold">Legislación laboral peruana (D.Leg 728 y SUNAFIL)</p>
-                </div>
-                <button onclick="closeModal('ai-modal')" class="text-slate-400 hover:text-slate-600 font-bold text-base">✕</button>
-            </div>
-
-            <div id="ai-chat-box" class="space-y-3 overflow-y-auto flex-1 pr-1 max-h-[300px]">
-                <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-700 leading-relaxed">
-                    <strong>¡Hola trabajador! Cuéntame tu caso:</strong><br>
-                    Escribe si te despidieron, si renunciaste o si tu empresa no te quiere pagar tu liquidación. Te orientaré con las normas de SUNAFIL.
-                </div>
-            </div>
-
-            <div class="space-y-2 pt-2 border-t border-slate-100">
-                <form id="ai-form-chat" onsubmit="event.preventDefault(); sendAIMessage();" class="flex gap-2">
-                    <input type="text" id="ai-user-input" placeholder="Ej. Me despidieron ayer y ganaba S/ 2,500..." class="flex-1 p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 text-xs">
-                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 rounded-xl text-xs transition whitespace-nowrap">
-                        Enviar
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- SCRIPTS -->
     <script>
@@ -581,14 +545,6 @@
         const CULQI_PUBLIC_KEY = "pk_live_aaXJvE0kgdtn8JN9"; 
 
         let currentCalculation = null;
-        let aiChatHistory = [];
-
-        // Precalentamiento silencioso del backend al entrar a la web
-        window.addEventListener('DOMContentLoaded', () => {
-            fetch(`${BACKEND_URL}/health`, { method: 'GET' })
-                .then(() => console.log("Backend precalentado con éxito"))
-                .catch(() => console.log("Despertando backend de Render..."));
-        });
 
         const viewCatalog = document.getElementById('view-catalog');
         const viewCalculator = document.getElementById('view-calculator');
@@ -604,14 +560,20 @@
             setTimeout(() => toast.classList.add('hidden'), 4500);
         }
 
-        function selectService(typeVal, titleText) {
-            document.getElementById('procedure-type').value = typeVal;
+        // Selección de uno de los 5 casos
+        function selectService(serviceCode, titleText) {
+            document.getElementById('selected-service-code').value = serviceCode;
             document.getElementById('form-selected-title').innerText = titleText;
             
-            if (typeVal === 'despido_arbitrario') {
-                document.getElementById('cessation-reason').value = 'despido_arbitrario';
-            } else if (typeVal === 'hostilidad') {
-                document.getElementById('cessation-reason').value = 'hostilidad';
+            const reasonInput = document.getElementById('cessation-reason');
+            if (serviceCode === 'despido_arbitrario') {
+                reasonInput.value = 'despido_arbitrario';
+            } else if (serviceCode === 'hostilidad') {
+                reasonInput.value = 'hostilidad';
+            } else if (serviceCode === 'renuncia') {
+                reasonInput.value = 'renuncia';
+            } else {
+                reasonInput.value = 'despido_arbitrario';
             }
 
             viewCatalog.classList.add('hidden');
@@ -625,10 +587,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function openAIModal() { openModal('ai-modal'); }
-        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
-        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
-
+        // Motor Matemático Oficial de Liquidación Laboral Perú (D.Leg 728 / 650 / 713)
         function calculateLiquidation(data) {
             const startDate = new Date(data.start_date);
             const endDate = new Date(data.end_date);
@@ -674,6 +633,7 @@
             const grandTotal = totalCTS + totalGrati + totalVaca + totalIndem;
 
             return {
+                service_code: data.service_code,
                 worker: {
                     name: data.worker_name.toUpperCase(),
                     dni: data.worker_dni,
@@ -712,6 +672,7 @@
             e.preventDefault();
 
             const payload = {
+                service_code: document.getElementById('selected-service-code').value,
                 worker_name: document.getElementById('worker-name').value.trim(),
                 worker_dni: document.getElementById('worker-dni').value.trim(),
                 worker_address: document.getElementById('worker-address').value.trim(),
@@ -742,6 +703,16 @@
                 indemRow.classList.add('hidden');
             }
 
+            // Cambiar título de la vista previa según el documento generado
+            const previewDocTitle = document.getElementById('preview-doc-title');
+            if (payload.service_code === 'sunafil') {
+                previewDocTitle.innerText = "Pág 2: Denuncia SUNAFIL";
+            } else if (payload.service_code === 'hostilidad') {
+                previewDocTitle.innerText = "Pág 2: Cese de Hostilidad";
+            } else {
+                previewDocTitle.innerText = "Pág 2: Carta Notarial";
+            }
+
             viewCalculator.classList.add('hidden');
             viewPreview.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -755,10 +726,12 @@
             const c = currentCalculation.company;
             const d = currentCalculation.details;
             const a = currentCalculation.amounts;
+            const sCode = currentCalculation.service_code;
             const todayStr = new Date().toLocaleDateString('es-PE');
 
             document.getElementById('doc-date').innerText = todayStr;
 
+            // Página 1: Liquidación
             document.getElementById('pdf-worker-name').innerText = w.name;
             document.getElementById('pdf-worker-dni').innerText = w.dni;
             document.getElementById('pdf-worker-address').innerText = w.address;
@@ -791,12 +764,31 @@
             document.getElementById('pdf-sign-worker').innerText = w.name;
             document.getElementById('pdf-sign-company').innerText = c.name;
 
+            // Página 2: Documento Legal Adaptable
             document.getElementById('pdf-letter-company').innerText = c.name;
             document.getElementById('pdf-letter-ruc').innerText = c.ruc;
             document.getElementById('pdf-letter-end-date').innerText = d.end_date;
             document.getElementById('pdf-letter-amount').innerText = `S/ ${a.total.toFixed(2)} PEN`;
             document.getElementById('pdf-letter-sign-name').innerText = w.name;
             document.getElementById('pdf-letter-sign-dni').innerText = w.dni;
+
+            const badgeElem = document.getElementById('pdf-doc-badge');
+            const subjectElem = document.getElementById('pdf-letter-subject');
+            const warningElem = document.getElementById('pdf-letter-warning');
+
+            if (sCode === 'sunafil') {
+                badgeElem.innerText = "DENUNCIA LABORAL FORMAL • SUNAFIL";
+                subjectElem.innerText = "DENUNCIA FORMAL POR INFRACCIÓN MUY GRAVE EN MATERIA LABORAL (FALTA DE PAGO DE BENEFICIOS SOCIALES)";
+                warningElem.innerHTML = "<strong>PETITORIO INSPECTIVO:</strong> Solicito a la Intendencia de Fiscalización de la SUNAFIL ordenar una orden de inspección inmediata, sancionando al empleador infractor con la multa de hasta 26.12 UIT tipificada en el numeral 25.19 del D.S. N° 019-2006-TR y requiriendo el depósito coactivo de la liquidación debida.";
+            } else if (sCode === 'hostilidad') {
+                badgeElem.innerText = "EMPLAZAMIENTO NOTARIAL • ART. 30 D.LEG. N° 728";
+                subjectElem.innerText = "CARTA DE REQUERIMIENTO DE CESE DE ACTOS DE HOSTILIDAD EQUIPARABLES AL DESPIDO";
+                warningElem.innerHTML = "<strong>PLAZO LEGAL IMPRORROGABLE (6 DÍAS):</strong> Conforme al Art. 30 del D.Leg. N° 728, otorgo a la empresa el término de 6 días naturales para que cese la hostilidad imputada o enmiende su conducta. Caso contrario, me daré por despedido indirectamente con derecho al cobro forzoso de la indemnización de ley.";
+            } else {
+                badgeElem.innerText = "CARTA NOTARIAL DE REQUERIMIENTO • LEY N° 28806";
+                subjectElem.innerText = "REQUIERO PAGO INMEDIATO DE BENEFICIOS SOCIALES BAJO APERCIBIMIENTO DE DENUNCIA ANTE LA SUNAFIL";
+                warningElem.innerHTML = "<strong>APERCIBIMIENTO LEGAL Y MULTAS SUNAFIL:</strong> Les otorgo el plazo perentorio de <strong>cuarenta y ocho (48) horas</strong> para hacer efectivo el abono en mi cuenta bancaria. Vencido dicho término, interpondré formal denuncia ante la SUNAFIL por Infracción Muy Grave (D.S. N° 019-2006-TR), sujeta a multas de hasta 26.12 UIT.";
+            }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -805,7 +797,7 @@
             const element = document.getElementById('pdf-printable');
             const opt = {
                 margin:       [0.3, 0.3, 0.3, 0.3],
-                filename:     `Liquidacion_Laboral_${currentCalculation.worker.dni}_${currentCalculation.company.ruc}.pdf`,
+                filename:     `Expediente_Laboral_${currentCalculation.worker.dni}_${currentCalculation.company.ruc}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true },
                 jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
@@ -814,64 +806,7 @@
             html2pdf().set(opt).from(element).save();
         });
 
-        // Chat con Asesor Laboral IA (Timeout extendido a 50s para Cold Starts)
-        async function sendAIMessage() {
-            const input = document.getElementById('ai-user-input');
-            const query = input.value.trim();
-            if (!query) return;
-
-            const chatBox = document.getElementById('ai-chat-box');
-            chatBox.innerHTML += `<div class="bg-indigo-600 text-white font-bold p-3 rounded-2xl ml-6 sm:ml-8 leading-relaxed">${query}</div>`;
-            aiChatHistory.push({ role: "user", text: query });
-            
-            chatBox.innerHTML += `<div id="ai-loading" class="text-slate-400 text-xs italic p-2 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span> Analizando con la legislación laboral peruana...</div>`;
-            input.value = "";
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            const warmNotice = setTimeout(() => {
-                const loadingElem = document.getElementById('ai-loading');
-                if (loadingElem) {
-                    loadingElem.innerHTML = `<span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span> Reactivando el servidor legal en Render, un momento...`;
-                }
-            }, 4000);
-
-            let replyText = "";
-
-            try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 50000); // 50s de tolerancia máxima
-
-                const res = await fetch(`${BACKEND_URL}/api/ai-consult`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ messages: aiChatHistory }),
-                    signal: controller.signal
-                });
-                clearTimeout(timeoutId);
-                clearTimeout(warmNotice);
-
-                const data = await res.json();
-                if (data.reply) {
-                    replyText = data.reply;
-                } else {
-                    replyText = `Error inesperado: ${JSON.stringify(data)}`;
-                }
-            } catch (e) {
-                clearTimeout(warmNotice);
-                replyText = `El servidor se encontraba suspendido y acaba de reactivarse. Por favor envía tu mensaje una vez más.`;
-            }
-
-            document.getElementById('ai-loading')?.remove();
-            chatBox.innerHTML += `
-                <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-800 space-y-1.5 border border-slate-200">
-                    <strong class="text-indigo-700 text-[11px] block">Asesor Laboral:</strong>
-                    <p class="leading-relaxed text-xs whitespace-pre-line">${replyText}</p>
-                </div>
-            `;
-            aiChatHistory.push({ role: "model", text: replyText });
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
+        // Culqi Checkout
         function initCulqi() {
             if (typeof Culqi !== 'undefined') {
                 Culqi.publicKey = CULQI_PUBLIC_KEY;
@@ -912,7 +847,7 @@
         window.culqi = async function() {
             if (Culqi.token) {
                 Culqi.close();
-                showToast("Pago validado.", "📱");
+                showToast("Pago validado con éxito.", "📱");
                 unlockExpediente();
             } else if (Culqi.error) {
                 showToast(Culqi.error.user_message || "No se completó la operación.", "⚠️");
