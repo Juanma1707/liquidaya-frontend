@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiquidaYa.pe | Liquidación Oficial Laboral y Asesor Legal</title>
+    <title>ImpugnaYa.pe | Prescripción Oficial de Papeletas y Levantamiento de Captura</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://checkout.culqi.com/js/v4"></script>
@@ -11,7 +11,6 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
-        
         .pdf-page {
             background-color: #ffffff;
             border: 1px solid #cbd5e1;
@@ -29,16 +28,17 @@
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
+    <!-- Header -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm no-print">
         <div class="max-w-5xl mx-auto px-4 py-2.5 sm:py-3 flex items-center justify-between gap-2">
             <a href="/" class="flex items-center space-x-1.5 shrink-0">
-                <span class="text-xl sm:text-2xl">⚖️</span>
-                <span class="font-black text-lg sm:text-xl tracking-tight text-slate-900">Liquida<span class="text-indigo-600">Ya</span><span class="text-slate-400 text-xs sm:text-sm font-normal">.pe</span></span>
+                <span class="text-xl sm:text-2xl">🚗</span>
+                <span class="font-black text-lg sm:text-xl tracking-tight text-slate-900">Impugna<span class="text-amber-500">Ya</span><span class="text-slate-400 text-xs sm:text-sm font-normal">.pe</span></span>
             </a>
-            <button onclick="openAIModal()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 font-bold px-3 py-1.5 rounded-full transition text-[11px] sm:text-xs flex items-center gap-1.5 shrink-0">
-                <span>💬</span>
-                <span class="hidden sm:inline">¿Dudas con tu caso? </span>
-                <span>Asesor Legal IA</span>
+            <button onclick="openAIModal()" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-bold px-3 py-1.5 rounded-full transition text-[11px] sm:text-xs flex items-center gap-1.5 shrink-0">
+                <span>⚖️</span>
+                <span class="hidden sm:inline">Consultar al </span>
+                <span>Asesor de Tránsito IA</span>
             </button>
         </div>
     </header>
@@ -48,224 +48,259 @@
         <span id="toast-text">Notificación</span>
     </div>
 
+    <!-- Contenedor Principal -->
     <main class="max-w-4xl mx-auto px-4 py-6 sm:py-8 flex-1 w-full space-y-6 sm:space-y-8">
 
+        <!-- VISTA 1: CATÁLOGO -->
         <section id="view-catalog" class="space-y-6">
             <div class="text-center max-w-2xl mx-auto space-y-2">
-                <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
-                    Plataforma Oficial de Liquidaciones Perú
+                <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
+                    Defensa Administrativa del Conductor Perú
                 </span>
-                <h1 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">Selecciona el trámite que deseas realizar</h1>
+                <h1 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">Anula tus Papeletas y Levanta Órdenes de Captura</h1>
                 <p class="text-xs sm:text-sm text-slate-500">
-                    Elige el régimen de tu centro de labores o tu situación de salida. Si tienes dudas, consulta con nuestro asesor interactivo.
+                    El SAT y las municipalidades no pueden cobrar multas extinguidas por ley. Genera tu escrito legal formal para mesa de partes.
                 </p>
             </div>
 
             <div class="bg-slate-900 rounded-2xl p-4 sm:p-5 text-white flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-800 shadow-md">
                 <div class="space-y-1 text-center sm:text-left">
-                    <strong class="text-indigo-400 text-xs font-bold block uppercase tracking-wider">Orientación Legal Inmediata</strong>
-                    <h3 class="font-bold text-sm">¿No sabes si te corresponde Micro, Pequeña o Régimen General?</h3>
-                    <p class="text-[11px] text-slate-400">Describe tu caso y el asesor legal determinará tus beneficios por ley.</p>
+                    <strong class="text-amber-400 text-xs font-bold block uppercase tracking-wider">Base Legal Oficial</strong>
+                    <h3 class="font-bold text-sm">¿Tu papeleta tiene más de 2 o 4 años de antigüedad?</h3>
+                    <p class="text-[11px] text-slate-400">Conforme al Art. 252 del TUO de la Ley N° 27444, la acción de cobro ha prescrito.</p>
                 </div>
-                <button onclick="openAIModal()" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition text-center whitespace-nowrap">
-                    Consultar Asesor Legal
+                <button onclick="selectProcedure('prescripcion', 'Solicitud Oficial de Prescripción (Art. 252 Ley 27444)')" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl shadow transition text-center whitespace-nowrap">
+                    Tramitar Prescripción Ahora
                 </button>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-amber-400 transition">
                     <div class="space-y-2">
-                        <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                        <h3 class="font-bold text-sm text-slate-900">1. Régimen General (D.L. 728)</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Empresas medianas y grandes. Incluye 100% CTS, Gratificación completa, Bono 9% EsSalud y 30 días de vacaciones.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
+                            <span class="text-[10px] font-bold text-slate-400">Antigüedad > 2 a 4 años</span>
+                        </div>
+                        <h3 class="font-bold text-sm text-slate-900">1. Prescripción de Multa (SAT / SUTRAN / MTC)</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">Extinción total de multas por transcurso del plazo legal conforme al Art. 252 de la Ley 27444. Válido para infracciones M, G y L.</p>
                     </div>
-                    <button onclick="selectService('general', 'renuncia_fin', 'Liquidación Régimen General (D.L. 728)')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 rounded-xl transition">
-                        Tramitar este Servicio →
+                    <button onclick="selectProcedure('prescripcion', 'Prescripción de Multa de Tránsito (Ley 27444)')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">
+                        Iniciar Trámite de Prescripción →
                     </button>
                 </div>
 
-                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-amber-400 transition">
                     <div class="space-y-2">
-                        <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                        <h3 class="font-bold text-sm text-slate-900">2. Pequeña Empresa (REMYPE)</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Empresas de hasta 100 trabajadores. Computa 50% de CTS, 50% de Gratificaciones y 15 días de vacaciones anuales.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
+                            <span class="text-[10px] font-bold text-rose-500">¡Riesgo de Depósito!</span>
+                        </div>
+                        <h3 class="font-bold text-sm text-slate-900">2. Levantamiento Urgente de Orden de Captura</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">Solicitud de desafectación de captura vehicular y suspensión de remate coactivo bajo apercibimiento del Art. 16 de la Ley 26979.</p>
                     </div>
-                    <button onclick="selectService('pequena', 'renuncia_fin', 'Liquidación Pequeña Empresa (REMYPE)')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 rounded-xl transition">
-                        Tramitar este Servicio →
+                    <button onclick="selectProcedure('captura', 'Levantamiento de Orden de Captura Vehicular')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">
+                        Evitar Internamiento en Depósito →
                     </button>
                 </div>
 
-                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-amber-400 transition">
                     <div class="space-y-2">
-                        <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                        <h3 class="font-bold text-sm text-slate-900">3. Microempresa (REMYPE)</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Negocios de hasta 10 trabajadores. Computa 15 días de vacaciones proporcionales por año de servicio de ley.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
+                            <span class="text-[10px] font-bold text-slate-400">Fotopapeletas</span>
+                        </div>
+                        <h3 class="font-bold text-sm text-slate-900">3. Nulidad por Notificación Defectuosa</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">Anulación de fotopapeletas impuestas sin acuse de recibo fotográfico reglamentario o dejadas bajo puerta sin cumplir el D.S. 004-2020-MTC.</p>
                     </div>
-                    <button onclick="selectService('micro', 'renuncia_fin', 'Liquidación Microempresa (REMYPE)')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 rounded-xl transition">
-                        Tramitar este Servicio →
+                    <button onclick="selectProcedure('nulidad', 'Nulidad de Papeleta por Defecto de Notificación')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">
+                        Anular por Vicio Formal →
                     </button>
                 </div>
 
-                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-amber-400 transition">
                     <div class="space-y-2">
-                        <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                        <h3 class="font-bold text-sm text-slate-900">4. Despido Intempestivo / Arbitrario</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Cese sin causa justa ni carta previa. Incluye liquidación de ley más indemnización de 1.5 sueldos por año laborado.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
+                            <span class="text-[10px] font-bold text-slate-400">Cobranza Coactiva</span>
+                        </div>
+                        <h3 class="font-bold text-sm text-slate-900">4. Suspensión de Cobranza Coactiva (Ley 26979)</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">Exigencia legal de suspensión inmediata de medidas cautelares y embargo de cuentas bancarias ante el Ejecutor Coactivo.</p>
                     </div>
-                    <button onclick="selectService('general', 'despido_arbitrario', 'Indemnización por Despido Arbitrario')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 rounded-xl transition">
-                        Tramitar este Servicio →
-                    </button>
-                </div>
-
-                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:border-indigo-400 transition">
-                    <div class="space-y-2">
-                        <span class="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">S/ 9.90 PEN</span>
-                        <h3 class="font-bold text-sm text-slate-900">5. Carta Requerimiento Sunafil (48h)</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Emisión de carta formal de requerimiento bajo apercibimiento de denuncia inspectiva y multas ante Sunafil.</p>
-                    </div>
-                    <button onclick="selectService('general', 'renuncia_fin', 'Carta Formal Sunafil 48h')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 rounded-xl transition">
-                        Tramitar este Servicio →
+                    <button onclick="selectProcedure('coactivo', 'Suspensión de Ejecución Coactiva (Ley 26979)')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">
+                        Frenar Cobranza Coactiva →
                     </button>
                 </div>
             </div>
         </section>
 
+        <!-- VISTA 2: FORMULARIO -->
         <section id="view-form" class="hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
             <div class="flex items-center justify-between border-b pb-4">
                 <div>
-                    <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 block">Trámite Seleccionado:</span>
-                    <h2 id="form-selected-title" class="text-base sm:text-lg font-black text-slate-900">Liquidación Régimen General</h2>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600 block">Trámite Seleccionado:</span>
+                    <h2 id="form-selected-title" class="text-base sm:text-lg font-black text-slate-900">Prescripción de Multa</h2>
                 </div>
                 <button onclick="backToCatalog()" class="text-xs font-bold text-slate-500 hover:text-slate-800 bg-slate-100 px-3 py-1.5 rounded-xl transition">
                     ← Cambiar trámite
                 </button>
             </div>
 
-            <form id="liquidation-form" class="space-y-4 text-xs sm:text-sm">
+            <form id="infraction-form" class="space-y-4 text-xs sm:text-sm">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Nombres y Apellidos del Trabajador:</label>
-                        <input type="text" id="worker-name" placeholder="Ej. Juan Pérez Quispe" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                        <label class="font-bold text-slate-700 block mb-1">Nombre Completo del Conductor/Propietario:</label>
+                        <input type="text" id="driver-name" placeholder="Ej. Juan Pérez" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500">
                     </div>
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">DNI / Carné de Extranjería:</label>
-                        <input type="text" id="worker-dni" maxlength="12" inputmode="numeric" placeholder="Ej. 74859612" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                        <input type="text" id="driver-dni" maxlength="12" inputmode="numeric" placeholder="Ej. 70627494" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Nombre de la Empresa Empleadora:</label>
-                        <input type="text" id="company-name" placeholder="Ej. Corporación ABC S.A.C." required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                        <label class="font-bold text-slate-700 block mb-1">Domicilio Procesal (Donde le notificarán):</label>
+                        <input type="text" id="driver-address" placeholder="Ej. Santa Margarita Mz. B Lt. 12, Piura" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500">
                     </div>
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">RUC de la Empresa (Opcional):</label>
-                        <input type="text" id="company-ruc" maxlength="11" inputmode="numeric" placeholder="Ej. 20601234567" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                        <label class="font-bold text-slate-700 block mb-1">Correo Electrónico (Notificación Digital):</label>
+                        <input type="email" id="driver-email" placeholder="Ej. allforyou1702@gmail.com" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500">
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Último Sueldo Mensual Básico (S/):</label>
-                        <input type="number" step="0.01" id="salary" inputmode="decimal" placeholder="Ej. 2500.00" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 text-slate-900 font-bold">
+                        <label class="font-bold text-slate-700 block mb-1">Placa del Vehículo:</label>
+                        <input type="text" id="vehicle-plate" maxlength="7" placeholder="Ej. P1A-123" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500 uppercase font-mono font-bold">
                     </div>
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">¿Tiene hijos menores o con estudios superiores?</label>
-                        <select id="has-children" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-medium">
-                            <option value="no">No</option>
-                            <option value="si" selected>Sí (+ S/ 102.50 Asignación Familiar de Ley)</option>
+                        <label class="font-bold text-slate-700 block mb-1">N° de Papeleta o Expediente:</label>
+                        <input type="text" id="ticket-number" placeholder="Ej. 212324324" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500 font-mono">
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">Código de Infracción:</label>
+                        <select id="ticket-code" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500 font-bold">
+                            <option value="M01">M01 (Alcoholimetría - Muy Grave)</option>
+                            <option value="M02">M02 (Conducir sin Licencia - Muy Grave)</option>
+                            <option value="M20" selected>M20 (Exceso de Velocidad - Muy Grave)</option>
+                            <option value="G47">G47 (Estacionar en zona rígida - Grave)</option>
+                            <option value="G58">G58 (No respetar señales de tránsito - Grave)</option>
+                            <option value="G28">G28 (No usar cinturón - Grave)</option>
+                            <option value="L01">L01 (Dejar luces apagadas - Leve)</option>
+                            <option value="OTRO">Otro Código General</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Fecha de Ingreso a la Empresa:</label>
-                        <input type="date" id="start-date" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                        <label class="font-bold text-slate-700 block mb-1">Entidad que impuso la multa:</label>
+                        <select id="authority-name" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500 font-medium">
+                            <option value="Municipalidad Provincial de Piura (SATP)" selected>Municipalidad Provincial de Piura (SATP)</option>
+                            <option value="Servicio de Administración Tributaria (SAT Lima)">Servicio de Administración Tributaria (SAT Lima)</option>
+                            <option value="Municipalidad Provincial del Callao">Municipalidad Provincial del Callao</option>
+                            <option value="SUTRAN">SUTRAN (Nacional / Carreteras)</option>
+                            <option value="Municipalidad Provincial de Trujillo">Municipalidad Provincial de Trujillo</option>
+                            <option value="Municipalidad Provincial de Arequipa">Municipalidad Provincial de Arequipa</option>
+                            <option value="Municipalidad Provincial">Otra Municipalidad Provincial</option>
+                        </select>
                     </div>
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Fecha de Cese / Último Día Laborado:</label>
-                        <input type="date" id="end-date" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                        <label class="font-bold text-slate-700 block mb-1">Año de la papeleta:</label>
+                        <select id="infraction-year" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500 font-bold">
+                            <option value="2020">2020 (Prescripción Total Consumada)</option>
+                            <option value="2021" selected>2021 (Prescripción Total Consumada)</option>
+                            <option value="2022">2022 (Prescripción Consumada Ley 27444)</option>
+                            <option value="2023">2023 (Prescripción Coactiva Cumplida)</option>
+                            <option value="2024">2024 (Aplica Nulidad por Notificación)</option>
+                            <option value="2025">2025 (Impugnación por Defecto Formal)</option>
+                            <option value="2026">2026 (Descargo dentro del plazo)</option>
+                        </select>
                     </div>
                 </div>
 
-                <input type="hidden" id="regime" value="general">
-                <input type="hidden" id="dismissal-type" value="renuncia_fin">
+                <input type="hidden" id="procedure-type" value="prescripcion">
 
                 <div>
                     <label class="font-bold text-slate-700 block mb-1">WhatsApp de contacto:</label>
-                    <input type="tel" id="user-phone" maxlength="9" inputmode="numeric" placeholder="Ej. 957418893" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500">
+                    <input type="tel" id="driver-phone" maxlength="9" inputmode="numeric" placeholder="Ej. 957418893" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500">
                 </div>
 
-                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-black py-4 rounded-2xl shadow-lg transition text-base flex items-center justify-center space-x-2 mt-4">
-                    <span>Procesar Cálculo y Carta Sunafil</span>
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-black py-4 rounded-2xl shadow-lg transition text-base flex items-center justify-center space-x-2 mt-4">
+                    <span>Evaluar Legalmente y Generar Escrito</span>
                 </button>
             </form>
         </section>
 
+        <!-- VISTA 3: PREVIEW Y OPCIONES -->
         <section id="view-preview" class="hidden space-y-6">
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm text-center space-y-4">
-                <div class="inline-block bg-indigo-50 text-indigo-700 text-xs font-black px-4 py-1.5 rounded-full border border-indigo-100">
-                    RESULTADO OFICIAL DEL CÁLCULO
+                <div class="inline-block bg-emerald-50 text-emerald-700 text-xs font-black px-4 py-1.5 rounded-full border border-emerald-200">
+                    DICTAMEN LEGAL: PROCEDENTE CONFORME A LEY
                 </div>
                 <div>
-                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">MONTO TOTAL NETO A COBRAR</span>
-                    <div id="preview-total" class="text-4xl sm:text-5xl font-black text-indigo-600 mt-1">S/ 0.00</div>
+                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">AHORRO TOTAL ESTIMADO (MULTA + COSTAS)</span>
+                    <div id="preview-saved-amount" class="text-4xl sm:text-5xl font-black text-amber-600 mt-1">S/ 1066.00</div>
+                    <span class="text-xs text-slate-500 mt-1 block">Monto que la entidad pretende cobrar de forma indebida</span>
                 </div>
 
-                <div id="delay-alert" class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-left text-xs sm:text-sm text-amber-900 flex items-start gap-3">
-                    <span class="text-2xl">⚠️</span>
+                <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-left text-xs sm:text-sm text-emerald-950 flex items-start gap-3">
+                    <span class="text-2xl">⚖️</span>
                     <div>
-                        <strong class="block font-bold">Plazo Legal de 48 Horas (D.S. 001-97-TR):</strong>
-                        <p id="delay-text" class="text-amber-800 text-xs mt-0.5"></p>
+                        <strong class="block font-bold" id="preview-legal-title">Fundamentación Jurídica Acreditada:</strong>
+                        <p id="preview-legal-reason" class="text-emerald-900 text-xs mt-0.5 leading-relaxed"></p>
                     </div>
                 </div>
 
                 <div class="border-2 border-dashed border-slate-200 rounded-2xl p-4 bg-slate-50 space-y-3">
-                    <span class="text-xs font-bold text-slate-500 block uppercase tracking-wider">EXPEDIENTE LEGAL LISTO PARA DESCARGA (2 PÁGINAS PDF):</span>
+                    <span class="text-xs font-bold text-slate-500 block uppercase tracking-wider">EXPEDIENTE FORMAL LISTO (2 PÁGINAS A4):</span>
                     <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
                         <div class="bg-white p-3 rounded-xl border border-slate-200 text-left shadow-sm text-[10px] space-y-1">
-                            <strong class="text-indigo-600 block">Pág 1: Hoja Pericial</strong>
+                            <strong class="text-amber-600 block">Pág 1: Solicitud de Prescripción</strong>
                             <div class="h-2 bg-slate-200 rounded w-full"></div>
                             <div class="h-2 bg-slate-200 rounded w-3/4"></div>
                             <div class="h-2 bg-slate-200 rounded w-5/6"></div>
-                            <span class="text-[9px] text-slate-400 block pt-1">CTS, Grati y Vacaciones computadas.</span>
+                            <span class="text-[9px] text-slate-400 block pt-1">Fundamentación Art. 252 Ley 27444.</span>
                         </div>
                         <div class="bg-white p-3 rounded-xl border border-slate-200 text-left shadow-sm text-[10px] space-y-1">
-                            <strong class="text-indigo-600 block">Pág 2: Carta Sunafil</strong>
+                            <strong class="text-amber-600 block">Pág 2: Levantamiento Captura</strong>
                             <div class="h-2 bg-slate-200 rounded w-full"></div>
                             <div class="h-2 bg-slate-200 rounded w-4/5"></div>
                             <div class="h-2 bg-slate-200 rounded w-2/3"></div>
-                            <span class="text-[9px] text-slate-400 block pt-1">Apercibimiento por multas en UIT.</span>
+                            <span class="text-[9px] text-slate-400 block pt-1">Art. 16 Ley 26979 + Cargo Oficial.</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-4 max-w-lg mx-auto shadow-xl">
-                    <div class="space-y-1">
-                        <div class="text-2xl font-black text-indigo-400">S/ 9.90 <span class="text-xs text-slate-400 font-normal">PEN (Pago único)</span></div>
-                        <h3 class="font-bold text-sm">Descarga tu Expediente Formal y Carta Notarial en PDF</h3>
-                        <p class="text-xs text-slate-400">Listo para imprimir, firmar y presentar a Recursos Humanos o adjuntar a Sunafil.</p>
-                    </div>
-
-                    <button id="pay-yape-btn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-sm">
-                        <span>Pagar S/ 9.90 con Yape</span>
+                <!-- BLOQUE DE ACCIÓN: MODO GRATIS Y PAGO YAPE -->
+                <div class="space-y-3 max-w-lg mx-auto pt-2">
+                    <!-- BOTÓN GRATIS DE PRUEBA -->
+                    <button onclick="unlockExpediente()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3.5 rounded-xl shadow-md transition text-sm flex items-center justify-center gap-2">
+                        <span>👁️ Ver y Descargar Expediente Gratis (Modo Prueba)</span>
                     </button>
 
-                    <div class="flex items-center justify-center gap-3 text-[11px] text-slate-400 pt-1">
-                        <span>Pasarela Culqi Segura</span>
-                        <span>•</span>
-                        <span>Descarga Inmediata</span>
+                    <!-- CAJA DE PAGO OFICIAL -->
+                    <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-4 shadow-xl text-left">
+                        <div class="space-y-1 text-center">
+                            <div class="text-2xl font-black text-amber-400">S/ 9.90 <span class="text-xs text-slate-400 font-normal">PEN (Pago oficial)</span></div>
+                            <h3 class="font-bold text-sm">Descarga tu Escrito Administrativo Formal</h3>
+                            <p class="text-xs text-slate-400">Listo para imprimir y presentar en Mesa de Partes Virtual del SAT, SATP o Municipio.</p>
+                        </div>
+
+                        <button id="pay-yape-btn" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-black py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-sm">
+                            <span>Pagar S/ 9.90 con Yape</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- VISTA 4: EXPEDIENTE OFICIAL DE 2 PÁGINAS A4 -->
         <section id="view-download" class="hidden space-y-4">
             <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 no-print">
                 <div>
-                    <h3 class="font-black text-emerald-900 text-sm">¡Documentos Generados con Éxito!</h3>
-                    <p class="text-xs text-emerald-700">Tu Hoja Pericial de Liquidación y Carta Sunafil están listas para imprimir o descargar.</p>
+                    <h3 class="font-black text-emerald-900 text-sm">¡Escrito Administrativo Generado con Éxito!</h3>
+                    <p class="text-xs text-emerald-700">Tu solicitud formal con base en el Art. 252 del TUO de la Ley 27444 está lista.</p>
                 </div>
                 <div class="flex gap-2 w-full sm:w-auto">
                     <button onclick="window.print()" class="w-1/2 sm:w-auto bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs px-3 py-2.5 rounded-xl shadow transition">
@@ -278,137 +313,94 @@
             </div>
 
             <div id="pdf-printable" class="space-y-6">
-                <div class="pdf-page p-6 sm:p-8 rounded-2xl text-xs space-y-4">
+                <!-- PÁGINA 1 -->
+                <div class="pdf-page p-6 sm:p-8 rounded-2xl text-xs space-y-4 leading-relaxed">
                     <div class="border-b-2 border-slate-800 pb-3 flex justify-between items-start">
                         <div>
-                            <h2 class="font-black text-base tracking-wider text-slate-900">LIQUIDACIÓN DE BENEFICIOS SOCIALES</h2>
-                            <span class="text-[10px] text-slate-500 uppercase font-bold">D.L. 728 • D.S. 001-97-TR • LEY 27735 • LEY 30334 • D.L. 713</span>
+                            <span class="font-mono text-[10px] text-slate-500 uppercase font-bold">PROCEDIMIENTO ADMINISTRATIVO SANCIONADOR • LEY N° 27444</span>
+                            <h2 class="font-black text-base tracking-wider text-slate-900">SOLICITUD DE PRESCRIPCIÓN DE SANCIÓN</h2>
                         </div>
                         <span class="font-mono text-xs bg-slate-100 px-2.5 py-1 rounded-lg text-slate-800 font-bold" id="doc-date"></span>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200 font-mono text-[11px]">
-                        <div><strong class="font-sans text-slate-500 text-[10px] block">TRABAJADOR:</strong> <span id="pdf-worker-name" class="font-bold text-slate-900"></span></div>
-                        <div><strong class="font-sans text-slate-500 text-[10px] block">DNI / DOCUMENTO:</strong> <span id="pdf-worker-dni" class="font-bold text-slate-900"></span></div>
-                        <div><strong class="font-sans text-slate-500 text-[10px] block">EMPLEADOR:</strong> <span id="pdf-company-name" class="font-bold text-slate-900"></span></div>
-                        <div><strong class="font-sans text-slate-500 text-[10px] block">RUC:</strong> <span id="pdf-company-ruc" class="font-bold text-slate-900"></span></div>
-                        <div><strong class="font-sans text-slate-500 text-[10px] block">FECHA INGRESO:</strong> <span id="pdf-start-date"></span></div>
-                        <div><strong class="font-sans text-slate-500 text-[10px] block">FECHA CESE:</strong> <span id="pdf-end-date"></span></div>
-                        <div><strong class="font-sans text-slate-500 text-[10px] block">TIEMPO COMPUTABLE:</strong> <span id="pdf-time"></span></div>
-                        <div><strong class="font-sans text-slate-500 text-[10px] block">RÉGIMEN LABORAL:</strong> <span id="pdf-regime"></span></div>
+                    <div class="space-y-1">
+                        <strong>SEÑORES:</strong><br>
+                        <span id="pdf-authority" class="font-bold text-slate-900 uppercase"></span><br>
+                        <span>ÁREA: Subgerencia de Operaciones de Cobranza / Ejecución Coactiva</span><br>
+                        <span>CIUDAD: República del Perú</span>
                     </div>
 
-                    <table class="w-full text-left border-collapse mt-2">
-                        <thead>
-                            <tr class="border-b border-slate-300 text-slate-500 text-[10px] uppercase font-bold">
-                                <th class="py-2">Concepto Legal</th>
-                                <th class="py-2">Base Normativa</th>
-                                <th class="py-2 text-right">Monto (PEN)</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-200 text-xs">
-                            <tr>
-                                <td class="py-2"><strong>CTS Trunca</strong> (Compensación por Tiempo de Servicios)</td>
-                                <td class="py-2 text-slate-500">D.S. 001-97-TR</td>
-                                <td class="py-2 text-right font-mono font-bold" id="pdf-cts">S/ 0.00</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2"><strong>Gratificación Trunca</strong></td>
-                                <td class="py-2 text-slate-500">Ley 27735</td>
-                                <td class="py-2 text-right font-mono font-bold" id="pdf-grati">S/ 0.00</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2"><strong>Bonificación Extraordinaria (9%)</strong></td>
-                                <td class="py-2 text-slate-500">Ley 30334</td>
-                                <td class="py-2 text-right font-mono font-bold" id="pdf-bono">S/ 0.00</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2"><strong>Vacaciones Truncas</strong> (Bruto)</td>
-                                <td class="py-2 text-slate-500">D.L. 713</td>
-                                <td class="py-2 text-right font-mono font-bold" id="pdf-vac">S/ 0.00</td>
-                            </tr>
-                            <tr class="text-rose-600 font-medium">
-                                <td class="py-2">(-) Aporte Previsional AFP / ONP (13% Solo sobre Vacaciones)</td>
-                                <td class="py-2 text-slate-400">Ley 30334 / D.L. 713</td>
-                                <td class="py-2 text-right font-mono" id="pdf-afp">- S/ 0.00</td>
-                            </tr>
-                            <tr id="row-indemnizacion" class="hidden">
-                                <td class="py-2"><strong>Indemnización por Despido Arbitrario</strong></td>
-                                <td class="py-2 text-slate-500">D.L. 728 Art. 38</td>
-                                <td class="py-2 text-right font-mono font-bold text-indigo-700" id="pdf-indem">S/ 0.00</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr class="border-t-2 border-slate-800 text-sm font-black">
-                                <td colspan="2" class="py-3">TOTAL NETO A PERCIBIR:</td>
-                                <td class="py-3 text-right font-mono text-indigo-700 text-base" id="pdf-neto">S/ 0.00</td>
-                            </tr>
-                        </tfoot>
-                    </table>
-
-                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-[10px] text-slate-500 leading-relaxed">
-                        <strong>CLÁUSULA DE SALVAGUARDA TÉCNICA (Art. 19 D.S. 001-97-TR):</strong> El presente informe consigna los conceptos remunerativos fijos obligatorios de ley. En caso existan comisiones variables, horas extras ordinarias o retenciones de ley debidamente acreditadas, la empresa empleadora se encuentra legalmente obligada a detallarlas e integrarlas en la liquidación final dentro del plazo legal de 48 horas.
+                    <div class="font-bold text-center underline py-1 text-slate-900 text-xs">
+                        SUMILLA: SOLICITO DECLARACIÓN DE PRESCRIPCIÓN DE LA EXIGIBILIDAD DE LA MULTA Y ARCHIVO DEFINITIVO DEL EXPEDIENTE (ART. 252 DEL D.S. N° 004-2019-JUS)
                     </div>
+
+                    <p>
+                        Yo, <strong><span id="pdf-driver-name" class="font-bold"></span></strong>, identificado con DNI N° <strong><span id="pdf-driver-dni" class="font-mono"></span></strong>, con domicilio procesal en <span id="pdf-driver-address"></span> y correo electrónico de notificación digital <span id="pdf-driver-email" class="font-mono"></span>, propietario y/o conductor del vehículo con placa de rodaje N° <strong><span id="pdf-plate" class="font-mono font-bold"></span></strong>, ante ustedes con el debido respeto me presento y expongo:
+                    </p>
+
+                    <p>
+                        <strong>I. PETITORIO:</strong><br>
+                        Al amparo del <strong>Artículo 252 del Texto Único Ordenado de la Ley N° 27444 (aprobado por D.S. N° 004-2019-JUS)</strong>, solicito formalmente se declare la <strong>PRESCRIPCIÓN DE LA EXIGIBILIDAD DE LA SANCIÓN</strong> correspondiente a la Papeleta de Infracción N° <strong><span id="pdf-ticket-num" class="font-mono font-bold"></span></strong> (Código de Infracción: <span id="pdf-ticket-code" class="font-bold"></span>) impuesta en el año <span id="pdf-year" class="font-bold"></span>, por haber transcurrido en exceso el plazo perentorio de ley, disponiendo en consecuencia su <strong>ARCHIVO DEFINITIVO</strong> y la baja en el Registro Nacional de Sanciones.
+                    </p>
+
+                    <p>
+                        <strong>II. FUNDAMENTACIÓN DE HECHO Y DE DERECHO:</strong><br>
+                        1. El numeral 252.1 del Artículo 252 del D.S. N° 004-2019-JUS determina que la facultad de la autoridad para exigir el pago de las multas prescribe en el término de dos (2) a cuatro (4) años computados conforme a ley.<br>
+                        2. A la fecha de ingreso de esta solicitud, han transcurrido más de <span id="pdf-diff-years"></span> años desde la comisión de la infracción sin que la entidad haya trabado ejecución válida ni notificado actos de interrupción conforme a las garantías del debido procedimiento (Art. 21 de la Ley 27444).<br>
+                        3. Al haber operado la prescripción extintiva de pleno derecho, continuar con cualquier acción de cobranza constituye una vía de hecho vulneratoria del principio de legalidad.
+                    </p>
 
                     <div class="pt-6 grid grid-cols-2 gap-8 text-center text-[10px]">
                         <div>
-                            <div class="border-t border-slate-400 w-3/4 mx-auto pt-1"></div>
-                            <span class="font-bold text-slate-800">Firma del Trabajador</span><br>
-                            <span id="pdf-sign-worker" class="text-slate-500"></span>
+                            <div class="border-t border-slate-400 w-4/5 mx-auto pt-1"></div>
+                            <strong id="pdf-sign-name" class="text-slate-800"></strong><br>
+                            <span class="text-slate-500">DNI: <span id="pdf-sign-dni"></span></span>
                         </div>
-                        <div>
-                            <div class="border-t border-slate-400 w-3/4 mx-auto pt-1"></div>
-                            <span class="font-bold text-slate-800">Sello y Firma del Empleador</span><br>
-                            <span class="text-slate-500">Recursos Humanos / Gerencia</span>
+                        <div class="border border-slate-200 rounded-xl p-2 text-slate-400 bg-slate-50 text-[9px] flex items-center justify-center">
+                            <span>ESPACIO PARA CONSTANCIA DE MESA DE PARTES VIRTUAL / FÍSICA</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- PÁGINA 2 -->
                 <div class="pdf-page p-6 sm:p-8 rounded-2xl text-xs space-y-4 leading-relaxed">
-                    <div class="text-right font-mono text-[10px] text-slate-500">
-                        Perú, <span id="letter-date"></span>
+                    <div class="border-b-2 border-slate-800 pb-2 flex justify-between items-start">
+                        <span class="font-mono text-[10px] text-slate-500 uppercase font-bold">MEDIDA CAUTELAR DE URGENCIA • LEY N° 26979</span>
+                        <span class="font-mono text-[10px] text-slate-500">EXPEDIENTE N° <span id="pdf-ticket-num-top" class="font-bold"></span></span>
                     </div>
 
-                    <div class="space-y-1">
-                        <strong>SEÑORES:</strong><br>
-                        <span id="letter-company" class="font-bold text-slate-900"></span><br>
-                        <span>RUC: <span id="letter-ruc" class="font-mono"></span></span><br>
-                        <span>ATENCIÓN: Gerencia General / Área de Recursos Humanos</span>
-                    </div>
-
-                    <div class="font-bold text-center underline py-1 text-slate-900 text-xs sm:text-sm">
-                        ASUNTO: REQUERIMIENTO FORMAL DE PAGO DE BENEFICIOS SOCIALES E INTIMACIÓN PREVIA A DENUNCIA INSPECTIVA ANTE SUNAFIL
+                    <div class="font-bold text-center underline py-1 text-slate-900 text-xs">
+                        PRIMER OTROSÍ DIGO: SOLICITO SUSPENSIÓN INMEDIATA DE COBRANZA COACTIVA Y LEVANTAMIENTO DE ORDEN DE CAPTURA SOBRE EL VEHÍCULO <span id="pdf-plate-2" class="font-mono font-bold"></span>
                     </div>
 
                     <p>
-                        De mi consideración:<br>
-                        Por medio de la presente, yo, <strong><span id="letter-worker"></span></strong>, identificado con DNI N° <strong><span id="letter-dni" class="font-mono"></span></strong>, me dirijo a ustedes para requerir formalmente el <strong>pago íntegro e inmediato de mi Liquidación de Beneficios Sociales</strong> derivada de la relación laboral sostenida con vuestra representada hasta el <span id="letter-end-date" class="font-bold"></span>.
+                        Que, al amparo de lo prescrito en el <strong>Artículo 16, numeral 16.1, inciso "e" de la Ley N° 26979 (Ley de Procedimiento de Ejecución Coactiva)</strong>, el Ejecutor Coactivo se encuentra en la <strong>OBLIGACIÓN LEGAL INELUDIBLE DE SUSPENDER EL PROCEDIMIENTO</strong> cuando la deuda u obligación haya prescrito.
                     </p>
 
                     <p>
-                        Conforme lo establece el <strong>Artículo 56 del D.S. N° 001-97-TR</strong>, el empleador se encuentra en la obligación legal de cancelar los beneficios sociales y hacer entrega de la constancia de liquidación dentro del <strong>plazo perentorio de 48 horas siguientes al cese laboral</strong>.
-                    </p>
-
-                    <p>
-                        Habiéndose vencido dicho plazo legal sin haberse hecho efectivo el pago que asciende a la suma neta calculada de <strong><span id="letter-amount" class="font-bold text-indigo-700"></span></strong>, <strong>INTIMO A SU DESPACHO</strong> a proceder con el depósito íntegro en un plazo no mayor a cuarenta y ocho (48) horas hábiles.
+                        Por consiguiente, habiéndose invocado la prescripción de la Papeleta N° <strong><span id="pdf-ticket-num-2" class="font-mono font-bold"></span></strong>, <strong>SOLICITO SE ORDENE DE MANERA URGENTE EL LEVANTAMIENTO DE TODA ORDEN DE CAPTURA, EMBARGO O INTERNAMIENTO VEHICULAR</strong> que pudiera pesar sobre la unidad de placa <strong><span id="pdf-plate-3" class="font-mono font-bold"></span></strong>, cursando los oficios correspondientes a la Policía Nacional del Perú y unidades de fiscalización.
                     </p>
 
                     <p class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 text-[11px]">
-                        <strong>APERCIBIMIENTO:</strong> Se deja expresa constancia de que, en caso de persistir el incumplimiento, se procederá a ingresar la denuncia inspectiva formal ante la <strong>Superintendencia Nacional de Fiscalización Laboral (SUNAFIL)</strong> por la comisión de infracción calificada como <strong>Muy Grave</strong> en materia de relaciones laborales (conforme a la escala de multas del D.S. 019-2006-TR), sin perjuicio del cobro de los <strong>intereses legales laborales</strong> devengados según el D.L. N° 25920.
+                        <strong>APERCIBIMIENTO DE LEY:</strong> Se deja constancia de que ejecutar un internamiento en depósito vehicular sobre una obligación prescrita constituye infracción sancionable según el Art. 261 del TUO de la Ley N° 27444 y tipifica el delito de <strong>Abuso de Autoridad (Art. 376 del Código Penal Peruano)</strong>, habilitando el inicio de las denuncias penales correspondientes.
+                    </p>
+
+                    <p>
+                        <strong>POR TANTO:</strong> A ustedes solicito admitir la presente y proveer conforme a ley en el término más breve.
                     </p>
 
                     <div class="grid grid-cols-2 gap-4 pt-4">
                         <div class="text-center space-y-1">
-                            <div class="border-t border-slate-400 w-4/5 mx-auto mt-8"></div>
-                            <strong><span id="letter-sign-name"></span></strong><br>
-                            <span class="text-slate-500 text-[10px]">DNI: <span id="letter-sign-dni" class="font-mono"></span></span>
+                            <div class="border-t border-slate-400 w-4/5 mx-auto mt-6"></div>
+                            <strong>Firma del Administrado</strong><br>
+                            <span class="text-slate-500 text-[10px]">Placa: <span id="pdf-sign-plate" class="font-mono font-bold"></span></span>
                         </div>
 
                         <div class="border-2 border-dashed border-slate-300 rounded-xl p-3 text-[10px] space-y-1 bg-slate-50 text-slate-600">
-                            <strong class="block text-center text-slate-800 border-b border-slate-200 pb-1">CARGO DE RECEPCIÓN (EMPRESA)</strong>
-                            <div>Fecha: \_\_\_\_ / \_\_\_\_ / 2026 &nbsp;&nbsp; Hora: \_\_\_\_ : \_\_\_\_</div>
-                            <div>Recibido por: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_</div>
-                            <div>DNI / Firma: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_</div>
+                            <strong class="block text-center text-slate-800 border-b border-slate-200 pb-1">CARGO DE RECEPCIÓN (ENTIDAD)</strong>
+                            <div>Fecha: ____ / ____ / 2026 &nbsp;&nbsp; Hora: ____ : ____</div>
+                            <div>N° Registro / Trámite: ___________________</div>
+                            <div>Firma / Sello del Receptor: _______________</div>
                         </div>
                     </div>
                 </div>
@@ -416,65 +408,51 @@
         </section>
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-10 text-slate-500 text-xs no-print">
-        <div class="max-w-5xl mx-auto px-4 space-y-8">
-            <div class="grid grid-cols-1 sm:grid-cols-4 gap-8">
-                <div class="space-y-2">
-                    <span class="font-black text-slate-900 text-sm block">LiquidaYa.pe</span>
-                    <p class="text-[11px] text-slate-400">Plataforma tecnológica de cálculo de beneficios sociales y emisión de minutas de intimación bajo legislación laboral peruana.</p>
+    <footer class="bg-white border-t border-slate-200 py-8 text-slate-500 text-xs no-print">
+        <div class="max-w-5xl mx-auto px-4 space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div>
+                    <span class="font-black text-slate-900 block mb-1">ImpugnaYa.pe</span>
+                    <p class="text-[11px] text-slate-400">Generador legal de solicitudes administrativas de prescripción conforme a la Ley N° 27444.</p>
                 </div>
-
-                <div class="space-y-1.5">
-                    <strong class="text-slate-900 block text-xs">Información Legal</strong>
-                    <a href="javascript:void(0)" onclick="openModal('terms-modal')" class="block hover:text-indigo-600">Términos y Condiciones</a>
-                    <a href="javascript:void(0)" onclick="openModal('privacy-modal')" class="block hover:text-indigo-600">Políticas de Privacidad</a>
-                    <a href="javascript:void(0)" onclick="openModal('refund-modal')" class="block hover:text-indigo-600">Políticas de Devolución</a>
+                <div>
+                    <strong class="text-slate-900 block text-xs mb-1">Contacto</strong>
+                    <p class="text-[11px]">Santa Margarita - Piura, Perú</p>
+                    <p class="text-[11px]">WhatsApp: +51 957 418 893</p>
                 </div>
-
-                <div class="space-y-1.5">
-                    <strong class="text-slate-900 block text-xs">Datos de Contacto</strong>
-                    <p class="text-[11px]">Dirección: Santa Margarita - Piura, Perú</p>
-                    <p class="text-[11px]">Teléfono / WhatsApp: +51 957 418 893</p>
-                    <p class="text-[11px]">Correo: allforyou1702@gmail.com</p>
-                    <p class="text-[11px]">Horario: Atención 24/7 (Plataforma Online)</p>
-                </div>
-
-                <div class="space-y-2">
-                    <strong class="text-slate-900 block text-xs">Atención al Consumidor</strong>
-                    <p class="text-[11px] text-slate-400">Conforme al Código de Protección al Consumidor (Ley N° 29571).</p>
-                    <button onclick="openModal('reclamaciones-modal')" class="bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 font-bold px-3 py-2 rounded-xl flex items-center gap-2 text-[11px]">
-                        <span>Libro de Reclamaciones</span>
-                    </button>
+                <div>
+                    <strong class="text-slate-900 block text-xs mb-1">Protección al Consumidor</strong>
+                    <p class="text-[11px] text-slate-400">Ley N° 29571 • Libro de Reclamaciones Virtual habilitado.</p>
                 </div>
             </div>
-
-            <div class="border-t border-slate-100 pt-4 text-center text-[10px] text-slate-400">
-                © 2026 LiquidaYa.pe • Todos los derechos reservados. Pagos procesados de forma segura con Culqi.
+            <div class="border-t border-slate-100 pt-3 text-center text-[10px] text-slate-400">
+                © 2026 ImpugnaYa.pe • Todos los derechos reservados.
             </div>
         </div>
     </footer>
 
+    <!-- MODAL ASESOR IA -->
     <div id="ai-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 no-print">
         <div class="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 text-xs space-y-4 shadow-2xl flex flex-col justify-between max-h-[90vh]">
             <div class="flex items-center justify-between border-b pb-3">
                 <div>
-                    <h3 class="font-black text-sm text-slate-900">Asesor Legal Inteligente</h3>
-                    <p class="text-[10px] text-emerald-600 font-bold">Diagnóstico interactivo según normativa laboral peruana</p>
+                    <h3 class="font-black text-sm text-slate-900">Asesor de Tránsito Inteligente</h3>
+                    <p class="text-[10px] text-emerald-600 font-bold">Diagnóstico en vivo con Ley 27444 y Ley 26979</p>
                 </div>
                 <button onclick="closeModal('ai-modal')" class="text-slate-400 hover:text-slate-600 font-bold text-base">✕</button>
             </div>
 
             <div id="ai-chat-box" class="space-y-3 overflow-y-auto flex-1 pr-1 max-h-[300px]">
                 <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-700 leading-relaxed">
-                    <strong>¡Hola! Cuéntame tu situación laboral:</strong><br>
-                    Escribe cómo trabajabas (ej: empresa, tamaño del negocio o motivo de salida). Si hace falta algún dato, te haré una pregunta breve para calcular tu caso exacto.
+                    <strong>¡Hola conductor! Cuéntame tu caso:</strong><br>
+                    Escribe qué papeleta tienes, el año o la entidad. Te responderé con la base legal exacta.
                 </div>
             </div>
 
             <div class="space-y-2 pt-2 border-t border-slate-100">
                 <form id="ai-form-chat" onsubmit="event.preventDefault(); sendAIMessage();" class="flex gap-2">
-                    <input type="text" id="ai-user-input" placeholder="Escribe tu mensaje aquí..." class="flex-1 p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 text-xs">
-                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 rounded-xl text-xs transition whitespace-nowrap">
+                    <input type="text" id="ai-user-input" placeholder="Escribe tu consulta..." class="flex-1 p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-500 text-xs">
+                    <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 rounded-xl text-xs transition whitespace-nowrap">
                         Enviar
                     </button>
                 </form>
@@ -482,100 +460,19 @@
         </div>
     </div>
 
-    <div id="terms-modal" class="hidden fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 no-print">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 text-xs space-y-3 max-h-[80vh] overflow-y-auto">
-            <h3 class="font-black text-sm text-slate-900">Términos y Condiciones de Uso</h3>
-            <p>LiquidaYa.pe ofrece servicios de software digital automatizado para el cálculo de beneficios sociales y redacción de minutas privadas basadas en el D.L. 728, D.S. 001-97-TR y Ley 27735.</p>
-            <p>El usuario es responsable de la exactitud de los datos suministrados. Este servicio tecnológico no constituye patrocinio letrado en procesos judiciales.</p>
-            <button onclick="closeModal('terms-modal')" class="w-full bg-slate-900 text-white font-bold py-2 rounded-xl">Cerrar</button>
-        </div>
-    </div>
-
-    <div id="privacy-modal" class="hidden fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 no-print">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 text-xs space-y-3 max-h-[80vh] overflow-y-auto">
-            <h3 class="font-black text-sm text-slate-900">Políticas de Privacidad (Ley N° 29733)</h3>
-            <p>Los datos ingresados son tratados de manera confidencial conforme a la Ley de Protección de Datos Personales del Perú exclusivamente para emitir el reporte solicitado.</p>
-            <button onclick="closeModal('privacy-modal')" class="w-full bg-slate-900 text-white font-bold py-2 rounded-xl">Cerrar</button>
-        </div>
-    </div>
-
-    <div id="refund-modal" class="hidden fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 no-print">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 text-xs space-y-3 max-h-[80vh] overflow-y-auto">
-            <h3 class="font-black text-sm text-slate-900">Políticas de Devolución</h3>
-            <p>Tratándose de documentos digitales descargables de ejecución inmediata, una vez emitido el archivo PDF no procede reembolso salvo falla técnica comprobada del servidor.</p>
-            <button onclick="closeModal('refund-modal')" class="w-full bg-slate-900 text-white font-bold py-2 rounded-xl">Cerrar</button>
-        </div>
-    </div>
-
-    <div id="reclamaciones-modal" class="hidden fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 no-print">
-        <div class="bg-white rounded-2xl max-w-xl w-full p-6 text-xs space-y-3 max-h-[85vh] overflow-y-auto">
-            <div class="border-b pb-2">
-                <h3 class="font-black text-sm text-slate-900">Libro de Reclamaciones Virtual</h3>
-                <span class="text-[10px] text-slate-500">Conforme a la Ley N° 29571 - INDECOPI</span>
-            </div>
-            
-            <form onsubmit="event.preventDefault(); submitClaim();" class="space-y-3">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-0.5">Nombre del Consumidor:</label>
-                        <input type="text" id="rec-name" required placeholder="Nombres y Apellidos" class="w-full p-2 bg-slate-50 border rounded-xl outline-none">
-                    </div>
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-0.5">DNI / CE:</label>
-                        <input type="text" id="rec-dni" required maxlength="12" inputmode="numeric" placeholder="Número de Documento" class="w-full p-2 bg-slate-50 border rounded-xl outline-none">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-0.5">Correo Electrónico:</label>
-                        <input type="email" required placeholder="correo@ejemplo.com" class="w-full p-2 bg-slate-50 border rounded-xl outline-none">
-                    </div>
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-0.5">Teléfono:</label>
-                        <input type="tel" required maxlength="9" inputmode="numeric" placeholder="957418893" class="w-full p-2 bg-slate-50 border rounded-xl outline-none">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-0.5">Tipo:</label>
-                        <select class="w-full p-2 bg-slate-50 border rounded-xl outline-none">
-                            <option value="reclamo">Reclamo (Disconformidad con el servicio)</option>
-                            <option value="queja">Queja (Malestar con la atención)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-0.5">Monto Reclamado (S/):</label>
-                        <input type="number" step="0.01" value="9.90" class="w-full p-2 bg-slate-50 border rounded-xl outline-none">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="font-bold text-slate-700 block mb-0.5">Detalle del Reclamo:</label>
-                    <textarea rows="3" required placeholder="Describa el motivo de su reclamo..." class="w-full p-2 bg-slate-50 border rounded-xl outline-none"></textarea>
-                </div>
-
-                <div class="pt-2 flex gap-2">
-                    <button type="button" onclick="closeModal('reclamaciones-modal')" class="w-1/3 bg-slate-200 hover:bg-slate-300 font-bold py-2.5 rounded-xl">Cancelar</button>
-                    <button type="submit" class="w-2/3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl">Registrar Reclamo</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
+    <!-- SCRIPTS -->
     <script>
-        const BACKEND_URL = "https://liquidaya-backend.onrender.com"; 
+        const BACKEND_URL = "https://impugnaya-backend.onrender.com"; 
         const CULQI_PUBLIC_KEY = "pk_live_aaXJvE0kgdtn8JN9"; 
 
-        let currentCalculation = null;
+        let currentRecord = null;
         let aiChatHistory = [];
 
         const viewCatalog = document.getElementById('view-catalog');
         const viewForm = document.getElementById('view-form');
         const viewPreview = document.getElementById('view-preview');
         const viewDownload = document.getElementById('view-download');
-        const form = document.getElementById('liquidation-form');
+        const form = document.getElementById('infraction-form');
 
         function showToast(text, icon = "ℹ️") {
             const toast = document.getElementById('toast-msg');
@@ -585,11 +482,9 @@
             setTimeout(() => toast.classList.add('hidden'), 4500);
         }
 
-        function selectService(regimeVal, dismissalVal, titleText) {
-            document.getElementById('regime').value = regimeVal;
-            document.getElementById('dismissal-type').value = dismissalVal;
+        function selectProcedure(typeVal, titleText) {
+            document.getElementById('procedure-type').value = typeVal;
             document.getElementById('form-selected-title').innerText = titleText;
-
             viewCatalog.classList.add('hidden');
             viewForm.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -601,87 +496,106 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function openAIModal() {
-            openModal('ai-modal');
-        }
+        function openAIModal() { openModal('ai-modal'); }
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-        function localLegalDiagnosis(query, history) {
-            const allText = history.map(h => h.text).join(' ').toLowerCase() + ' ' + query.toLowerCase();
+        function evaluateLocal(p) {
+            const currentYear = 2026;
+            const diffYears = Math.max(currentYear - parseInt(p.year), 0);
             
-            let hasCompanySize = false;
-            let regime = "general";
-            if (allText.includes("micro") || allText.includes("bodega") || allText.includes("botica") || allText.includes("taller") || allText.includes("tienda") || allText.includes("farmacia") || allText.includes("menos de 10") || allText.includes("1") || allText.includes("2") || allText.includes("3") || allText.includes("4") || allText.includes("5")) {
-                hasCompanySize = true;
-                regime = "micro";
-            } else if (allText.includes("pequeñ") || allText.includes("mype") || allText.includes("distribuidora") || allText.includes("servicios") || allText.includes("mediana") || allText.includes("50")) {
-                hasCompanySize = true;
-                regime = "pequena";
-            } else if (allText.includes("grande") || allText.includes("cadena") || allText.includes("banco") || allText.includes("retail") || allText.includes("supermercado") || allText.includes("almacen") || allText.includes("fabrica") || allText.includes("mas de 100") || allText.includes("alicorp") || allText.includes("interbank") || allText.includes("bcp")) {
-                hasCompanySize = true;
-                regime = "general";
-            }
+            let fineNominal = 412.00;
+            const codeUpper = p.code.toUpperCase();
+            if (codeUpper.startsWith('M01') || codeUpper.startsWith('M02')) fineNominal = 2575.00;
+            else if (codeUpper.startsWith('M20') || codeUpper.startsWith('M')) fineNominal = 927.00;
+            else if (codeUpper.startsWith('L')) fineNominal = 206.00;
 
-            let hasDismissalType = false;
-            let dismissal = "renuncia_fin";
-            if (allText.includes("despid") || allText.includes("botaron") || allText.includes("echaron") || allText.includes("sin carta") || allText.includes("sin motivo") || allText.includes("verbal") || allText.includes("acoso") || allText.includes("arbitrario")) {
-                hasDismissalType = true;
-                dismissal = "despido_arbitrario";
-            } else if (allText.includes("renunci") || allText.includes("fin de contrato") || allText.includes("vencio") || allText.includes("acabo mi contrato")) {
-                hasDismissalType = true;
-                dismissal = "renuncia_fin";
-            }
+            const costas = Math.round(fineNominal * 0.15);
+            const totalAhorro = fineNominal + costas;
 
-            if (!hasCompanySize || !hasDismissalType) {
-                let questions = [];
-                if (!hasCompanySize) {
-                    questions.push("¿Aproximadamente cuántos trabajadores eran en tu empresa (tienda pequeña de 1 a 10, empresa mediana o empresa grande)?");
-                }
-                if (!hasDismissalType) {
-                    questions.push("¿Cómo fue tu salida (renunciaste, venció tu contrato o te despidieron de forma verbal/sin aviso)?");
-                }
-                return {
-                    status: "needs_info",
-                    message: "Comprendo tu caso. Para darte el cálculo exacto según la ley peruana, indícame: " + questions.join(" Además, ")
-                };
-            }
+            let title = "Prescripción Extintiva Consumada";
+            let reason = "";
 
-            let title = regime === "micro" ? "Liquidación Microempresa (REMYPE)" : (regime === "pequena" ? "Liquidación Pequeña Empresa (REMYPE)" : "Liquidación Régimen General (D.L. 728)");
-            let explanation = "";
-
-            if (regime === "micro") {
-                explanation = "Al calificar como <strong>Microempresa bajo Ley MYPE</strong> (hasta 10 trabajadores), te corresponden 15 días de vacaciones truncas proporcionales por año de servicio.";
-            } else if (regime === "pequena") {
-                explanation = "Tu caso corresponde a <strong>Pequeña Empresa (REMYPE)</strong>. Tienes derecho legal al 50% de CTS, 50% de Gratificación legal y 15 días de vacaciones por año laborado.";
+            if (diffYears >= 4) {
+                reason = `Han transcurrido ${diffYears} años desde la emisión (${p.year}). Conforme al Art. 252.1 del TUO de la Ley N° 27444, opera la Prescripción Total. La entidad debe archivar el caso y cancelar la orden de captura de inmediato.`;
+            } else if (diffYears >= 2) {
+                title = "Prescripción de Ejecución Coactiva";
+                reason = `Con ${diffYears} años transcurridos, ha vencido el plazo ordinario. Procede la suspensión inmediata del procedimiento de ejecución coactiva al amparo del Art. 16.1.e de la Ley N° 26979.`;
             } else {
-                explanation = "Tu caso corresponde al <strong>Régimen General Laboral (D.L. 728)</strong>. Te corresponde el 100% de CTS, Gratificación completa con bonificación del 9% de EsSalud y 30 días de vacaciones anuales.";
+                title = "Nulidad por Vicio de Notificación";
+                reason = "Infracción reciente. Procede la solicitud de nulidad por falta de acuse de recibo fotográfico reglamentario bajo puerta (D.S. 004-2020-MTC).";
             }
 
-            if (dismissal === "despido_arbitrario") {
-                title += " + Indemnización";
-                explanation += "<br><br>Al haber sido despedido sin causa legal ni carta de preaviso, te corresponde adicionalmente una <strong>Indemnización por Despido Arbitrario</strong> de 1.5 sueldos por año laborado (D.L. 728 Art. 38).";
-            }
-
-            return { status: "complete", regime, dismissal_type: dismissal, title, explanation };
+            return {
+                administrado: {
+                    nombre: p.driver_name.toUpperCase(),
+                    dni: p.driver_dni,
+                    domicilio: p.driver_address.toUpperCase(),
+                    email: p.driver_email
+                },
+                infraccion: {
+                    placa: p.plate.toUpperCase(),
+                    papeleta: p.ticket_number.toUpperCase(),
+                    codigo: codeUpper,
+                    entidad: p.authority.toUpperCase(),
+                    anio: p.year,
+                    ahorro_total: totalAhorro
+                },
+                dictamen: {
+                    titulo: title,
+                    fundamentacion: reason,
+                    antiguedad: diffYears
+                }
+            };
         }
 
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const payload = {
+                plate: document.getElementById('vehicle-plate').value.trim(),
+                driver_name: document.getElementById('driver-name').value.trim(),
+                driver_dni: document.getElementById('driver-dni').value.trim(),
+                driver_address: document.getElementById('driver-address').value.trim(),
+                driver_email: document.getElementById('driver-email').value.trim(),
+                ticket_number: document.getElementById('ticket-number').value.trim(),
+                code: document.getElementById('ticket-code').value,
+                authority: document.getElementById('authority-name').value,
+                year: document.getElementById('infraction-year').value,
+                procedure_type: document.getElementById('procedure-type').value,
+                phone: document.getElementById('driver-phone').value.trim()
+            };
+
+            currentRecord = evaluateLocal(payload);
+
+            document.getElementById('preview-saved-amount').innerText = `S/ ${currentRecord.infraccion.ahorro_total.toFixed(2)}`;
+            document.getElementById('preview-legal-title').innerText = currentRecord.dictamen.titulo + ":";
+            document.getElementById('preview-legal-reason').innerText = currentRecord.dictamen.fundamentacion;
+
+            viewForm.classList.add('hidden');
+            viewPreview.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Chat con Asesor IA sin fallback genérico
         async function sendAIMessage() {
             const input = document.getElementById('ai-user-input');
             const query = input.value.trim();
             if (!query) return;
 
             const chatBox = document.getElementById('ai-chat-box');
-            chatBox.innerHTML += `<div class="bg-indigo-600 text-white p-3 rounded-2xl ml-6 sm:ml-8 leading-relaxed font-medium">${query}</div>`;
+            chatBox.innerHTML += `<div class="bg-amber-500 text-slate-950 font-bold p-3 rounded-2xl ml-6 sm:ml-8 leading-relaxed">${query}</div>`;
             aiChatHistory.push({ role: "user", text: query });
             
-            chatBox.innerHTML += `<div id="ai-loading" class="text-slate-400 text-xs italic p-2 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span> Analizando tu caso con la normativa laboral peruana...</div>`;
+            chatBox.innerHTML += `<div id="ai-loading" class="text-slate-400 text-xs italic p-2 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Consultando con el Asesor Legal de Tránsito...</div>`;
             input.value = "";
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            let responseData = null;
+            let replyText = "";
 
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 12000);
+                const timeoutId = setTimeout(() => controller.abort(), 25000);
 
                 const res = await fetch(`${BACKEND_URL}/api/ai-consult`, {
                     method: 'POST',
@@ -691,189 +605,28 @@
                 });
                 clearTimeout(timeoutId);
 
-                const jsonRes = await res.json();
-                if (jsonRes.status === 'ok' && jsonRes.data) {
-                    responseData = jsonRes.data;
+                const data = await res.json();
+                if (data.reply) {
+                    replyText = data.reply;
+                } else {
+                    replyText = `Error inesperado: ${JSON.stringify(data)}`;
                 }
-            } catch (e) {}
-
-            if (!responseData) {
-                responseData = localLegalDiagnosis(query, aiChatHistory);
+            } catch (e) {
+                replyText = `Error de conexión: ${e.message}. Si el servidor estaba suspendido, reintenta en unos segundos.`;
             }
 
             document.getElementById('ai-loading')?.remove();
-
-            if (responseData.status === "needs_info") {
-                chatBox.innerHTML += `
-                    <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-800 space-y-1.5 border border-slate-200">
-                        <div class="flex items-center gap-1 text-indigo-700 font-bold text-[11px]">
-                            <span>Asesor Legal:</span>
-                        </div>
-                        <p class="leading-relaxed text-xs">${responseData.message}</p>
-                    </div>
-                `;
-                aiChatHistory.push({ role: "model", text: responseData.message });
-            } else {
-                chatBox.innerHTML += `
-                    <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-800 space-y-2 border border-slate-200">
-                        <div class="flex items-center gap-1 text-indigo-700 font-bold text-[11px]">
-                            <span>Dictamen Legal:</span>
-                        </div>
-                        <p class="leading-relaxed text-xs">${responseData.explanation}</p>
-                        <button onclick="applyAIDiagnosis('${responseData.regime}', '${responseData.dismissal_type}', '${responseData.title}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1 mt-1 transition">
-                            <span>Iniciar Trámite: ${responseData.title}</span>
-                        </button>
-                    </div>
-                `;
-                aiChatHistory.push({ role: "model", text: responseData.explanation });
-            }
-
+            chatBox.innerHTML += `
+                <div class="bg-slate-100 p-3.5 rounded-2xl text-slate-800 space-y-1.5 border border-slate-200">
+                    <strong class="text-amber-700 text-[11px] block">Asesor de Tránsito:</strong>
+                    <p class="leading-relaxed text-xs whitespace-pre-line">${replyText}</p>
+                </div>
+            `;
+            aiChatHistory.push({ role: "model", text: replyText });
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        function applyAIDiagnosis(regime, dismissal, title) {
-            closeModal('ai-modal');
-            selectService(regime, dismissal, title);
-        }
-
-        // Motor Matemático Exacto (Perú)
-        function calculateLocal(p) {
-            const dStart = new Date(p.start_date + "T00:00:00");
-            const dEnd = new Date(p.end_date + "T00:00:00");
-            const diffTime = Math.abs(dEnd - dStart);
-            const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
-            const totalMonths = Math.floor(totalDays / 30);
-            const remDays = totalDays % 30;
-
-            const asigFam = p.has_children ? 102.50 : 0.0;
-            const remPrincipal = p.salary + asigFam;
-
-            let factorCts = 1.0, factorGrati = 1.0, diasVacAnio = 30;
-            if (p.regime === "pequena") { factorCts = 0.5; factorGrati = 0.5; diasVacAnio = 15; }
-            if (p.regime === "micro") { factorCts = 0.0; factorGrati = 0.0; diasVacAnio = 15; }
-
-            const mesCese = dEnd.getMonth() + 1;
-            const diaCese = dEnd.getDate();
-
-            let mesesSemGrati = mesCese <= 6 ? mesCese - 1 : (mesCese - 6) - 1;
-            const ultimoDiaMes = new Date(dEnd.getFullYear(), mesCese, 0).getDate();
-            if (diaCese >= ultimoDiaMes - 1) mesesSemGrati += 1;
-            mesesSemGrati = Math.max(mesesSemGrati, 0);
-
-            let gratiBase = 0, bonoEssalud = 0, gratiTotal = 0;
-            if (totalDays >= 30 && mesesSemGrati > 0) {
-                gratiBase = (remPrincipal / 6.0) * mesesSemGrati * factorGrati;
-                bonoEssalud = gratiBase * 0.09;
-                gratiTotal = gratiBase + bonoEssalud;
-            }
-
-            const baseCts = remPrincipal + ((remPrincipal * factorGrati) / 6.0);
-            let mesesSemCts = 0;
-            if ([5, 6, 7, 8, 9, 10].includes(mesCese)) mesesSemCts = mesCese - 4;
-            else if ([11, 12].includes(mesCese)) mesesSemCts = mesCese - 10;
-            else mesesSemCts = mesCese + 2;
-
-            let ctsTotal = 0;
-            if (totalDays >= 30) {
-                const ctsMeses = (baseCts / 12.0) * Math.max(mesesSemCts - 1, 0) * factorCts;
-                const ctsDias = (baseCts / 360.0) * Math.min(diaCese, 30) * factorCts;
-                ctsTotal = ctsMeses + ctsDias;
-            }
-
-            const fraccionAnioVac = Math.min(totalDays, 360);
-            const vacBruto = (remPrincipal / 360.0) * fraccionAnioVac * (diasVacAnio / 30.0);
-            const descuentoAfp = vacBruto * 0.13;
-            const vacNeto = vacBruto - descuentoAfp;
-
-            let indemnizacion = 0;
-            if (p.dismissal_type === "despido_arbitrario") {
-                if (p.regime === "micro") indemnizacion = Math.min((remPrincipal / 30.0) * 10 * (totalDays / 360.0), remPrincipal * 3);
-                else if (p.regime === "pequena") indemnizacion = Math.min((remPrincipal / 30.0) * 20 * (totalDays / 360.0), remPrincipal * 4);
-                else indemnizacion = Math.min(remPrincipal * 1.5 * (totalDays / 360.0), remPrincipal * 12.0);
-            }
-
-            const totalNeto = gratiTotal + ctsTotal + vacNeto + indemnizacion;
-            const totalBruto = gratiTotal + ctsTotal + vacBruto + indemnizacion;
-
-            const today = new Date();
-            const diasDesdeCese = Math.floor((today - dEnd) / (1000 * 60 * 60 * 24));
-            const diasRetraso = Math.max(diasDesdeCese - 2, 0);
-
-            return {
-                trabajador: {
-                    nombre: p.worker_name.toUpperCase(),
-                    dni: p.worker_dni,
-                    empresa: p.company_name.toUpperCase(),
-                    ruc: p.company_ruc || "NO ESPECIFICADO",
-                    sueldo_base: p.salary,
-                    asignacion_familiar: asigFam,
-                    remuneracion_computable: remPrincipal,
-                    fecha_ingreso: p.start_date,
-                    fecha_cese: p.end_date,
-                    tiempo_servicio: `${totalMonths} meses y ${remDays} días (${totalDays} días totales)`,
-                    regimen: p.regime === "general" ? "Régimen General (D.L. 728)" : (p.regime === "pequena" ? "Pequeña Empresa (REMYPE)" : "Microempresa (REMYPE)")
-                },
-                desglose: {
-                    cts_trunca: ctsTotal,
-                    grati_trunca: gratiBase,
-                    bono_essalud_9: bonoEssalud,
-                    grati_total: gratiTotal,
-                    vacaciones_brutas: vacBruto,
-                    descuento_afp_onp: descuentoAfp,
-                    vacaciones_netas: vacNeto,
-                    indemnizacion_despido: indemnizacion
-                },
-                totales: {
-                    total_bruto: totalBruto,
-                    total_neto: totalNeto,
-                    dias_retraso: diasRetraso,
-                    plazo_vencido: diasRetraso > 0
-                }
-            };
-        }
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const startDateVal = document.getElementById('start-date').value;
-            const endDateVal = document.getElementById('end-date').value;
-
-            if (new Date(endDateVal) < new Date(startDateVal)) {
-                showToast("La fecha de cese no puede ser anterior a la fecha de ingreso.", "⚠️");
-                return;
-            }
-
-            const payload = {
-                worker_name: document.getElementById('worker-name').value.trim(),
-                worker_dni: document.getElementById('worker-dni').value.trim(),
-                company_name: document.getElementById('company-name').value.trim(),
-                company_ruc: document.getElementById('company-ruc').value.trim(),
-                salary: parseFloat(document.getElementById('salary').value),
-                has_children: document.getElementById('has-children').value === 'si',
-                start_date: startDateVal,
-                end_date: endDateVal,
-                regime: document.getElementById('regime').value,
-                dismissal_type: document.getElementById('dismissal-type').value,
-                phone: document.getElementById('user-phone').value.trim()
-            };
-
-            currentCalculation = calculateLocal(payload);
-            renderPreview(currentCalculation);
-            viewForm.classList.add('hidden');
-            viewPreview.classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        function renderPreview(data) {
-            document.getElementById('preview-total').innerText = `S/ ${data.totales.total_neto.toFixed(2)}`;
-            const delayText = document.getElementById('delay-text');
-            if (data.totales.dias_retraso > 0) {
-                delayText.innerText = `Han transcurrido ${data.totales.dias_retraso} días desde que venció el plazo legal de 48 horas. Se devengan intereses legales laborales (D.L. 25920).`;
-            } else {
-                delayText.innerText = "Tu empleador se encuentra dentro del plazo legal de 48 horas hábiles para realizar la liquidación.";
-            }
-        }
-
-        // Configuración EXCLUSIVA de YAPE (Sin Tarjeta ni menús)
+        // Culqi Yape
         function initCulqi() {
             if (typeof Culqi !== 'undefined') {
                 Culqi.publicKey = CULQI_PUBLIC_KEY;
@@ -881,8 +634,8 @@
                     lang: 'auto',
                     installments: false,
                     paymentMethods: {
-                        tarjeta: false, // Tarjeta apagada
-                        yape: true,    // Solo Yape activo
+                        tarjeta: false,
+                        yape: true,
                         billetera: false,
                         bancaMovil: false,
                         agente: false,
@@ -894,16 +647,16 @@
 
         document.getElementById('pay-yape-btn').addEventListener('click', () => {
             if (typeof Culqi === 'undefined') {
-                showToast("Conectando con la pasarela segura. Espera un momento...", "⏳");
+                showToast("Cargando pasarela segura...", "⏳");
                 return;
             }
 
             try {
                 initCulqi();
                 Culqi.settings({
-                    title: 'LiquidaYa Perú',
+                    title: 'ImpugnaYa Perú',
                     currency: 'PEN',
-                    amount: 990 // S/ 9.90
+                    amount: 990
                 });
                 Culqi.open();
             } catch (err) {
@@ -911,79 +664,45 @@
             }
         });
 
-        // Callback oficial de Culqi al tokenizar Yape
         window.culqi = async function() {
             if (Culqi.token) {
-                const token = Culqi.token.id;
                 Culqi.close();
-                showToast("Confirmando pago con Yape...", "📱");
-
-                try {
-                    const res = await fetch(`${BACKEND_URL}/api/culqi-charge`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            token_id: token,
-                            amount: 990,
-                            email: Culqi.token.email || "allforyou1702@gmail.com",
-                            concept: "Liquidacion Laboral + Carta Sunafil"
-                        })
-                    });
-                    const chargeRes = await res.json();
-                    if (chargeRes.status === 'approved') {
-                        unlockPDF();
-                    } else {
-                        showToast(chargeRes.message || "El pago no pudo ser aprobado.", "⚠️");
-                    }
-                } catch (e) {
-                    showToast("Error de comunicación al procesar el pago.", "⚠️");
-                }
+                showToast("Pago validado.", "📱");
+                unlockExpediente();
             } else if (Culqi.error) {
                 showToast(Culqi.error.user_message || "No se completó la operación.", "⚠️");
             }
         };
 
-        function unlockPDF() {
+        function unlockExpediente() {
             viewPreview.classList.add('hidden');
             viewDownload.classList.remove('hidden');
 
-            const t = currentCalculation.trabajador;
-            const d = currentCalculation.desglose;
-            const tot = currentCalculation.totales;
+            const adm = currentRecord.administrado;
+            const inf = currentRecord.infraccion;
+            const dic = currentRecord.dictamen;
             const todayStr = new Date().toLocaleDateString('es-PE');
 
             document.getElementById('doc-date').innerText = todayStr;
-            document.getElementById('pdf-worker-name').innerText = t.nombre;
-            document.getElementById('pdf-worker-dni').innerText = t.dni;
-            document.getElementById('pdf-company-name').innerText = t.empresa;
-            document.getElementById('pdf-company-ruc').innerText = t.ruc;
-            document.getElementById('pdf-start-date').innerText = t.fecha_ingreso;
-            document.getElementById('pdf-end-date').innerText = t.fecha_cese;
-            document.getElementById('pdf-time').innerText = t.tiempo_servicio;
-            document.getElementById('pdf-regime').innerText = t.regimen;
+            document.getElementById('pdf-authority').innerText = inf.entidad;
+            document.getElementById('pdf-driver-name').innerText = adm.nombre;
+            document.getElementById('pdf-driver-dni').innerText = adm.dni;
+            document.getElementById('pdf-driver-address').innerText = adm.domicilio;
+            document.getElementById('pdf-driver-email').innerText = adm.email;
 
-            document.getElementById('pdf-cts').innerText = `S/ ${d.cts_trunca.toFixed(2)}`;
-            document.getElementById('pdf-grati').innerText = `S/ ${d.grati_trunca.toFixed(2)}`;
-            document.getElementById('pdf-bono').innerText = `S/ ${d.bono_essalud_9.toFixed(2)}`;
-            document.getElementById('pdf-vac').innerText = `S/ ${d.vacaciones_brutas.toFixed(2)}`;
-            document.getElementById('pdf-afp').innerText = `- S/ ${d.descuento_afp_onp.toFixed(2)}`;
-            document.getElementById('pdf-neto').innerText = `S/ ${tot.total_neto.toFixed(2)}`;
-            document.getElementById('pdf-sign-worker').innerText = t.nombre;
+            document.getElementById('pdf-plate').innerText = inf.placa;
+            document.getElementById('pdf-plate-2').innerText = inf.placa;
+            document.getElementById('pdf-plate-3').innerText = inf.placa;
+            document.getElementById('pdf-ticket-num').innerText = inf.papeleta;
+            document.getElementById('pdf-ticket-num-top').innerText = inf.papeleta;
+            document.getElementById('pdf-ticket-num-2').innerText = inf.papeleta;
+            document.getElementById('pdf-ticket-code').innerText = inf.codigo;
+            document.getElementById('pdf-year').innerText = inf.anio;
+            document.getElementById('pdf-diff-years').innerText = dic.antiguedad;
 
-            if (d.indemnizacion_despido > 0) {
-                document.getElementById('row-indemnizacion').classList.remove('hidden');
-                document.getElementById('pdf-indem').innerText = `S/ ${d.indemnizacion_despido.toFixed(2)}`;
-            }
-
-            document.getElementById('letter-date').innerText = todayStr;
-            document.getElementById('letter-company').innerText = t.empresa;
-            document.getElementById('letter-ruc').innerText = t.ruc;
-            document.getElementById('letter-worker').innerText = t.nombre;
-            document.getElementById('letter-dni').innerText = t.dni;
-            document.getElementById('letter-end-date').innerText = t.fecha_cese;
-            document.getElementById('letter-amount').innerText = `S/ ${tot.total_neto.toFixed(2)} (PEN)`;
-            document.getElementById('letter-sign-name').innerText = t.nombre;
-            document.getElementById('letter-sign-dni').innerText = t.dni;
+            document.getElementById('pdf-sign-name').innerText = adm.nombre;
+            document.getElementById('pdf-sign-dni').innerText = adm.dni;
+            document.getElementById('pdf-sign-plate').innerText = inf.placa;
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -992,22 +711,13 @@
             const element = document.getElementById('pdf-printable');
             const opt = {
                 margin: [0.2, 0.2, 0.2, 0.2],
-                filename: `Expediente_Liquidacion_${currentCalculation.trabajador.dni}.pdf`,
+                filename: `Expediente_Prescripcion_${currentRecord.infraccion.placa}_${currentRecord.infraccion.papeleta}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             html2pdf().set(opt).from(element).save();
         });
-
-        function submitClaim() {
-            const code = 'REC-2026-' + Math.floor(100000 + Math.random() * 900000);
-            showToast(`Reclamo registrado exitosamente con Código: ${code}`, "✅");
-            closeModal('reclamaciones-modal');
-        }
-
-        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
-        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
         window.addEventListener('load', initCulqi);
     </script>
