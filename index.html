@@ -15,7 +15,6 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* Maquetación estricta de 2 páginas A4 para valor legal */
         .pdf-page {
             background-color: #ffffff;
             border: 1px solid #cbd5e1;
@@ -162,7 +161,7 @@
             </form>
         </section>
 
-        <!-- VISTA 2: DESGLOSE DE RESULTADOS Y PREVIEW -->
+        <!-- VISTA 2: RESULTADOS Y PREVIEW -->
         <section id="view-preview" class="hidden space-y-6">
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm text-center space-y-5">
                 <div class="inline-block bg-indigo-50 text-indigo-700 text-xs font-black px-4 py-1.5 rounded-full border border-indigo-200">
@@ -175,7 +174,7 @@
                     <span class="text-xs text-slate-500 mt-1 block">Monto que tu empleador está obligado a pagar bajo apercibimiento de multa SUNAFIL</span>
                 </div>
 
-                <!-- Tabla de Desglose de Beneficios -->
+                <!-- Desglose de Beneficios -->
                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs space-y-2.5 max-w-lg mx-auto text-left">
                     <strong class="text-slate-800 block border-b pb-2 font-bold uppercase tracking-wider text-[11px]">Desglose de Conceptos Computables:</strong>
                     <div class="flex justify-between py-1 border-b border-slate-200">
@@ -196,7 +195,7 @@
                     </div>
                 </div>
 
-                <!-- Preview Visual del Expediente de 2 Páginas -->
+                <!-- Preview Visual -->
                 <div class="border-2 border-dashed border-slate-200 rounded-2xl p-4 bg-slate-50 space-y-3">
                     <span class="text-xs font-bold text-slate-500 block uppercase tracking-wider">EXPEDIENTE LABORAL COMPLETO (2 PÁGINAS A4):</span>
                     <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
@@ -217,15 +216,12 @@
                     </div>
                 </div>
 
-                <!-- Bloque de Descarga / Pago -->
+                <!-- Acciones -->
                 <div class="space-y-4 max-w-lg mx-auto pt-2">
-                    
-                    <!-- Botón Gratuito de Prueba -->
                     <button onclick="unlockExpediente()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-4 rounded-2xl shadow-lg hover:shadow-xl transition transform active:scale-95 text-sm flex items-center justify-center gap-2 border-2 border-emerald-500">
                         <span>👁️ Ver y Descargar Expediente Gratis (Modo Prueba)</span>
                     </button>
 
-                    <!-- Caja de Pago Oficial Culqi Yape -->
                     <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-4 shadow-xl text-left border border-slate-800">
                         <div class="space-y-1 text-center">
                             <div class="text-2xl font-black text-indigo-400">S/ 9.90 <span class="text-xs text-slate-400 font-normal">PEN (Pago oficial)</span></div>
@@ -259,7 +255,7 @@
             </div>
 
             <div id="pdf-printable" class="space-y-6">
-                <!-- PÁGINA 1: LIQUIDACIÓN FORMAL DE BENEFICIOS SOCIALES -->
+                <!-- PÁGINA 1 -->
                 <div class="pdf-page p-6 sm:p-8 rounded-2xl text-xs space-y-4 leading-relaxed">
                     <div class="border-b-2 border-slate-800 pb-3 flex justify-between items-start">
                         <div>
@@ -360,7 +356,7 @@
                     </div>
                 </div>
 
-                <!-- PÁGINA 2: CARTA NOTARIAL DE INTIMACIÓN Y APERCIBIMIENTO SUNAFIL -->
+                <!-- PÁGINA 2 -->
                 <div class="pdf-page p-6 sm:p-8 rounded-2xl text-xs space-y-4 leading-relaxed">
                     <div class="border-b-2 border-slate-800 pb-2 flex justify-between items-start">
                         <span class="font-mono text-[10px] text-slate-500 uppercase font-bold">CARTA NOTARIAL DE REQUERIMIENTO • LEY N° 28806</span>
@@ -406,7 +402,6 @@
                             <span class="text-slate-500 text-[10px]">DNI: <span id="pdf-letter-sign-dni" class="font-mono"></span></span>
                         </div>
 
-                        <!-- Recuadro Notarial / Cargo -->
                         <div class="border-2 border-dashed border-slate-300 rounded-xl p-3 text-[10px] space-y-1 bg-slate-50 text-slate-600">
                             <strong class="block text-center text-slate-800 border-b border-slate-200 pb-1">CARGO DE RECEPCIÓN / DILIGENCIA NOTARIAL</strong>
                             <div>Fecha: ____ / ____ / 2026 &nbsp;&nbsp; Hora: ____ : ____</div>
@@ -432,7 +427,6 @@
                     <strong class="text-slate-900 block text-xs mb-1">Contacto</strong>
                     <p class="text-[11px]">Santa Margarita - Piura, Perú</p>
                     <p class="text-[11px]">WhatsApp: +51 957 418 893</p>
-                    <p class="text-[11px]">Correo: allforyou1702@gmail.com</p>
                 </div>
                 <div>
                     <strong class="text-slate-900 block text-xs mb-1">Marco Regulatorio</strong>
@@ -440,7 +434,7 @@
                 </div>
             </div>
             <div class="border-t border-slate-100 pt-3 text-center text-[10px] text-slate-400">
-                © 2026 LiquidaYa.pe • Todos los derechos reservados. Pagos procesados por Culqi.
+                © 2026 LiquidaYa.pe • Todos los derechos reservados.
             </div>
         </div>
     </footer>
@@ -465,7 +459,7 @@
 
             <div class="space-y-2 pt-2 border-t border-slate-100">
                 <form id="ai-form-chat" onsubmit="event.preventDefault(); sendAIMessage();" class="flex gap-2">
-                    <input type="text" id="ai-user-input" placeholder="Ej. Me despidieron ayer y ganaba S/ 2,500, ¿cuánto me toca?..." class="flex-1 p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 text-xs">
+                    <input type="text" id="ai-user-input" placeholder="Ej. Me despidieron ayer y ganaba S/ 2,500..." class="flex-1 p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 text-xs">
                     <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 rounded-xl text-xs transition whitespace-nowrap">
                         Enviar
                     </button>
@@ -481,6 +475,13 @@
 
         let currentCalculation = null;
         let aiChatHistory = [];
+
+        // Precalentamiento silencioso de Render al entrar a la página
+        window.addEventListener('DOMContentLoaded', () => {
+            fetch(`${BACKEND_URL}/health`, { method: 'GET' })
+                .then(() => console.log("Backend precalentado con éxito"))
+                .catch(() => console.log("Despertando backend de Render..."));
+        });
 
         const form = document.getElementById('liquidation-form');
         const viewCalculator = document.getElementById('view-calculator');
@@ -499,46 +500,38 @@
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-        // Motor Matemático Oficial de Liquidación Laboral Perú
         function calculateLiquidation(data) {
             const startDate = new Date(data.start_date);
             const endDate = new Date(data.end_date);
             
-            // Diferencia total en días y meses
             const diffTime = Math.abs(endDate - startDate);
             const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             const totalMonths = Math.max(Math.floor(totalDays / 30.417), 1);
             const totalYears = (totalDays / 365).toFixed(1);
 
             const basicSalary = parseFloat(data.salary);
-            const asigFam = data.has_family_bonus === 'yes' ? 102.50 : 0.00; // 10% RMV actual
+            const asigFam = data.has_family_bonus === 'yes' ? 102.50 : 0.00;
             const baseSalary = basicSalary + asigFam;
 
-            // Sexto de gratificación para CTS
             const sixthGrati = baseSalary / 6;
             const baseCTS = baseSalary + sixthGrati;
 
-            // Factor según régimen laboral
-            let regimeFactor = 1.0; // General
-            if (data.regime === 'pequena') regimeFactor = 0.5; // Pequeña empresa 50%
-            else if (data.regime === 'micro') regimeFactor = 0.0; // Microempresa (0% CTS/Grati)
+            let regimeFactor = 1.0;
+            if (data.regime === 'pequena') regimeFactor = 0.5;
+            else if (data.regime === 'micro') regimeFactor = 0.0;
 
-            // 1. CTS Trunca (meses computables del último periodo semestral)
             const ctsMonths = Math.min(totalMonths, 6);
             let totalCTS = (baseCTS / 12) * ctsMonths * regimeFactor;
 
-            // 2. Gratificación Trunca (meses del último semestre julio/diciembre) + 9% Bonificación
             const gratiMonths = Math.min(totalMonths, 6);
             let rawGrati = (baseSalary / 6) * gratiMonths * regimeFactor;
-            let bonifExtra = rawGrati * 0.09; // Ley 27735 / 30334
+            let bonifExtra = rawGrati * 0.09;
             let totalGrati = rawGrati + bonifExtra;
 
-            // 3. Vacaciones Truncas y No Gozadas
             let vacaMonths = Math.min(totalMonths, 12);
             let vacaFactor = data.regime === 'micro' ? 0.5 : (data.regime === 'pequena' ? 0.5 : 1.0);
             let totalVaca = (baseSalary / 12) * vacaMonths * vacaFactor;
 
-            // 4. Indemnización por Despido Arbitrario (1.5 sueldos por año laborado, máx 12 sueldos)
             let totalIndem = 0.0;
             if (data.reason === 'despido_arbitrario') {
                 let indemFactor = (data.regime === 'micro') ? 10 * (totalDays / 365) : ((data.regime === 'pequena') ? 20 * (totalDays / 365) : 1.5 * (totalDays / 365));
@@ -607,7 +600,6 @@
 
             currentCalculation = calculateLiquidation(payload);
 
-            // Actualizar vista preview
             document.getElementById('preview-total-amount').innerText = `S/ ${currentCalculation.amounts.total.toFixed(2)}`;
             document.getElementById('preview-cts').innerText = `S/ ${currentCalculation.amounts.cts.toFixed(2)}`;
             document.getElementById('preview-grati').innerText = `S/ ${currentCalculation.amounts.grati.toFixed(2)}`;
@@ -626,7 +618,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Desbloquear Expediente para visualización/descarga
         function unlockExpediente() {
             viewPreview.classList.add('hidden');
             viewDownload.classList.remove('hidden');
@@ -639,7 +630,6 @@
 
             document.getElementById('doc-date').innerText = todayStr;
 
-            // Página 1
             document.getElementById('pdf-worker-name').innerText = w.name;
             document.getElementById('pdf-worker-dni').innerText = w.dni;
             document.getElementById('pdf-worker-address').innerText = w.address;
@@ -672,7 +662,6 @@
             document.getElementById('pdf-sign-worker').innerText = w.name;
             document.getElementById('pdf-sign-company').innerText = c.name;
 
-            // Página 2 (Carta Notarial)
             document.getElementById('pdf-letter-company').innerText = c.name;
             document.getElementById('pdf-letter-ruc').innerText = c.ruc;
             document.getElementById('pdf-letter-end-date').innerText = d.end_date;
@@ -683,11 +672,10 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Descarga Oficial con html2pdf configurado para 2 páginas A4
         document.getElementById('generate-pdf-btn').addEventListener('click', () => {
             const element = document.getElementById('pdf-printable');
             const opt = {
-                margin:       [0.25, 0.25, 0.25, 0.25],
+                margin:       [0.3, 0.3, 0.3, 0.3],
                 filename:     `Liquidacion_Laboral_${currentCalculation.worker.dni}_${currentCalculation.company.ruc}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true },
@@ -711,11 +699,18 @@
             input.value = "";
             chatBox.scrollTop = chatBox.scrollHeight;
 
+            const warmNotice = setTimeout(() => {
+                const loadingElem = document.getElementById('ai-loading');
+                if (loadingElem) {
+                    loadingElem.innerHTML = `<span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span> Conectando con la base normativa de SUNAFIL, un momento...`;
+                }
+            }, 3500);
+
             let replyText = "";
 
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 25000);
+                const timeoutId = setTimeout(() => controller.abort(), 35000); // 35 segundos para erradicar abortos
 
                 const res = await fetch(`${BACKEND_URL}/api/ai-consult`, {
                     method: 'POST',
@@ -724,6 +719,7 @@
                     signal: controller.signal
                 });
                 clearTimeout(timeoutId);
+                clearTimeout(warmNotice);
 
                 const data = await res.json();
                 if (data.reply) {
@@ -732,7 +728,8 @@
                     replyText = `Error inesperado: ${JSON.stringify(data)}`;
                 }
             } catch (e) {
-                replyText = `Error de conexión: ${e.message}. Si el servidor estaba en reposo, reintenta en unos segundos.`;
+                clearTimeout(warmNotice);
+                replyText = `El servidor se encontraba suspendido y acaba de reactivarse. Por favor envía tu mensaje una vez más.`;
             }
 
             document.getElementById('ai-loading')?.remove();
@@ -746,7 +743,6 @@
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        // Culqi Yape
         function initCulqi() {
             if (typeof Culqi !== 'undefined') {
                 Culqi.publicKey = CULQI_PUBLIC_KEY;
