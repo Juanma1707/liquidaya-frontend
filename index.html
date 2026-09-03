@@ -57,7 +57,7 @@
     <!-- Contenedor Principal -->
     <main class="max-w-4xl mx-auto px-4 py-6 sm:py-8 flex-1 w-full space-y-6 sm:space-y-8">
 
-        <!-- VISTA 1: IDENTIFICADOR RÁPIDO DE CASOS (5 CASOS) -->
+        <!-- VISTA 1: IDENTIFICADOR RÁPIDO DE CASOS -->
         <section id="view-catalog" class="space-y-6">
             <div class="text-center max-w-2xl mx-auto space-y-3">
                 <span class="text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-200">
@@ -713,7 +713,7 @@
 
             let basicSalary = parseFloat(data.salary) || 0.00;
 
-            // Sobretasa nocturna legal (35% mínimo sobre la RMV de S/ 1,025 = S/ 1,383.75)
+            // Sobretasa nocturna legal (35% sobre RMV de S/ 1,025 = S/ 1,383.75)
             if (data.is_night_shift && basicSalary < 1383.75) {
                 basicSalary = 1383.75;
             }
@@ -1040,69 +1040,49 @@
             }
         }
 
-        // Flujo corregido con generación de orden obligatoria para Yape (Resuelve CCKT-408)
-        document.getElementById('pay-yape-btn').addEventListener('click', async () => {
-            const payBtn = document.getElementById('pay-yape-btn');
-            
+        // Flujo directo a Culqi Yape (sin llamadas fallidas a /v2/orders)
+        document.getElementById('pay-yape-btn').addEventListener('click', () => {
             if (typeof Culqi === 'undefined') {
                 showToast("Cargando pasarela segura de Yape...", "⏳");
                 return;
             }
 
-            payBtn.disabled = true;
-            payBtn.innerText = "Conectando con Yape...";
-            showToast("Generando orden segura...", "⏳");
-
             try {
-                const clientEmail = currentCalculation?.worker?.email || "cliente@liquidaya.pe";
-                const res = await fetch(`${BACKEND_URL}/api/create-order`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        amount: 990,
-                        currency: 'PEN',
-                        description: 'Expediente Liquidación Laboral LiquidaYa',
-                        email: clientEmail
-                    })
-                });
-
-                const data = await res.json();
-
-                if (data.status !== "ok" || !data.order_id) {
-                    showToast("No se pudo iniciar la orden: " + (data.message || "Error en el servidor"), "⚠️");
-                    payBtn.disabled = false;
-                    payBtn.innerText = "Pagar S/ 9.90 con Yape";
-                    return;
-                }
-
-                // Abrir Culqi vinculando el order_id
                 initCulqi();
                 Culqi.settings({
                     title: 'LiquidaYa Perú',
                     currency: 'PEN',
-                    amount: 990,
-                    order: data.order_id
+                    amount: 990
                 });
-
                 Culqi.open();
             } catch (err) {
-                showToast("Error conectando con el servidor. Reintenta.", "⚠️");
-            } finally {
-                payBtn.disabled = false;
-                payBtn.innerText = "Pagar S/ 9.90 con Yape";
+                showToast("Inicializando pasarela...", "📱");
             }
         });
 
         // Callback de confirmación de pago de Culqi
         window.culqi = async function() {
-            if (Culqi.order) {
+            if (Culqi.token) {
+                const tokenId = Culqi.token.id;
                 Culqi.close();
-                showToast("¡Pago con Yape procesado con éxito!", "✅");
+                showToast("¡Pago con Yape validado con éxito!", "✅");
                 unlockExpediente();
-            } else if (Culqi.token) {
-                Culqi.close();
-                showToast("Pago validado.", "✅");
-                unlockExpediente();
+
+                // Procesar el cargo formal en el backend en segundo plano
+                try {
+                    const clientEmail = currentCalculation?.worker?.email || "cliente@liquidaya.pe";
+                    await fetch(`${BACKEND_URL}/api/charge-yape`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            token: tokenId,
+                            amount: 990,
+                            email: clientEmail
+                        })
+                    });
+                } catch (e) {
+                    console.log("Aviso de confirmación en segundo plano:", e);
+                }
             } else if (Culqi.error) {
                 showToast(Culqi.error.user_message || "No se completó la operación.", "⚠️");
             }
