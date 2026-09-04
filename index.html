@@ -183,7 +183,7 @@ body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         </div>
         <div>
           <label class="font-bold text-slate-700 block mb-0.5">RUC del empleador (11 dígitos):</label>
-          <span class="text-[10px] text-slate-400 block mb-1">Búscalo en tus boletas o contrato (si no lo sabes, pon 20000000001)</span>
+          <span class="text-[10px] text-slate-400 block mb-1">Búscalo en tu boleta o en "Consulta RUC SUNAT" con el nombre de tu empresa</span>
           <input type="text" id="company-ruc" maxlength="11" inputmode="numeric" placeholder="Ej. 20601234567" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-mono">
         </div>
       </div>
@@ -207,8 +207,8 @@ body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
           <label class="font-bold text-slate-700 block mb-0.5">¿Tienes hijos a cargo?</label>
           <span class="text-[10px] text-slate-400 block mb-1">Menores de 18, o hasta 24 si estudian</span>
           <select id="family-bonus" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 font-medium">
-            <option value="no">No tengo hijos que califiquen</option>
-            <option value="yes" selected>Sí (+ S/ 102.50 al mes)</option>
+            <option value="no" selected>No tengo hijos que califiquen</option>
+            <option value="yes">Sí (+ S/ 102.50 al mes)</option>
           </select>
         </div>
         <div>
@@ -570,10 +570,7 @@ body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
 </footer>
 
 <script>
-// Al vivir el backend en el mismo Vercel, la ruta relativa queda vacía
 const BACKEND_URL = "";
-
-// Llave pública de Izipay (se cambiará cuando obtengas las credenciales)
 const IZIPAY_PUBLIC_KEY = "TU_LLAVE_PUBLICA_IZIPAY_AQUI";
 
 let currentCalculation = null;
