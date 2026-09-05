@@ -1,637 +1,762 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LiquidaYa.pe - Defensa de los Derechos del Trabajador en el Perú</title>
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- html2pdf.js para exportar el expediente en PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LiquidaYa.pe | Calcula tu liquidación y reclama lo que te deben</title>
 
-  <!-- Librerías de Izipay Krypton Client (Producción) -->
-  <link rel="stylesheet" href="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic-reset.css">
-  <script src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.js"></script>
-  <script 
-    src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/stable/kr-payment-form.min.js"
-    kr-public-key="5994464:publickey_751kvxY3JDhPt8k1vSyuY90qkq4PqfweQwD7hWsPqHu"
-    kr-post-url-success="/api/pago-exitoso">
-  </script>
+<script src="https://cdn.tailwindcss.com"></script>
 
-  <style>
-    .kr-embedded {
-      width: 100% !important;
-      max-width: 380px !important;
-      margin: 0 auto !important;
-    }
-  </style>
+<!-- Generación de PDF con texto real (no una imagen de la pantalla) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.6/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.6/vfs_fonts.min.js"></script>
+
+<!-- Pasarela de pagos: Izipay con credencial de producción activa -->
+<link rel="stylesheet" href="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.css" />
+<script type="text/javascript" src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.js"></script>
+<script type="text/javascript"
+  src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/stable/kr-payment-form.min.js"
+  kr-public-key="5994464:publickey_751kvxY3JDhPt8k1vSyuY90qkq4PqfweQwD7hWsPqHu"
+  kr-post-url-success="/">
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#152238; --navy-2:#1e2f4d; --gold:#b8862d; --gold-2:#d9ab4f;
+    --paper:#faf7f1; --paper-2:#f2ecdf; --ink:#241f14; --muted:#6b6455;
+    --rule:#e6ddc8; --brick:#963c32;
+  }
+  body{ font-family:'Inter',sans-serif; background:var(--paper); color:var(--ink); }
+  .font-display{ font-family:'Fraunces',serif; }
+  .font-mono{ font-family:'JetBrains Mono',monospace; }
+  .rule{ border-color:var(--rule); }
+  .kr-embedded{ min-height:220px; }
+  .file-tab{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:2.1rem; height:2.1rem; border:1.5px solid var(--navy);
+    border-radius:9999px; font-family:'Fraunces',serif; font-weight:700; font-size:.95rem;
+    color:var(--navy); flex:none;
+  }
+  .stamp{
+    border:1.5px dashed var(--gold); color:var(--gold-2); background:transparent;
+  }
+  .step-dot{ width:1.9rem; height:1.9rem; border-radius:9999px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.8rem; }
+  .step-dot.active{ background:var(--navy); color:#fff; }
+  .step-dot.done{ background:var(--gold); color:#fff; }
+  .step-dot.pending{ background:#eee7d6; color:var(--muted); }
+</style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+<body class="antialiased min-h-screen flex flex-col justify-between">
 
-  <!-- Header -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
-    <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <a href="#" class="text-2xl font-black tracking-tight text-slate-900">
-          Liquida<span class="text-indigo-600">Ya</span><span class="text-slate-900">.pe</span>
-        </a>
-      </div>
-      <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full shadow-sm">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span>Leyes Laborales SUNAFIL 2026</span>
-      </div>
+<!-- ===================== HEADER ===================== -->
+<header class="bg-[var(--paper)] border-b rule sticky top-0 z-40">
+  <div class="max-w-5xl mx-auto px-4 py-3.5 flex items-center justify-between">
+    <a href="/" class="font-display text-2xl font-bold tracking-tight text-[var(--navy)]">
+      Liquida<span class="text-[var(--gold)]">Ya</span><span class="text-[var(--muted)] text-base font-normal">.pe</span>
+    </a>
+    <div class="stamp px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5">
+      <span class="w-1.5 h-1.5 rounded-full bg-[var(--gold-2)]"></span>
+      Leyes laborales · SUNAFIL 2026
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- Contenedor Principal del Catálogo -->
-  <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full">
-    
-    <!-- Hero / Título Principal -->
-    <div class="text-center max-w-3xl mx-auto mb-8">
-      <span class="text-xs font-extrabold tracking-widest text-indigo-600 uppercase">Defensa de los derechos del trabajador en el Perú</span>
-      <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight mt-2 mb-3">¿Qué te pasó en tu trabajo?</h1>
-      <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-        Lee las 5 situaciones de abajo y toca la que más se parece a lo que viviste tú. Con eso armamos tu cálculo exacto y el documento que necesitas para reclamar.
+<div id="toast-msg" class="hidden fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-[var(--navy)] text-white text-xs font-semibold px-5 py-3 rounded-xl shadow-2xl flex items-center gap-2 max-w-sm text-center">
+  <span id="toast-icon">ℹ️</span><span id="toast-text"></span>
+</div>
+
+<main class="max-w-4xl mx-auto px-4 py-8 sm:py-10 flex-1 w-full space-y-8">
+
+  <!-- ===================== CATÁLOGO ===================== -->
+  <section id="view-catalog" class="space-y-6">
+    <div class="max-w-2xl space-y-3">
+      <span class="text-[11px] font-bold uppercase tracking-[0.15em] text-[var(--gold)]">Defensa laboral · Perú</span>
+      <h1 class="font-display text-3xl sm:text-4xl font-bold text-[var(--navy)] leading-tight">¿Qué te pasó en tu trabajo?</h1>
+      <p class="text-sm text-[var(--muted)] leading-relaxed">
+        Lee las 5 situaciones y toca la que se parezca a lo tuyo. Vamos a calcular tu monto exacto
+        y armar el documento que necesitas para reclamarlo.
       </p>
     </div>
 
-    <!-- Regla Legal de Oro (Banner Negro) -->
-    <div class="bg-slate-950 text-white rounded-2xl p-5 sm:p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-5 shadow-lg border border-slate-800">
+    <div class="bg-[var(--navy)] text-white rounded-2xl p-5 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-5 shadow-lg">
       <div>
-        <span class="inline-block bg-amber-400 text-slate-950 font-black text-[11px] px-2.5 py-0.5 rounded tracking-wider uppercase mb-1.5">
-          Regla legal de oro en el Perú:
-        </span>
-        <h2 class="text-lg sm:text-xl font-extrabold text-white">Tu empleador tiene solo 48 horas tras tu salida para pagarte</h2>
-        <p class="text-slate-400 text-xs sm:text-sm mt-1">
-          "El contador no vino", "espera a fin de mes" o "falta una firma" son pretextos ilegales (D.S. 001-97-TR).
-        </p>
+        <span class="inline-block bg-[var(--gold)] text-[var(--navy)] font-bold text-[11px] px-2.5 py-0.5 rounded uppercase tracking-wider mb-1.5">Regla legal de oro</span>
+        <h2 class="font-display text-lg sm:text-xl font-bold">Tu empleador tiene solo 48 horas tras tu salida para pagarte</h2>
+        <p class="text-white/60 text-xs mt-1">"El contador no vino", "espera a fin de mes" o "falta una firma" son pretextos ilegales (D.S. 001-97-TR).</p>
       </div>
-      <div class="flex-shrink-0 w-full md:w-auto">
-        <button onclick="seleccionarCaso('despido', '1. Dejé el trabajo hace días y todavía no me pagan')" class="w-full md:w-auto bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold px-6 py-3 rounded-xl text-sm transition duration-150 shadow-md flex items-center justify-center gap-2">
-          <span>Reclamar mi pago ahora</span>
-        </button>
+      <button onclick="abrirCaso(null, false, '¿Qué pasó exactamente?')" class="w-full md:w-auto bg-[var(--gold)] hover:bg-[var(--gold-2)] text-[var(--navy)] font-bold px-6 py-3 rounded-xl text-sm transition shadow-md whitespace-nowrap">
+        Reclamar mi pago ahora
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div onclick="abrirCaso(null, false, 'Ya salí del trabajo y no me pagan')" class="bg-white rounded-2xl p-5 border rule shadow-sm flex flex-col justify-between gap-4 hover:border-[var(--gold)] hover:shadow-md transition cursor-pointer">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2.5">
+            <span class="file-tab text-xs">01</span>
+            <span class="text-[11px] font-bold uppercase text-[var(--brick)]">Plazo vencido · S/ 9.90</span>
+          </div>
+          <h3 class="font-display font-bold text-slate-900">"Dejé el trabajo hace días y todavía no me pagan"</h3>
+          <p class="text-xs text-[var(--muted)] leading-relaxed">Te dicen "vuelve la otra semana" o no contestan. La ley les da 48 horas exactas para pagarte todo.</p>
+        </div>
+        <div class="w-full bg-[var(--navy)] text-white font-semibold text-xs py-2.5 rounded-xl text-center">Calcular lo que me deben</div>
+      </div>
+
+      <div onclick="abrirCaso('despido', false, 'Me despidieron sin carta ni razón válida')" class="bg-white rounded-2xl p-5 border rule shadow-sm flex flex-col justify-between gap-4 hover:border-[var(--gold)] hover:shadow-md transition cursor-pointer">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2.5">
+            <span class="file-tab text-xs">02</span>
+            <span class="text-[11px] font-bold uppercase text-[var(--brick)]">Hasta 12 sueldos · S/ 9.90</span>
+          </div>
+          <h3 class="font-display font-bold text-slate-900">"Me dijeron 'hasta hoy trabajas' y no me dejaron volver"</h3>
+          <p class="text-xs text-[var(--muted)] leading-relaxed">Te despidieron de palabra o por WhatsApp, sin carta. Te corresponde tu liquidación completa MÁS indemnización.</p>
+        </div>
+        <div class="w-full bg-[var(--navy)] text-white font-semibold text-xs py-2.5 rounded-xl text-center">Calcular mi indemnización</div>
+      </div>
+
+      <div onclick="abrirCaso('renuncia', false, 'Renuncié o venció mi contrato')" class="bg-white rounded-2xl p-5 border rule shadow-sm flex flex-col justify-between gap-4 hover:border-[var(--gold)] hover:shadow-md transition cursor-pointer">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2.5">
+            <span class="file-tab text-xs">03</span>
+            <span class="text-[11px] font-bold uppercase text-[var(--gold)]">Cálculo al centavo · S/ 9.90</span>
+          </div>
+          <h3 class="font-display font-bold text-slate-900">"Renuncié yo mismo, o se terminó mi contrato"</h3>
+          <p class="text-xs text-[var(--muted)] leading-relaxed">Aunque hayas renunciado, igual te deben tu CTS, gratificación y vacaciones truncas.</p>
+        </div>
+        <div class="w-full bg-[var(--navy)] text-white font-semibold text-xs py-2.5 rounded-xl text-center">Calcular mi liquidación</div>
+      </div>
+
+      <div onclick="abrirCaso(null, true, 'Ya reclamé y no me hacen caso')" class="bg-white rounded-2xl p-5 border rule shadow-sm flex flex-col justify-between gap-4 hover:border-[var(--gold)] hover:shadow-md transition cursor-pointer">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2.5">
+            <span class="file-tab text-xs">04</span>
+            <span class="text-[11px] font-bold uppercase text-[var(--brick)]">Multa a la empresa · S/ 9.90</span>
+          </div>
+          <h3 class="font-display font-bold text-slate-900">"Ya reclamé por las buenas y me siguen ignorando"</h3>
+          <p class="text-xs text-[var(--muted)] leading-relaxed">Genera la denuncia formal para que SUNAFIL le haga una inspección a tu ex-empleador.</p>
+        </div>
+        <div class="w-full bg-[var(--navy)] text-white font-semibold text-xs py-2.5 rounded-xl text-center">Generar denuncia SUNAFIL</div>
+      </div>
+
+      <div onclick="abrirCaso('hostilidad', false, 'Me hostigan para que renuncie solo')" class="md:col-span-2 bg-white rounded-2xl p-5 border rule shadow-sm flex flex-col sm:flex-row items-center justify-between gap-5 hover:border-[var(--gold)] hover:shadow-md transition cursor-pointer">
+        <div class="space-y-1.5 w-full">
+          <div class="flex items-center gap-2.5">
+            <span class="file-tab text-xs">05</span>
+            <span class="text-[11px] font-bold uppercase text-[#6b3fa0]">Tienes 6 días para actuar · S/ 9.90</span>
+          </div>
+          <h3 class="font-display font-bold text-slate-900">"No me botan, pero me hacen la vida imposible para que renuncie solo"</h3>
+          <p class="text-xs text-[var(--muted)] leading-relaxed max-w-xl">Te bajaron el sueldo, te cambiaron de puesto o te hostigan. Esto exige a la empresa que pare, bajo amenaza de indemnizarte igual que un despido.</p>
+        </div>
+        <div class="w-full sm:w-auto bg-[var(--gold)] text-[var(--navy)] font-bold text-xs py-2.5 px-6 rounded-xl text-center whitespace-nowrap">Reclamar hostilidad</div>
       </div>
     </div>
 
-    <!-- Grid de las 5 Tarjetas -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-      
-      <!-- Caso 1 -->
-      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:border-indigo-300 hover:shadow-md transition">
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-extrabold uppercase px-2.5 py-1 rounded bg-rose-50 text-rose-700 border border-rose-100">Plazo vencido</span>
-            <span class="text-sm font-black text-slate-400">S/ 9.90</span>
-          </div>
-          <h3 class="text-lg font-extrabold text-slate-900 mb-2">1. "Dejé el trabajo hace días y todavía no me pagan"</h3>
-          <p class="text-xs text-slate-600 leading-relaxed mb-6">
-            Te están "paseando" con pretextos. Te calculamos los días de retraso, liquidación completa e intereses legales exactos para pagarte todo.
-          </p>
-        </div>
-        <button onclick="seleccionarCaso('renuncia', '1. Dejé el trabajo hace días y todavía no me pagan')" class="w-full bg-slate-900 hover:bg-indigo-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2">
-          <span>Calcular lo que me deben →</span>
-        </button>
-      </div>
-
-      <!-- Caso 2 -->
-      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:border-indigo-300 hover:shadow-md transition">
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-extrabold uppercase px-2.5 py-1 rounded bg-amber-50 text-amber-800 border border-amber-100">Hasta 12 sueldos</span>
-            <span class="text-sm font-black text-slate-400">S/ 9.90</span>
-          </div>
-          <h3 class="text-lg font-extrabold text-slate-900 mb-2">2. "Me dijeron 'hasta hoy trabajas' / no me dejaron volver"</h3>
-          <p class="text-xs text-slate-600 leading-relaxed mb-6">
-            Te despidieron de palabra, por WhatsApp, sin ninguna carta. Te corresponde la liquidación completa MÁS una indemnización por despido arbitrario.
-          </p>
-        </div>
-        <button onclick="seleccionarCaso('despido', '2. Me dijeron \'hasta hoy trabajas\' / no me dejaron volver')" class="w-full bg-slate-900 hover:bg-indigo-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2">
-          <span>Calcular mi indemnización →</span>
-        </button>
-      </div>
-
-      <!-- Caso 3 -->
-      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:border-indigo-300 hover:shadow-md transition">
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-extrabold uppercase px-2.5 py-1 rounded bg-blue-50 text-blue-700 border border-blue-100">Cálculo al centavo</span>
-            <span class="text-sm font-black text-slate-400">S/ 9.90</span>
-          </div>
-          <h3 class="text-lg font-extrabold text-slate-900 mb-2">3. "Renuncié yo mismo, o se terminó mi contrato"</h3>
-          <p class="text-xs text-slate-600 leading-relaxed mb-6">
-            Aunque hayas renunciado, igual te deben tu CTS, gratificación y vacaciones truncas completas. Calcúlalo exacto aquí.
-          </p>
-        </div>
-        <button onclick="seleccionarCaso('renuncia', '3. Renuncié yo mismo, o se terminó mi contrato')" class="w-full bg-slate-900 hover:bg-indigo-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2">
-          <span>Calcular mi liquidación →</span>
-        </button>
-      </div>
-
-      <!-- Caso 4 -->
-      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:border-indigo-300 hover:shadow-md transition">
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-extrabold uppercase px-2.5 py-1 rounded bg-red-50 text-red-700 border border-red-100">Multa a la empresa</span>
-            <span class="text-sm font-black text-slate-400">S/ 9.90</span>
-          </div>
-          <h3 class="text-lg font-extrabold text-slate-900 mb-2">4. "Ya reclamé por las buenas y me siguen ignorando"</h3>
-          <p class="text-xs text-slate-600 leading-relaxed mb-6">
-            Genera la carta de intimación legal y el formato de denuncia formal para que SUNAFIL le haga una inspección a tu ex-empleador.
-          </p>
-        </div>
-        <button onclick="seleccionarCaso('despido', '4. Ya reclamé por las buenas y me siguen ignorando')" class="w-full bg-slate-900 hover:bg-indigo-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2">
-          <span>Generar denuncia SUNAFIL →</span>
-        </button>
-      </div>
-
-      <!-- Caso 5 (Fila Completa) -->
-      <div class="md:col-span-2 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6 hover:border-indigo-300 hover:shadow-md transition">
-        <div>
-          <div class="flex items-center gap-3 mb-2">
-            <span class="text-xs font-extrabold uppercase px-2.5 py-1 rounded bg-purple-50 text-purple-700 border border-purple-100">Tienes 6 días para actuar</span>
-            <span class="text-sm font-black text-slate-400">S/ 9.90</span>
-          </div>
-          <h3 class="text-lg font-extrabold text-slate-900 mb-1">5. "No me botan, pero me hacen la vida imposible para que renuncie solo"</h3>
-          <p class="text-xs text-slate-600 max-w-2xl leading-relaxed">
-            Te bajaron el sueldo, te cambiaron de puesto o te hostigan. Esto exige a la empresa que pare, bajo amenaza de indemnizarte igual que un despido.
-          </p>
-        </div>
-        <div class="flex-shrink-0 w-full md:w-auto">
-          <button onclick="seleccionarCaso('despido', '5. Actos de hostilidad laboral')" class="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2">
-            <span>Reclamar hostilidad →</span>
-          </button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Nota inferior de orientación legal -->
-    <p class="text-center text-xs text-slate-500 max-w-xl mx-auto mb-12">
-      Esta página te ayuda a calcular y ordenar tu reclamo, no reemplaza a un abogado. Para casos grandes o complicados, siempre es mejor consultar con uno.
+    <p class="text-center text-[11px] text-[var(--muted)] px-4">
+      Esta página te ayuda a calcular y ordenar tu reclamo; no reemplaza a un abogado. Para casos grandes o complicados, siempre es mejor consultar con uno.
     </p>
+  </section>
 
-    <!-- FORMULARIO DE CÁLCULO (Se despliega al elegir un caso) -->
-    <div id="seccionCalculadora" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 mb-8">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
-        <div>
-          <span class="text-xs font-extrabold uppercase text-indigo-600 tracking-wider">Paso siguiente</span>
-          <h2 id="tituloCasoSeleccionado" class="text-xl font-black text-slate-900 mt-0.5">Completar datos para el cálculo</h2>
-        </div>
-        <button onclick="cerrarCalculadora()" class="text-xs font-bold text-slate-400 hover:text-slate-700">Cambiar caso</button>
+  <!-- ===================== CALCULADORA (3 pasos) ===================== -->
+  <section id="view-calculator" class="hidden bg-white p-6 sm:p-8 rounded-2xl border rule shadow-sm space-y-6">
+    <div class="flex items-center justify-between border-b rule pb-4">
+      <div>
+        <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--gold)] block">Tu caso</span>
+        <h2 id="titulo-caso" class="font-display text-lg font-bold text-[var(--navy)]">Cuéntanos qué pasó</h2>
       </div>
+      <button onclick="volverAlCatalogo()" class="text-xs font-semibold text-[var(--muted)] hover:text-[var(--navy)] bg-[var(--paper-2)] px-3 py-1.5 rounded-xl transition">← Cambiar caso</button>
+    </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+    <div class="flex items-center gap-3">
+      <div id="dot-1" class="step-dot active">1</div><div class="flex-1 h-px rule border-t"></div>
+      <div id="dot-2" class="step-dot pending">2</div><div class="flex-1 h-px rule border-t"></div>
+      <div id="dot-3" class="step-dot pending">3</div>
+    </div>
+
+    <form id="liquidation-form" class="space-y-6 text-sm" onsubmit="return false;">
+
+      <!-- PASO 1 -->
+      <div id="paso-1" class="space-y-4">
+        <h3 class="font-display font-bold text-[var(--navy)]">Paso 1 · Qué pasó y quién eres</h3>
         <div>
-          <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Motivo de Cese</label>
-          <select id="motivoCese" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-            <option value="despido">Despido Arbitrario / Sin causa</option>
-            <option value="renuncia">Renuncia Voluntaria</option>
-            <option value="fin_contrato">Fin de Contrato de Trabajo</option>
-            <option value="mutuo">Mutuo Disenso / Acuerdo</option>
+          <label class="font-semibold text-slate-700 block mb-1">¿Por qué terminó tu relación laboral?</label>
+          <select id="motivo-cese" required class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)]">
+            <option value="" disabled selected>— Elige lo que te pasó a ti —</option>
+            <option value="renuncia">Renuncié yo mismo/a</option>
+            <option value="fin_contrato">Se terminó mi contrato (no me renovaron)</option>
+            <option value="despido">Me despidieron sin carta ni razón válida</option>
+            <option value="hostilidad">Me hostigan / bajaron mi sueldo para que renuncie yo</option>
           </select>
         </div>
+        <label class="flex items-start gap-2.5 cursor-pointer bg-[var(--paper-2)] p-3.5 rounded-xl border rule text-xs text-slate-700">
+          <input type="checkbox" id="escalar-sunafil" class="mt-0.5 rounded text-[var(--navy)] focus:ring-0">
+          <span>Ya le reclamé a mi empresa (verbalmente o por escrito) y sigue sin pagarme o sin hacerme caso — quiero la <strong>denuncia formal ante SUNAFIL</strong> en vez de la carta simple.</span>
+        </label>
 
-        <div>
-          <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Sueldo Básico Mensual (S/)</label>
-          <input type="number" id="sueldoBasico" placeholder="Ej. 1500" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-        </div>
-
-        <div>
-          <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Fecha de Ingreso</label>
-          <input type="date" id="fechaIngreso" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-        </div>
-
-        <div>
-          <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Fecha de Salida / Cese</label>
-          <input type="date" id="fechaCese" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-        </div>
-
-        <div class="sm:col-span-2 flex items-center gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
-          <input type="checkbox" id="asignacionFamiliar" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
-          <label for="asignacionFamiliar" class="text-sm font-medium text-slate-700 cursor-pointer">
-            Percibo Asignación Familiar (Tengo hijos menores o dependientes en estudios superiores)
-          </label>
-        </div>
-
-        <div class="sm:col-span-2 border-t border-slate-100 pt-4 mt-2">
-          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-4">Datos para el expediente legal</span>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Tus Nombres y Apellidos</label>
-              <input type="text" id="nombreCompleto" placeholder="Ej. Juan Pérez" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Tu DNI</label>
-              <input type="text" id="dniTrabajador" maxlength="8" placeholder="Ej. 70627494" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Nombre o Razón Social del Empleador</label>
-              <input type="text" id="nombreEmpleador" placeholder="Ej. Mi Empresa S.A.C." class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">RUC del Empleador (Opcional)</label>
-              <input type="text" id="rucEmpleador" maxlength="11" placeholder="Ej. 20603235780" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+          <div>
+            <label class="font-semibold text-slate-700 block mb-1">Tu nombre completo:</label>
+            <input type="text" id="worker-name" autocomplete="name" placeholder="Ej. Juan Carlos Pérez Quispe" required class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)]">
+          </div>
+          <div>
+            <label class="font-semibold text-slate-700 block mb-1">Tu documento de identidad:</label>
+            <div class="flex gap-2">
+              <select id="worker-id-type" class="p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)] text-xs">
+                <option value="DNI" selected>DNI</option>
+                <option value="CE">Carné Ext.</option>
+              </select>
+              <input type="text" id="worker-dni" maxlength="12" inputmode="numeric" placeholder="70627494" required class="flex-1 p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)] font-mono">
             </div>
           </div>
         </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="font-semibold text-slate-700 block mb-1">¿Dónde vives ahora?</label>
+            <input type="text" id="worker-address" autocomplete="street-address" placeholder="Ej. Av. Los Laureles 320, Piura" required class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)]">
+          </div>
+          <div>
+            <label class="font-semibold text-slate-700 block mb-1">Tu correo electrónico:</label>
+            <input type="email" id="worker-email" autocomplete="email" placeholder="trabajador@gmail.com" required class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)]">
+          </div>
+        </div>
+        <div>
+          <label class="font-semibold text-slate-700 block mb-1">Tu número de WhatsApp:</label>
+          <input type="tel" id="worker-phone" maxlength="9" inputmode="numeric" autocomplete="tel" placeholder="957418893" required class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)]">
+        </div>
+        <div class="flex justify-end pt-2">
+          <button type="button" onclick="irAPaso(2)" class="bg-[var(--navy)] text-white font-semibold text-sm px-6 py-2.5 rounded-xl">Siguiente →</button>
+        </div>
       </div>
 
-      <div class="mt-6">
-        <button onclick="ejecutarCalculo()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-black py-3.5 px-6 rounded-xl transition duration-150 shadow-md flex items-center justify-center gap-2">
-          <span>Calcular mi dinero ahora</span>
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      <!-- PASO 2 -->
+      <div id="paso-2" class="hidden space-y-4">
+        <h3 class="font-display font-bold text-[var(--navy)]">Paso 2 · Tu empleador y tu sueldo</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="font-semibold text-slate-700 block mb-0.5">Nombre de la empresa o tu jefe:</label>
+            <input type="text" id="company-name" placeholder="Ej. Inversiones Comerciales SAC" required class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)]">
+          </div>
+          <div>
+            <label class="font-semibold text-slate-700 block mb-0.5">RUC del empleador (11 dígitos):</label>
+            <span class="text-[10px] text-[var(--muted)] block mb-1">Está en tus boletas. Si no las tienes, búscalo gratis en <strong>sunat.gob.pe</strong> con el nombre de la empresa.</span>
+            <input type="text" id="company-ruc" maxlength="11" inputmode="numeric" placeholder="20601234567" required class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)] font-mono">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="font-semibold text-slate-700 block mb-1">Fecha en que empezaste a trabajar:</label>
+            <input type="date" id="start-date" required class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)] font-mono">
+          </div>
+          <div>
+            <label class="font-semibold text-slate-700 block mb-1">Fecha de tu último día (cese):</label>
+            <input type="date" id="end-date" required class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)] font-mono">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="font-semibold text-slate-700 block mb-0.5">Sueldo bruto mensual (S/):</label>
+            <span class="text-[10px] text-[var(--gold)] block mb-1 font-semibold">Antes de descuentos AFP/ONP</span>
+            <input type="number" step="0.01" id="monthly-salary" placeholder="2500.00" required class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)] font-bold">
+          </div>
+          <div>
+            <label class="font-semibold text-slate-700 block mb-0.5">¿Tienes hijos a cargo?</label>
+            <span class="text-[10px] text-[var(--muted)] block mb-1">Menores de 18, o hasta 24 si estudian</span>
+            <select id="family-bonus" class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)]">
+              <option value="no" selected>No tengo hijos que califiquen</option>
+              <option value="yes">Sí (+ S/ 102.50 al mes)</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-semibold text-slate-700 block mb-0.5">¿Cómo te pagaban?</label>
+            <select id="contract-modality" class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)]">
+              <option value="planilla" selected>En planilla formal</option>
+              <option value="rxh">Con Recibos por Honorarios</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="font-semibold text-slate-700 block mb-0.5">Tamaño de la empresa:</label>
+            <span class="text-[10px] text-[var(--muted)] block mb-1">Guíate por lo que te pagaban al año</span>
+            <select id="labor-regime" class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)] text-xs font-semibold">
+              <option value="general" selected>Empresa grande / general (beneficios completos)</option>
+              <option value="pequena">Pequeña empresa - REMYPE (mitad de CTS y gratificación)</option>
+              <option value="micro">Microempresa - REMYPE (sin CTS ni gratificación)</option>
+              <option value="hogar">Trabajadora del hogar (Ley 31047)</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-semibold text-slate-700 block mb-0.5">¿Qué seguro médico tenías?</label>
+            <select id="health-insurance" class="w-full p-2.5 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)] text-xs">
+              <option value="essalud" selected>EsSalud regular (bono del 9%)</option>
+              <option value="eps">EPS privada (bono del 6.75%)</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex justify-between pt-2">
+          <button type="button" onclick="irAPaso(1)" class="bg-[var(--paper-2)] text-[var(--navy)] font-semibold text-sm px-6 py-2.5 rounded-xl">← Atrás</button>
+          <button type="button" onclick="irAPaso(3)" class="bg-[var(--navy)] text-white font-semibold text-sm px-6 py-2.5 rounded-xl">Siguiente →</button>
+        </div>
+      </div>
+
+      <!-- PASO 3 -->
+      <div id="paso-3" class="hidden space-y-4">
+        <h3 class="font-display font-bold text-[var(--navy)]">Paso 3 · Ajustes que afinan tu cálculo</h3>
+        <p class="text-xs text-[var(--muted)]">Solo llena esto si aplica a tu caso. Si no, déjalo así y calcula.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="font-semibold text-slate-600 block mb-0.5 text-xs">Comisiones / horas extra promedio (S/):</label>
+            <input type="number" step="0.01" id="commissions-avg" value="0.00" class="w-full p-2 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)] font-mono text-xs">
+          </div>
+          <div>
+            <label class="font-semibold text-slate-600 block mb-0.5 text-xs">Vacaciones de años pasados sin gozar:</label>
+            <select id="pending-vacation-years" class="w-full p-2 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)] text-xs">
+              <option value="0" selected>Ninguno</option>
+              <option value="1">1 año pendiente</option>
+              <option value="2">2 años pendientes</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-semibold text-slate-600 block mb-0.5 text-xs">Préstamos a descontar (S/):</label>
+            <input type="number" step="0.01" id="loans-discount" value="0.00" class="w-full p-2 bg-[var(--paper)] border rule rounded-xl outline-none focus:border-[var(--gold)] font-mono text-xs">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t rule text-xs">
+          <label class="flex items-center gap-2 cursor-pointer text-slate-700">
+            <input type="checkbox" id="check-night-shift" class="rounded text-[var(--navy)] focus:ring-0">
+            <span>Trabajaba en horario nocturno (10pm–6am)</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer text-slate-700">
+            <input type="checkbox" id="check-modal-five-years" class="rounded text-[var(--navy)] focus:ring-0">
+            <span>Tuve contratos renovados por más de 5 años</span>
+          </label>
+        </div>
+        <div class="flex justify-between pt-4">
+          <button type="button" onclick="irAPaso(2)" class="bg-[var(--paper-2)] text-[var(--navy)] font-semibold text-sm px-6 py-2.5 rounded-xl">← Atrás</button>
+          <button type="button" onclick="calcular()" class="bg-[var(--gold)] hover:bg-[var(--gold-2)] text-[var(--navy)] font-bold text-sm px-7 py-3 rounded-xl shadow-md">Calcular mi dinero</button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <!-- ===================== RESULTADOS + PAGO ===================== -->
+  <section id="view-preview" class="hidden space-y-6">
+    <div class="bg-white rounded-2xl p-6 sm:p-8 border rule shadow-sm space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b rule pb-5">
+        <div>
+          <span class="text-[11px] font-bold uppercase text-[var(--gold)] tracking-wider">Cálculo completado</span>
+          <h2 class="font-display text-2xl font-bold text-[var(--navy)]">Esto es lo que te deberían pagar</h2>
+        </div>
+        <div class="bg-[var(--paper-2)] border rule rounded-2xl px-5 py-3 text-right">
+          <span class="text-[11px] font-semibold text-[var(--muted)] uppercase block">Total neto estimado</span>
+          <span id="preview-total-amount" class="font-display text-3xl font-bold text-[var(--navy)]">S/ 0.00</span>
+        </div>
+      </div>
+
+      <p class="text-xs text-[var(--muted)]">Cálculo de orientación según la ley laboral vigente; no reemplaza la opinión de un abogado.</p>
+
+      <div class="space-y-2">
+        <div class="flex justify-between items-center p-3 rounded-xl bg-[var(--paper)] border rule text-sm">
+          <span class="text-slate-600">CTS (Compensación por Tiempo de Servicios)</span>
+          <strong id="preview-cts" class="font-mono text-slate-900">S/ 0.00</strong>
+        </div>
+        <div class="flex justify-between items-center p-3 rounded-xl bg-[var(--paper)] border rule text-sm">
+          <span class="text-slate-600">Gratificación trunca + bono legal</span>
+          <strong id="preview-grati" class="font-mono text-slate-900">S/ 0.00</strong>
+        </div>
+        <div class="flex justify-between items-center p-3 rounded-xl bg-[var(--paper)] border rule text-sm">
+          <span class="text-slate-600">Vacaciones del periodo trabajado</span>
+          <strong id="preview-vaca" class="font-mono text-slate-900">S/ 0.00</strong>
+        </div>
+        <div id="preview-pending-vaca-row" class="hidden flex justify-between items-center p-3 rounded-xl bg-[var(--paper)] border rule text-sm">
+          <span class="text-slate-600">Vacaciones vencidas de años anteriores</span>
+          <strong id="preview-pending-vaca" class="font-mono text-slate-900">S/ 0.00</strong>
+        </div>
+        <div id="preview-indemnizacion-row" class="hidden flex justify-between items-center p-3 rounded-xl bg-[#fbeeee] border border-[#f0d4d0] text-sm">
+          <span class="text-[var(--brick)] font-semibold">Indemnización</span>
+          <strong id="preview-indemnizacion" class="font-mono text-[var(--brick)]">S/ 0.00</strong>
+        </div>
+        <div id="preview-loans-row" class="hidden flex justify-between items-center p-3 rounded-xl bg-[var(--paper)] border rule text-sm text-slate-500 italic">
+          <span>Se descuentan tus adelantos o préstamos</span>
+          <strong id="preview-loans" class="font-mono">- S/ 0.00</strong>
+        </div>
+      </div>
+
+      <div class="stamp rounded-xl p-3.5 text-xs flex items-start gap-2.5">
+        <span class="font-display font-bold text-[var(--gold-2)]">i</span>
+        <div class="text-[var(--muted)]"><strong class="text-[var(--navy)]">No olvides pedir tu Carta de Cese:</strong> es lo que necesitas para retirar tu CTS del banco. Tu empleador está obligado a dártela en 48 horas, y va incluida en tu expediente.</div>
+      </div>
+
+      <div id="payment-error-box" class="hidden bg-[#fbeeee] border border-[#f0d4d0] text-[var(--brick)] text-xs font-semibold rounded-xl p-3"></div>
+
+      <div class="bg-[var(--navy)] text-white p-6 rounded-2xl space-y-4 shadow-xl">
+        <div class="text-center space-y-1">
+          <div class="font-display text-2xl font-bold text-[var(--gold-2)]">S/ 9.90 <span class="text-xs text-white/50 font-normal font-sans">— pago único con tu código Yape</span></div>
+          <h3 class="font-semibold text-sm">Tu expediente: liquidación + <span id="preview-doc-title">carta de requerimiento</span></h3>
+          <p class="text-xs text-white/50">PDF de texto real, listo para firmar, notariar o presentar en mesa de partes.</p>
+        </div>
+        <button id="pay-yape-btn" onclick="iniciarPago()" class="w-full bg-[var(--gold)] hover:bg-[var(--gold-2)] text-[var(--navy)] font-bold py-3.5 rounded-xl shadow-lg transition text-sm">
+          Pagar S/ 9.90 con Yape
         </button>
       </div>
     </div>
+  </section>
 
-    <!-- RESULTADOS DEL CÁLCULO -->
-    <div id="seccionResultados" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 mb-8">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-6">
-        <div>
-          <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Cálculo completado</span>
-          <h2 class="text-2xl font-black text-slate-900 mt-0.5">Resumen de Liquidación</h2>
-        </div>
-        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl px-5 py-3 text-right">
-          <span class="text-xs font-semibold text-emerald-700 uppercase block">Total Neto Estimado</span>
-          <span id="resTotal" class="text-3xl font-black text-emerald-700">S/ 0.00</span>
-        </div>
+  <!-- ===================== CONFIRMACIÓN ===================== -->
+  <section id="view-download" class="hidden">
+    <div class="bg-[#eef6ee] border border-[#cfe6cf] p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <h3 class="font-display font-bold text-[#1f5c33] text-base">¡Tu expediente está listo!</h3>
+        <p class="text-xs text-[#2c6b3f]">Se descargó un PDF de 2 páginas: tu liquidación y tu carta de requerimiento.</p>
       </div>
-
-      <div class="space-y-3 mb-8">
-        <div class="flex justify-between items-center p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-sm">
-          <span class="text-slate-600 font-medium">Compensación por Tiempo de Servicios (CTS Trunca)</span>
-          <span id="resCts" class="font-bold text-slate-900">S/ 0.00</span>
-        </div>
-        <div class="flex justify-between items-center p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-sm">
-          <span class="text-slate-600 font-medium">Gratificaciones Truncas + Bonificación Ley 29351 (9%)</span>
-          <span id="resGrati" class="font-bold text-slate-900">S/ 0.00</span>
-        </div>
-        <div class="flex justify-between items-center p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-sm">
-          <span class="text-slate-600 font-medium">Vacaciones Truncas</span>
-          <span id="resVacaciones" class="font-bold text-slate-900">S/ 0.00</span>
-        </div>
-        <div id="filaIndemnizacion" class="hidden flex justify-between items-center p-3.5 rounded-xl bg-amber-50 border border-amber-100 text-sm">
-          <span class="text-amber-800 font-semibold">Indemnización por Despido Arbitrario</span>
-          <span id="resIndemnizacion" class="font-bold text-amber-900">S/ 0.00</span>
-        </div>
-      </div>
-
-      <!-- Banner de Pago con Izipay -->
-      <div class="bg-slate-950 text-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
-        <div>
-          <div class="inline-block bg-indigo-500/30 text-indigo-300 text-xs font-bold px-2.5 py-1 rounded-full mb-2">Expediente Formal en PDF</div>
-          <h3 class="text-xl font-black">Descarga tu liquidación detallada y carta legal</h3>
-          <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-lg">
-            Documento de 2 páginas con hojas de cálculo desglosadas por cada concepto y carta de requerimiento lista para firmar e intimar al empleador.
-          </p>
-        </div>
-        <div class="flex-shrink-0 w-full sm:w-auto">
-          <button id="btnPagarYape" onclick="iniciarPagoIzipay()" class="w-full sm:w-auto bg-[#00D69E] hover:bg-[#00c08d] text-slate-950 font-black px-7 py-3.5 rounded-xl text-base shadow-lg transition flex items-center justify-center gap-2">
-            <span>Pagar S/ 9.90 con Yape</span>
-          </button>
-        </div>
-      </div>
+      <button onclick="descargarPdf()" class="bg-[var(--navy)] text-white font-semibold text-xs px-5 py-2.5 rounded-xl whitespace-nowrap">Descargar de nuevo</button>
     </div>
+  </section>
+</main>
 
-  </main>
-
-  <!-- Modal de Pasarela Izipay Embedded -->
-  <div id="modalIzipay" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 relative shadow-2xl border border-slate-100">
-      <button onclick="cerrarModalIzipay()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100 transition">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
-
-      <div class="text-center mb-5">
-        <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold mb-2">
-          <span>Pago 100% Seguro</span>
-        </div>
-        <h3 class="text-xl font-black text-slate-900">Completa tu pago con Yape</h3>
-        <p class="text-slate-500 text-xs mt-1">Monto total a cobrar: <strong class="text-slate-800">S/ 9.90</strong></p>
-      </div>
-
-      <!-- Contenedor donde Krypton dibuja el formulario de cobro -->
-      <div id="izipayEmbeddedContainer" class="min-h-[220px] flex items-center justify-center">
-        <div class="kr-embedded"></div>
-      </div>
+<!-- ===================== MODAL DE PAGO IZIPAY ===================== -->
+<div id="modal-izipay" class="hidden fixed inset-0 bg-[var(--navy)]/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl max-w-sm w-full p-6 relative shadow-2xl">
+    <button onclick="cerrarModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100">✕</button>
+    <div class="text-center mb-4">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#eef6ee] text-[#2c6b3f] rounded-full text-[11px] font-bold mb-2">Pago con Yape</div>
+      <h3 class="font-display text-lg font-bold text-[var(--navy)]">Completa tu pago</h3>
+      <p class="text-slate-500 text-xs mt-1">Monto: <strong class="text-slate-800">S/ 9.90</strong></p>
     </div>
+    <div id="izipay-form-wrapper" class="kr-embedded"></div>
+    <p id="modal-status" class="text-center text-xs text-[var(--muted)] mt-3"></p>
   </div>
+</div>
 
-  <!-- Plantilla oculta para generar el PDF de 2 Páginas -->
-  <div id="plantillaPdf" class="hidden">
-    <div style="font-family: Arial, sans-serif; padding: 40px; color: #1e293b; line-height: 1.5; font-size: 13px;">
-      <!-- PÁGINA 1: Hoja de Liquidación -->
-      <div style="text-align: center; border-bottom: 2px solid #4f46e5; padding-bottom: 12px; margin-bottom: 24px;">
-        <h1 style="font-size: 20px; font-weight: bold; margin: 0; color: #1e1b4b;">HOJA DE LIQUIDACIÓN DE BENEFICIOS SOCIALES</h1>
-        <p style="margin: 4px 0 0 0; font-size: 12px; color: #64748b;">Régimen de la Actividad Privada - Texto Único Ordenado del D.L. N° 728</p>
+<footer class="bg-white border-t rule py-8 text-[var(--muted)] text-xs">
+  <div class="max-w-5xl mx-auto px-4 space-y-6">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div>
+        <span class="font-display font-bold text-[var(--navy)] block mb-1">LiquidaYa.pe</span>
+        <p>Herramienta de orientación para calcular tu liquidación y ordenar tu reclamo laboral en Perú. No sustituye la asesoría de un abogado.</p>
       </div>
-
-      <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse;">
-        <tr>
-          <td style="padding: 4px 0;"><strong>Trabajador:</strong> <span id="pdfNombre"></span></td>
-          <td style="padding: 4px 0;"><strong>DNI:</strong> <span id="pdfDni"></span></td>
-        </tr>
-        <tr>
-          <td style="padding: 4px 0;"><strong>Empleador:</strong> <span id="pdfEmpleador"></span></td>
-          <td style="padding: 4px 0;"><strong>RUC:</strong> <span id="pdfRuc"></span></td>
-        </tr>
-        <tr>
-          <td style="padding: 4px 0;"><strong>Fecha Ingreso:</strong> <span id="pdfIngreso"></span></td>
-          <td style="padding: 4px 0;"><strong>Fecha Cese:</strong> <span id="pdfCese"></span></td>
-        </tr>
-        <tr>
-          <td style="padding: 4px 0;"><strong>Motivo Cese:</strong> <span id="pdfMotivo"></span></td>
-          <td style="padding: 4px 0;"><strong>Remuneración Computable:</strong> <span id="pdfRemun"></span></td>
-        </tr>
-      </table>
-
-      <h3 style="font-size: 14px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-top: 20px; color: #334155;">DESGLOSE LIQUIDATORIO (CONCEPTOS TRUNCOS)</h3>
-      <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
-        <tr style="background-color: #f8fafc; border-bottom: 1px solid #e2e8f0;">
-          <th style="text-align: left; padding: 8px;">Concepto</th>
-          <th style="text-align: right; padding: 8px;">Importe (PEN)</th>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 8px;">Compensación por Tiempo de Servicios (CTS Trunca)</td>
-          <td style="text-align: right; padding: 8px;" id="pdfRowCts"></td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 8px;">Gratificaciones Truncas (Ley N° 27735 + Bonificación 9%)</td>
-          <td style="text-align: right; padding: 8px;" id="pdfRowGrati"></td>
-        </tr>
-        <tr style="border-bottom: 1px solid #f1f5f9;">
-          <td style="padding: 8px;">Vacaciones Truncas (D. Leg. N° 713)</td>
-          <td style="text-align: right; padding: 8px;" id="pdfRowVacaciones"></td>
-        </tr>
-        <tr id="pdfRowFilaIndem" style="border-bottom: 1px solid #f1f5f9; display: none;">
-          <td style="padding: 8px;">Indemnización por Despido Arbitrario (Art. 38 D.L. 728)</td>
-          <td style="text-align: right; padding: 8px;" id="pdfRowIndem"></td>
-        </tr>
-        <tr style="font-size: 15px; font-weight: bold; background-color: #eef2ff;">
-          <td style="padding: 10px; color: #3730a3;">TOTAL NETO A PAGAR</td>
-          <td style="text-align: right; padding: 10px; color: #3730a3;" id="pdfRowTotal"></td>
-        </tr>
-      </table>
-
-      <!-- SALTO DE PÁGINA PARA PÁGINA 2 -->
-      <div style="page-break-before: always; margin-top: 40px; border-top: 1px dashed #cbd5e1; padding-top: 40px;"></div>
-
-      <!-- PÁGINA 2: Carta Notarial / Requerimiento Formal -->
-      <div style="text-align: center; margin-bottom: 24px;">
-        <h2 style="font-size: 18px; font-weight: bold; margin: 0; color: #1e1b4b;">CARTA DE REQUERIMIENTO FORMAL DE PAGO</h2>
-        <p style="font-size: 12px; color: #64748b; margin-top: 4px;">PAGO DE BENEFICIOS SOCIALES Y ENTREGA DE CERTIFICADO DE TRABAJO</p>
+      <div>
+        <strong class="text-[var(--navy)] block mb-1">Contacto</strong>
+        <p>Santa Margarita - Piura, Perú<br>WhatsApp: +51 957 418 893<br>allforyou1702@gmail.com</p>
       </div>
-
-      <p style="margin-bottom: 16px;">
-        <strong>A:</strong> <span id="pdfCartaEmpleador"></span><br>
-        <strong>RUC:</strong> <span id="pdfCartaRuc"></span><br>
-        <strong>De:</strong> <span id="pdfCartaNombre"></span> (DNI N° <span id="pdfCartaDni"></span>)
-      </p>
-
-      <p style="text-align: justify; margin-bottom: 12px;">
-        Por medio de la presente, me dirijo a ustedes al amparo del artículo 24° de la Constitución Política del Perú y los Decretos Supremos N° 001-97-TR y N° 005-2002-TR, para <strong>REQUERIR FORMALMENTE</strong> el pago íntegro de mi liquidación de beneficios sociales correspondientes a la relación laboral culminada con fecha <span id="pdfCartaCese"></span>.
-      </p>
-
-      <p style="text-align: justify; margin-bottom: 12px;">
-        Habiéndose superado el plazo perentorio de 48 horas establecido por la normativa laboral vigente para la cancelación de las sumas adeudadas, solicito se me abone el importe de <strong id="pdfCartaMonto"></strong>, según la liquidación adjunta, así como la entrega de mi correspondiente Certificado de Trabajo y la Constancia de Cese para la liberación de CTS.
-      </p>
-
-      <p style="text-align: justify; margin-bottom: 40px;">
-        De persistir el incumplimiento, procederé a formular la denuncia ante la Superintendencia Nacional de Fiscalización Laboral (SUNAFIL) e iniciar las acciones judiciales pertinentes con los correspondientes intereses legales.
-      </p>
-
-      <div style="margin-top: 60px; text-align: center; width: 240px; border-top: 1px solid #1e293b; padding-top: 8px;">
-        <strong id="pdfCartaFirmaNombre"></strong><br>
-        DNI: <span id="pdfCartaFirmaDni"></span>
+      <div>
+        <strong class="text-[var(--navy)] block mb-1">Marco regulatorio</strong>
+        <p>Ley N° 28806 · TUO D.Leg 728 · Ley N° 31047 · Libro de Reclamaciones habilitado.</p>
       </div>
     </div>
+    <div class="border-t rule pt-3 text-center">© 2026 LiquidaYa.pe · Pagos procesados por Izipay.</div>
   </div>
+</footer>
 
-  <!-- Footer Original -->
-  <footer class="bg-white border-t border-slate-200 pt-10 pb-8 text-slate-600 text-xs mt-12">
-    <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-      <div>
-        <h4 class="text-sm font-black text-slate-900 mb-2">LiquidaYa.pe</h4>
-        <p class="text-slate-500 leading-relaxed">
-          Herramienta de orientación para liquidación laboral y reclamos laborales en el Perú. No sustituye la asesoría de un abogado.
-        </p>
-      </div>
-      <div>
-        <h4 class="text-sm font-black text-slate-900 mb-2">Contacto</h4>
-        <p class="text-slate-500 leading-relaxed">
-          Santa Margarita - Piura, Perú<br>
-          WhatsApp: +51 957 418 893<br>
-          Correo: allforyou1702@gmail.com
-        </p>
-      </div>
-      <div>
-        <h4 class="text-sm font-black text-slate-900 mb-2">Marco regulatorio</h4>
-        <p class="text-slate-500 leading-relaxed">
-          Ley N° 29806 - TUO D.Leg 728 - Ley N° 31047 - Libro de Reclamaciones habilitado.
-        </p>
-      </div>
-    </div>
-    <div class="max-w-5xl mx-auto px-4 border-t border-slate-100 pt-6 text-center text-slate-400">
-      © 2026 LiquidaYa.pe - Todos los derechos reservados. Pagos procesados por Izipay.
-    </div>
-  </footer>
+<script>
+const BACKEND_URL = "";
+let calculoActual = null;
+let pasoActual = 1;
 
-  <!-- Lógica JavaScript Completa -->
-  <script>
-    // CLAVE PÚBLICA DE PRODUCCIÓN DE IZIPAY
-    const IZIPAY_PUBLIC_KEY = "5994464:publickey_751kvxY3JDhPt8k1vSyuY90qkq4PqfweQwD7hWsPqHu";
+const viewCatalog = document.getElementById('view-catalog');
+const viewCalculator = document.getElementById('view-calculator');
+const viewPreview = document.getElementById('view-preview');
+const viewDownload = document.getElementById('view-download');
 
-    let calculoActual = null;
+function showToast(text, icon = "ℹ️") {
+  const t = document.getElementById('toast-msg');
+  document.getElementById('toast-text').innerText = text;
+  document.getElementById('toast-icon').innerText = icon;
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 4200);
+}
+function showPaymentError(text) {
+  const box = document.getElementById('payment-error-box');
+  box.innerText = text;
+  box.classList.remove('hidden');
+}
 
-    function seleccionarCaso(motivo, titulo) {
-      document.getElementById('motivoCese').value = motivo;
-      document.getElementById('tituloCasoSeleccionado').innerText = titulo;
-      
-      const calc = document.getElementById('seccionCalculadora');
-      calc.classList.remove('hidden');
-      calc.scrollIntoView({ behavior: 'smooth' });
+// ======= NAVEGACIÓN =======
+function abrirCaso(motivoPreset, sunafilPreset, tituloTexto) {
+  document.getElementById('titulo-caso').innerText = tituloTexto;
+  document.getElementById('motivo-cese').value = motivoPreset || '';
+  document.getElementById('escalar-sunafil').checked = !!sunafilPreset;
+  viewCatalog.classList.add('hidden');
+  viewCalculator.classList.remove('hidden');
+  irAPaso(1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function volverAlCatalogo() {
+  viewCalculator.classList.add('hidden');
+  viewCatalog.classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function irAPaso(n) {
+  if (n === 2 || n === 3) {
+    const paso1Valido = document.getElementById('motivo-cese').value &&
+      ['worker-name','worker-dni','worker-address','worker-email','worker-phone'].every(id => document.getElementById(id).value.trim());
+    if (!paso1Valido) { showToast('Completa el paso 1 primero.', '⚠️'); irAPaso(1); return; }
+  }
+  if (n === 3) {
+    const paso2Valido = ['company-name','company-ruc','start-date','end-date','monthly-salary'].every(id => document.getElementById(id).value);
+    if (!paso2Valido) { showToast('Completa el paso 2 primero.', '⚠️'); irAPaso(2); return; }
+  }
+  [1,2,3].forEach(i => {
+    document.getElementById('paso-' + i).classList.toggle('hidden', i !== n);
+    const dot = document.getElementById('dot-' + i);
+    dot.classList.remove('active','done','pending');
+    dot.classList.add(i === n ? 'active' : (i < n ? 'done' : 'pending'));
+  });
+  pasoActual = n;
+  document.getElementById('view-calculator').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ======= CÁLCULO =======
+function calcular() {
+  const data = {
+    motivo: document.getElementById('motivo-cese').value,
+    escalar_sunafil: document.getElementById('escalar-sunafil').checked,
+    worker_name: document.getElementById('worker-name').value.trim(),
+    worker_id_type: document.getElementById('worker-id-type').value,
+    worker_dni: document.getElementById('worker-dni').value.trim(),
+    worker_address: document.getElementById('worker-address').value.trim(),
+    worker_email: document.getElementById('worker-email').value.trim(),
+    worker_phone: document.getElementById('worker-phone').value.trim(),
+    company_name: document.getElementById('company-name').value.trim(),
+    company_ruc: document.getElementById('company-ruc').value.trim(),
+    start_date: document.getElementById('start-date').value,
+    end_date: document.getElementById('end-date').value,
+    salary: document.getElementById('monthly-salary').value,
+    has_family_bonus: document.getElementById('family-bonus').value,
+    modality: document.getElementById('contract-modality').value,
+    regime: document.getElementById('labor-regime').value,
+    health_insurance: document.getElementById('health-insurance').value,
+    commissions_avg: document.getElementById('commissions-avg').value,
+    pending_vacation_years: document.getElementById('pending-vacation-years').value,
+    loans_discount: document.getElementById('loans-discount').value,
+    is_night_shift: document.getElementById('check-night-shift').checked,
+    is_modal_five_years: document.getElementById('check-modal-five-years').checked
+  };
+  if (!data.motivo) { showToast('Falta indicar por qué terminó tu relación laboral.', '⚠️'); irAPaso(1); return; }
+
+  const startDate = new Date(data.start_date), endDate = new Date(data.end_date);
+  const totalDays = Math.ceil(Math.abs(endDate - startDate) / 86400000);
+  const totalMonths = Math.max(Math.floor(totalDays / 30.417), 1);
+  const totalYears = (totalDays / 365).toFixed(1);
+
+  let basicSalary = parseFloat(data.salary) || 0;
+  if (data.is_night_shift && basicSalary < 1383.75) basicSalary = 1383.75;
+
+  const asigFam = data.has_family_bonus === 'yes' ? 102.50 : 0;
+  const commissionsAvg = parseFloat(data.commissions_avg) || 0;
+  const baseSalary = basicSalary + asigFam + commissionsAvg;
+
+  let regimeFactor = 1.0;
+  if (data.regime === 'pequena') regimeFactor = 0.5;
+  else if (data.regime === 'micro') regimeFactor = 0.0;
+
+  const sixthGrati = regimeFactor > 0 ? (baseSalary / 6) * regimeFactor : 0;
+  const baseCTS = baseSalary + sixthGrati;
+  const ctsMonths = Math.min(totalMonths, 6);
+  const totalCTS = (baseCTS / 12) * ctsMonths * regimeFactor;
+
+  const gratiMonths = Math.min(totalMonths, 6);
+  const rawGrati = (baseSalary / 6) * gratiMonths * regimeFactor;
+  const bonusRate = data.health_insurance === 'eps' ? 0.0675 : 0.09;
+  const totalGrati = rawGrati + (rawGrati * bonusRate);
+
+  const vacaFactor = (data.regime === 'micro' || data.regime === 'pequena') ? 0.5 : 1.0;
+  const vacaMonths = Math.min(totalMonths, 12);
+  const totalVaca = (baseSalary / 12) * vacaMonths * vacaFactor;
+
+  const pendingVacationYears = parseInt(data.pending_vacation_years) || 0;
+  const totalPendingVaca = pendingVacationYears * baseSalary * vacaFactor;
+
+  let totalIndem = 0;
+  const califica = (data.motivo === 'despido' || data.motivo === 'hostilidad' || data.is_modal_five_years);
+  if (califica) {
+    if (data.regime === 'general' || data.regime === 'hogar') totalIndem = Math.min(baseSalary * 1.5 * (totalDays / 365), baseSalary * 12);
+    else if (data.regime === 'pequena') totalIndem = Math.min(baseSalary * (20 * (totalDays / 365) / 30), baseSalary * 4);
+    else if (data.regime === 'micro') totalIndem = Math.min(baseSalary * (10 * (totalDays / 365) / 30), baseSalary * 3);
+  }
+
+  const loansDiscount = parseFloat(data.loans_discount) || 0;
+  const total = Math.max((totalCTS + totalGrati + totalVaca + totalPendingVaca + totalIndem) - loansDiscount, 0);
+
+  calculoActual = {
+    motivo: data.motivo, escalarSunafil: data.escalar_sunafil,
+    worker: { name: data.worker_name.toUpperCase(), idType: data.worker_id_type, dni: data.worker_dni, address: data.worker_address, email: data.worker_email, phone: data.worker_phone, modality: data.modality },
+    company: { name: data.company_name.toUpperCase(), ruc: data.company_ruc },
+    details: { start_date: data.start_date, end_date: data.end_date, total_days: totalDays, total_years: totalYears, basic_salary: basicSalary, regime: data.regime, health_insurance: data.health_insurance },
+    amounts: { cts: totalCTS, grati: totalGrati, bonus_rate: bonusRate, vaca: totalVaca, pending_vaca: totalPendingVaca, indem: totalIndem, loans: loansDiscount, total }
+  };
+
+  document.getElementById('preview-total-amount').innerText = `S/ ${total.toFixed(2)}`;
+  document.getElementById('preview-cts').innerText = `S/ ${totalCTS.toFixed(2)}`;
+  document.getElementById('preview-grati').innerText = `S/ ${totalGrati.toFixed(2)}`;
+  document.getElementById('preview-vaca').innerText = `S/ ${totalVaca.toFixed(2)}`;
+
+  toggleRow('preview-pending-vaca-row', 'preview-pending-vaca', totalPendingVaca);
+  toggleRow('preview-indemnizacion-row', 'preview-indemnizacion', totalIndem);
+  toggleRow('preview-loans-row', 'preview-loans', loansDiscount, '- S/ ');
+
+  document.getElementById('preview-doc-title').innerText = data.escalar_sunafil
+    ? 'denuncia SUNAFIL'
+    : (data.motivo === 'hostilidad' ? 'carta de cese de hostilidad' : 'carta de requerimiento');
+
+  viewCalculator.classList.add('hidden');
+  viewPreview.classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleRow(rowId, valId, value, prefix = 'S/ ') {
+  const row = document.getElementById(rowId);
+  if (value > 0) { row.classList.remove('hidden'); document.getElementById(valId).innerText = `${prefix}${value.toFixed(2)}`; }
+  else row.classList.add('hidden');
+}
+
+// ======= PDF CON TEXTO REAL (pdfmake) =======
+function construirDocumentoPdf() {
+  const w = calculoActual.worker, c = calculoActual.company, d = calculoActual.details, a = calculoActual.amounts;
+  const hoy = new Date().toLocaleDateString('es-PE');
+
+  const filas = [
+    [{text:'Concepto', style:'th'}, {text:'Base legal', style:'th'}, {text:'Total (S/)', style:'th', alignment:'right'}],
+    ['Compensación por Tiempo de Servicios (CTS trunca)', 'D.Leg. N° 650', {text:a.cts.toFixed(2), alignment:'right'}],
+    [`Gratificación trunca + bono (${a.bonus_rate === 0.0675 ? '6.75% EPS' : '9% EsSalud'})`, 'Ley N° 27735 / 29351', {text:a.grati.toFixed(2), alignment:'right'}],
+    ['Vacaciones truncas del periodo', 'D.Leg. N° 713', {text:a.vaca.toFixed(2), alignment:'right'}],
+  ];
+  if (a.pending_vaca > 0) filas.push(['Vacaciones vencidas de años anteriores', 'Art. 23 D.Leg. 713', {text:a.pending_vaca.toFixed(2), alignment:'right'}]);
+  if (a.indem > 0) filas.push([{text:'Indemnización', color:'#963c32', bold:true}, 'Art. 38 D.Leg. 728', {text:a.indem.toFixed(2), color:'#963c32', bold:true, alignment:'right'}]);
+  if (a.loans > 0) filas.push([{text:'Descuento de préstamos', colSpan:2, italics:true}, {}, {text:'-'+a.loans.toFixed(2), alignment:'right', italics:true}]);
+  filas.push([{text:'TOTAL NETO A PAGAR', colSpan:2, style:'totalRow'}, {}, {text:'S/ '+a.total.toFixed(2), alignment:'right', style:'totalRow'}]);
+
+  const cartaTitulo = calculoActual.escalarSunafil ? 'DENUNCIA FORMAL ANTE SUNAFIL'
+    : (calculoActual.motivo === 'hostilidad' ? 'CARTA DE CESE DE HOSTILIDAD' : 'CARTA DE REQUERIMIENTO DE PAGO');
+
+  let parrafoApercibimiento;
+  if (calculoActual.escalarSunafil) {
+    parrafoApercibimiento = 'Habiendo reclamado previamente sin obtener respuesta, solicito a la Intendencia de Fiscalización Laboral de SUNAFIL ordenar una inspección inmediata, con la multa correspondiente por Infracción Muy Grave (D.S. N° 019-2006-TR) de hasta 26.12 UIT, y el depósito coactivo de la liquidación adeudada.';
+  } else if (calculoActual.motivo === 'hostilidad') {
+    parrafoApercibimiento = 'Conforme al Art. 30 del D.Leg. N° 728, otorgo a la empresa el plazo de 6 días naturales para que cese el acto hostil descrito o enmiende su conducta. De persistir, me daré por despedido indirectamente con derecho al cobro forzoso de la indemnización de ley.';
+  } else {
+    parrafoApercibimiento = 'Les otorgo el plazo perentorio de cuarenta y ocho (48) horas para hacer efectivo el abono en mi cuenta bancaria. Vencido dicho término, interpondré denuncia formal ante SUNAFIL por Infracción Muy Grave (D.S. N° 019-2006-TR), sujeta a multas de hasta 26.12 UIT, más los intereses legales laborales del D.L. N° 25920.';
+  }
+
+  return {
+    pageSize: 'A4', pageMargins: [42, 50, 42, 46],
+    defaultStyle: { fontSize: 10, color: '#241f14' },
+    styles: {
+      h1: { fontSize: 15, bold: true, color: '#152238', margin: [0,0,0,2] },
+      subtitle: { fontSize: 8.5, color: '#6b6455', margin: [0,0,0,14] },
+      label: { bold: true },
+      th: { bold: true, fontSize: 9, fillColor: '#f2ecdf' },
+      totalRow: { bold: true, fillColor: '#f2ecdf', color: '#152238' },
+      sectionTitle: { fontSize: 11, bold: true, color: '#152238', margin: [0,14,0,6] }
+    },
+    content: [
+      { text: 'LIQUIDACIÓN DE BENEFICIOS SOCIALES', style: 'h1' },
+      { text: 'Régimen laboral privado — TUO del D.Leg. N° 728 · ' + hoy, style: 'subtitle' },
+      {
+        columns: [
+          { width: '*', text: [{text:'Trabajador: ', style:'label'}, w.name, '\n', {text: w.idType + ': ', style:'label'}, w.dni, '\n', {text:'Domicilio: ', style:'label'}, w.address] },
+          { width: '*', text: [{text:'Empleador: ', style:'label'}, c.name, '\n', {text:'RUC: ', style:'label'}, c.ruc, '\n', {text:'Régimen: ', style:'label'}, d.regime.toUpperCase()] }
+        ], columnGap: 20
+      },
+      { text: [{text:'Periodo laborado: ', style:'label'}, `${d.start_date} al ${d.end_date}  (${d.total_years} años)`], margin:[0,10,0,0] },
+      { text: 'Detalle de conceptos liquidados', style: 'sectionTitle' },
+      { table: { headerRows: 1, widths: ['*','auto','auto'], body: filas }, layout: { hLineColor:'#e6ddc8', vLineColor:'#e6ddc8', hLineWidth:()=>0.5, vLineWidth:()=>0 } },
+      {
+        columns: [
+          { width:'*', text:['\n\n_______________________\n', {text:w.name, alignment:'center'}, '\nFirma del trabajador'], alignment:'center' },
+          { width:'*', text:['\n\n_______________________\n', {text:c.name, alignment:'center'}, '\nFirma y sello del empleador'], alignment:'center' }
+        ], margin:[0,30,0,0]
+      },
+      { text: '', pageBreak: 'before' },
+      { text: cartaTitulo, style: 'h1' },
+      { text: 'Ley N° 28806 · Expediente laboral', style: 'subtitle' },
+      { text: [{text:'Señores: ', style:'label'}, c.name, '  (RUC N° ', c.ruc, ')'] },
+      { text: 'Ciudad: República del Perú', margin:[0,0,0,10] },
+      { text: `De mi mayor consideración: por medio del presente conducto formal, me dirijo a ustedes para intimar el pago íntegro de mi liquidación de beneficios sociales correspondiente a la relación laboral culminada el ${d.end_date}, habiendo desempeñado labores bajo subordinación y dependencia.`, alignment:'justify', margin:[0,0,0,8] },
+      { text: 'Que, al amparo del Decreto Supremo N° 001-97-TR, el empleador está obligado a poner a disposición del trabajador el pago íntegro de su liquidación dentro de las cuarenta y ocho (48) horas siguientes al cese, plazo que a la fecha se encuentra vencido.', alignment:'justify', margin:[0,0,0,8] },
+      { text: [`Conforme al cálculo de la página anterior, la suma total líquida y exigible asciende a `, {text:'S/ '+a.total.toFixed(2), bold:true, color:'#152238'}, '.'], margin:[0,0,0,8] },
+      { text: 'Exijo asimismo la entrega inmediata de mi Carta de Cese, dirigida a la entidad financiera depositaria de mi CTS, para el retiro de los fondos acumulados que por ley me corresponden.', alignment:'justify', margin:[0,0,0,8] },
+      { text: parrafoApercibimiento, alignment:'justify', margin:[0,0,0,20], fillColor:'#f2ecdf' },
+      { text: 'Sin otro particular, quedo a la espera del cumplimiento de sus obligaciones legales.', margin:[0,0,0,30] },
+      { text: ['_______________________\n', w.name, '\n', w.idType+': '+w.dni], alignment:'center', margin:[0,20,0,0] }
+    ]
+  };
+}
+
+function descargarPdf() {
+  if (!calculoActual) return;
+  const nombreArchivo = `Expediente_LiquidaYa_${calculoActual.worker.dni}.pdf`;
+  pdfMake.createPdf(construirDocumentoPdf()).download(nombreArchivo);
+}
+
+function mostrarConfirmacionYDescargar() {
+  viewPreview.classList.add('hidden');
+  viewDownload.classList.remove('hidden');
+  descargarPdf();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ======= PAGO CON IZIPAY / YAPE =======
+function cerrarModal() {
+  document.getElementById('modal-izipay').classList.add('hidden');
+}
+
+async function iniciarPago() {
+  const btn = document.getElementById('pay-yape-btn');
+  document.getElementById('payment-error-box').classList.add('hidden');
+  if (!calculoActual) { showPaymentError('Primero completa el cálculo.'); return; }
+
+  btn.disabled = true; btn.innerText = 'Conectando con la pasarela...';
+  const w = calculoActual.worker;
+  const orderId = 'LIQ-' + Date.now();
+
+  try {
+    const resp = await fetch(`${BACKEND_URL}/api/formtoken`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: w.name.split(' ')[0] || w.name,
+        lastName: w.name.split(' ').slice(1).join(' ') || w.name,
+        email: w.email, phoneNumber: w.phone, identityType: w.idType,
+        identityCode: w.dni, address: w.address, orderId
+      })
+    });
+    const data = await resp.json();
+    btn.disabled = false; btn.innerText = 'Pagar S/ 9.90 con Yape';
+
+    if (!resp.ok || !data.formToken) {
+      showPaymentError(data.error || 'No se pudo iniciar el pago. Intenta de nuevo.');
+      return;
     }
 
-    function cerrarCalculadora() {
-      document.getElementById('seccionCalculadora').classList.add('hidden');
-      document.getElementById('seccionResultados').classList.add('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function ejecutarCalculo() {
-      const sueldo = parseFloat(document.getElementById('sueldoBasico').value);
-      const fechaIngresoStr = document.getElementById('fechaIngreso').value;
-      const fechaCeseStr = document.getElementById('fechaCese').value;
-      const motivo = document.getElementById('motivoCese').value;
-      const asigFam = document.getElementById('asignacionFamiliar').checked ? 102.50 : 0;
-
-      if (!sueldo || sueldo <= 0 || !fechaIngresoStr || !fechaCeseStr) {
-        alert('Por favor, ingresa tu sueldo mensual y las fechas de ingreso y cese.');
-        return;
-      }
-
-      const dIngreso = new Date(fechaIngresoStr);
-      const dCese = new Date(fechaCeseStr);
-      if (dCese <= dIngreso) {
-        alert('La fecha de cese debe ser posterior a la fecha de ingreso.');
-        return;
-      }
-
-      const diffTime = Math.abs(dCese - dIngreso);
-      const diasTotales = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      const mesesComputables = Math.min(Math.floor(diasTotales / 30), 6) || 1;
-
-      const baseComputable = sueldo + asigFam;
-      const unSextoGrati = baseComputable / 6;
-
-      // Cálculos según D.L. 728
-      const ctsTrunca = ((baseComputable + unSextoGrati) / 12) * mesesComputables;
-      const gratiBase = (baseComputable / 6) * mesesComputables;
-      const gratiBonif = gratiBase * 0.09;
-      const gratiTrunca = gratiBase + gratiBonif;
-      const vacacionesTrunca = (baseComputable / 12) * mesesComputables;
-
-      let indemnizacion = 0;
-      if (motivo === 'despido') {
-        const anos = diasTotales / 365;
-        indemnizacion = Math.min(baseComputable * 1.5 * Math.max(anos, 1), baseComputable * 12);
-      }
-
-      const totalNeto = ctsTrunca + gratiTrunca + vacacionesTrunca + indemnizacion;
-
-      calculoActual = {
-        sueldo,
-        baseComputable,
-        cts: ctsTrunca,
-        grati: gratiTrunca,
-        vacaciones: vacacionesTrunca,
-        indemnizacion,
-        total: totalNeto,
-        motivo,
-        ingreso: fechaIngresoStr,
-        cese: fechaCeseStr,
-        nombre: document.getElementById('nombreCompleto').value || 'Trabajador(a)',
-        dni: document.getElementById('dniTrabajador').value || '--------',
-        empleador: document.getElementById('nombreEmpleador').value || 'Empleador',
-        ruc: document.getElementById('rucEmpleador').value || '----------'
-      };
-
-      document.getElementById('resCts').innerText = 'S/ ' + ctsTrunca.toFixed(2);
-      document.getElementById('resGrati').innerText = 'S/ ' + gratiTrunca.toFixed(2);
-      document.getElementById('resVacaciones').innerText = 'S/ ' + vacacionesTrunca.toFixed(2);
-      document.getElementById('resTotal').innerText = 'S/ ' + totalNeto.toFixed(2);
-
-      const filaIndem = document.getElementById('filaIndemnizacion');
-      if (indemnizacion > 0) {
-        document.getElementById('resIndemnizacion').innerText = 'S/ ' + indemnizacion.toFixed(2);
-        filaIndem.classList.remove('hidden');
-      } else {
-        filaIndem.classList.add('hidden');
-      }
-
-      const seccionRes = document.getElementById('seccionResultados');
-      seccionRes.classList.remove('hidden');
-      seccionRes.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    async function iniciarPagoIzipay() {
-      const btn = document.getElementById('btnPagarYape');
-      btn.disabled = true;
-      btn.innerHTML = `<span>Conectando pasarela...</span>`;
-
+    document.getElementById('modal-izipay').classList.remove('hidden');
+    document.getElementById('modal-status').innerText = '';
+    KR.setFormConfig({ formToken: data.formToken, 'kr-language': 'es-ES' });
+    KR.onSubmit(async (paymentData) => {
+      document.getElementById('modal-status').innerText = 'Verificando tu pago...';
       try {
-        const res = await fetch('/api/crear-token', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            monto: 990,
-            moneda: 'PEN',
-            ordenId: 'LIQ-' + Date.now(),
-            email: 'cliente@liquidaya.pe'
-          })
+        const val = await fetch(`${BACKEND_URL}/api/validar`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ krAnswer: paymentData.rawClientAnswer, krHash: paymentData.hash })
         });
-
-        const data = await res.json();
-        if (!data.formToken) {
-          throw new Error(data.error || 'No se pudo generar el token de pago');
+        const valData = await val.json();
+        if (valData.pagado) {
+          cerrarModal();
+          showToast('¡Pago con Yape confirmado!', '✅');
+          mostrarConfirmacionYDescargar();
+        } else {
+          document.getElementById('modal-status').innerText = '';
+          showPaymentError('Tu pago no pudo confirmarse. Si Yape te descontó, escríbenos por WhatsApp con tu comprobante.');
         }
-
-        document.getElementById('modalIzipay').classList.remove('hidden');
-        
-        if (window.KR) {
-          await KR.setFormToken(data.formToken);
-          
-          KR.onSubmit(async (paymentData) => {
-            cerrarModalIzipay();
-            alert('¡Pago confirmado con éxito! Generando tu expediente...');
-            generarPdfExpediente();
-            return false;
-          });
-        }
-
       } catch (err) {
-        alert('Error en pasarela: ' + err.message);
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = `<span>Pagar S/ 9.90 con Yape</span>`;
+        showPaymentError('No pudimos confirmar tu pago por un problema de conexión.');
       }
-    }
-
-    function cerrarModalIzipay() {
-      document.getElementById('modalIzipay').classList.add('hidden');
-    }
-
-    function generarPdfExpediente() {
-      if (!calculoActual) return;
-
-      document.getElementById('pdfNombre').innerText = calculoActual.nombre;
-      document.getElementById('pdfDni').innerText = calculoActual.dni;
-      document.getElementById('pdfEmpleador').innerText = calculoActual.empleador;
-      document.getElementById('pdfRuc').innerText = calculoActual.ruc;
-      document.getElementById('pdfIngreso').innerText = calculoActual.ingreso;
-      document.getElementById('pdfCese').innerText = calculoActual.cese;
-      document.getElementById('pdfMotivo').innerText = calculoActual.motivo.toUpperCase();
-      document.getElementById('pdfRemun').innerText = 'S/ ' + calculoActual.baseComputable.toFixed(2);
-
-      document.getElementById('pdfRowCts').innerText = 'S/ ' + calculoActual.cts.toFixed(2);
-      document.getElementById('pdfRowGrati').innerText = 'S/ ' + calculoActual.grati.toFixed(2);
-      document.getElementById('pdfRowVacaciones').innerText = 'S/ ' + calculoActual.vacaciones.toFixed(2);
-      document.getElementById('pdfRowTotal').innerText = 'S/ ' + calculoActual.total.toFixed(2);
-
-      const fInd = document.getElementById('pdfRowFilaIndem');
-      if (calculoActual.indemnizacion > 0) {
-        document.getElementById('pdfRowIndem').innerText = 'S/ ' + calculoActual.indemnizacion.toFixed(2);
-        fInd.style.display = 'table-row';
-      } else {
-        fInd.style.display = 'none';
-      }
-
-      document.getElementById('pdfCartaEmpleador').innerText = calculoActual.empleador;
-      document.getElementById('pdfCartaRuc').innerText = calculoActual.ruc;
-      document.getElementById('pdfCartaNombre').innerText = calculoActual.nombre;
-      document.getElementById('pdfCartaDni').innerText = calculoActual.dni;
-      document.getElementById('pdfCartaCese').innerText = calculoActual.cese;
-      document.getElementById('pdfCartaMonto').innerText = 'S/ ' + calculoActual.total.toFixed(2);
-      document.getElementById('pdfCartaFirmaNombre').innerText = calculoActual.nombre;
-      document.getElementById('pdfCartaFirmaDni').innerText = calculoActual.dni;
-
-      const element = document.getElementById('plantillaPdf');
-      element.classList.remove('hidden');
-
-      const opt = {
-        margin:       10,
-        filename:     `Expediente_Liquidacion_${calculoActual.dni}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-
-      html2pdf().set(opt).from(element).save().then(() => {
-        element.classList.add('hidden');
-      });
-    }
-  </script>
+      return false;
+    });
+  } catch (err) {
+    btn.disabled = false; btn.innerText = 'Pagar S/ 9.90 con Yape';
+    showPaymentError('No se pudo conectar con la pasarela de pago.');
+  }
+}
+</script>
 </body>
 </html>
